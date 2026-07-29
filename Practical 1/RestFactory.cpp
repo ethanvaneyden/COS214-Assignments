@@ -1,7 +1,7 @@
 #include "RestApiFactory.h"
 #include "RestApiConnector.h"
 
-Connector *createConnector()
+Connector *RestApiFactory::createConnector()
 {
     return new RestApiConnector();
 }

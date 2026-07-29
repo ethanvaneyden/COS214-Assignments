@@ -12,9 +12,18 @@
 void printRecords(const std::string &label, const std::vector<std::string> &records)
 {
     std::cout << label << ": ";
+    std::size_t counter = 0;
     for (const auto &record : records)
     {
-        std::cout << record << "";
+        if (counter == records.size() - 1)
+        {
+            std::cout << record;
+        }
+        else
+        {
+            std::cout << record << ", ";
+        }
+        counter++;
     }
     std::cout << std::endl;
 }
@@ -78,7 +87,6 @@ int main()
     std::cout << "TEST 3: Polymorphic Behavior (THE ACTUAL PATTERN)" << std::endl;
     std::cout << "========================================" << std::endl;
     std::cout << "The Pipeline will treat all factories as ConnectorFactory*" << std::endl;
-    std::cout << "Watch how the SAME code calls different createConnector() implementations:" << std::endl;
     std::cout << std::endl;
 
     ConnectorFactory *factories[] = {

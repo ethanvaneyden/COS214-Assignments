@@ -6,3 +6,5 @@ std::string Connector::getSource()
 {
     return source;
 }
+
+Connector::~Connector() {}

@@ -3,7 +3,7 @@
 
 #include "Connector.h"
 
-class RestApiConnector {
+class RestApiConnector : public Connector {
     public:
     vector<string> extract();
 

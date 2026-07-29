@@ -1,7 +1,8 @@
 #include "Connector.h"
 
-Connector::Connector(const string& source) : source(source) {}
+Connector::Connector(const std::string &source) : source(source) {}
 
-string Connector::getSource() {
+std::string Connector::getSource()
+{
     return source;
 }

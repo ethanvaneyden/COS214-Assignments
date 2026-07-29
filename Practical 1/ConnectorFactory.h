@@ -3,12 +3,12 @@
 
 #include "Connector.h"
 
-class ConnectorFactory {
+class ConnectorFactory
+{
 
-    public:
-    virtual Connector* createConnector() = 0;
+public:
+    virtual Connector *createConnector() = 0;
     virtual ~ConnectorFactory();
-    
 };
 
 #endif

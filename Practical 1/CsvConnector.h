@@ -3,12 +3,12 @@
 
 #include "Connector.h"
 
-class CsvConnector : public Connector {
+class CsvConnector : public Connector
+{
 
-    public:
+public:
     CsvConnector();
-    vector<string> extract();
-
+    std::vector<std::string> extract();
 };
 
 #endif

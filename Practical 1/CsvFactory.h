@@ -3,9 +3,10 @@
 
 #include "ConnectorFactory.h"
 
-class CsvFactory : public ConnectorFactory {
-    public:
-    Connector* createConnector();
+class CsvFactory : public ConnectorFactory
+{
+public:
+    Connector *createConnector();
 };
 
 #endif

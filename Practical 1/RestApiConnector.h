@@ -3,11 +3,11 @@
 
 #include "Connector.h"
 
-class RestApiConnector : public Connector {
-    public:
+class RestApiConnector : public Connector
+{
+public:
     RestApiConnector();
-    vector<string> extract();
-
+    std::vector<std::string> extract();
 };
 
 #endif

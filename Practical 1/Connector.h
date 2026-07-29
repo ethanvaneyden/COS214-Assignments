@@ -4,17 +4,16 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
-class Connector {
-    public:
-    Connector(const string&);
-    virtual vector<string> extract() = 0;
-    string getSource();
+class Connector
+{
+public:
+    Connector(const std::string &);
+    virtual std::vector<std::string> extract() = 0;
+    std::string getSource();
     virtual ~Connector();
 
-    protected:
-    string source;
+protected:
+    std::string source;
 };
 
 #endif

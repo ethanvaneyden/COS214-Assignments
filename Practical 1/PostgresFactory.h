@@ -3,9 +3,10 @@
 
 #include "ConnectorFactory.h"
 
-class PostgresFactory : public ConnectorFactory {
-    public:
-    Connector* createConnector();
+class PostgresFactory : public ConnectorFactory
+{
+public:
+    Connector *createConnector();
 };
 
 #endif

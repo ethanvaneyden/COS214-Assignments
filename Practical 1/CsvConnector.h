@@ -6,6 +6,7 @@
 class CsvConnector : public Connector {
 
     public:
+    CsvConnector();
     vector<string> extract();
 
 };

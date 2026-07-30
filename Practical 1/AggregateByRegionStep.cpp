@@ -26,4 +26,4 @@ std::vector<std::string> AggregateByRegionStep::apply(std::vector<std::string> a
     arrayR.push_back(fullNum);
 
     return arrayR;
-};
+}

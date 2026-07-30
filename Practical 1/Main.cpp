@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void checkPointTest();
+void testCheckpoint();
 void testSource();
 
 int main()
@@ -29,7 +29,7 @@ int main()
         testSource();
         break;
     case 2:
-        checkPointTest();
+        testCheckpoint();
         break;
     default:
         cout << "Please enter a valid number";
@@ -37,7 +37,7 @@ int main()
     }
 }
 
-void checkPointTest()
+void testCheckpoint()
 {
     cout << "Test 1: Run checkpoint" << "\n==================================";
     RunCheckpoint *checkpoint = new RunCheckpoint(2, {"a", "b", "c"});
@@ -55,7 +55,10 @@ void checkPointTest()
     RunCheckpoint *last = cpm->undo();
     std::cout << "Last stage is now: " << last->getStage() << std::endl;
 
+    delete cpm;
     delete last;
+    last = nullptr;
+    cpm = nullptr;
 }
 
 void printRecords(const std::string &label, const std::vector<std::string> &records)

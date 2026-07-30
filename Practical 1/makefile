@@ -1,26 +1,20 @@
 CXX = g++
+
 CXXFLAGS = -std=c++11 -Wall -Wextra -g
 
+SRCS = $(wildcard *.cpp)
 
-COMMON_OBJS = CheckpointManager.o Connector.o CsvConnector.o CsvFactory.o Pipeline.o PostgresConnector.o PostgresFactory.o RestApiConnector.o RestFactory.o RunCheckpoint.o
+OBJS = $(SRCS:.cpp=.o)
 
-ENGINE = engine
-TEST1   = TestSource
+TARGET = main
 
-all: $(ENGINE)
+all: $(TARGET)
 
-test1: $(TEST1)
-
-
-$(ENGINE): $(COMMON_OBJS) Main.o
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-$(TEST1): $(COMMON_OBJS) TestSource.o
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o
-	rm -f $(ENGINE) $(TEST1)
+	rm -f $(TARGET) $(OBJS)

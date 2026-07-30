@@ -8,6 +8,10 @@
 #include "PostgresFactory.h"
 #include "RestApiConnector.h"
 #include "CsvFactory.h"
+#include "Transformation.h"
+#include "TransformationRegistry.h"
+#include "DeduplicateStep.h"
+#include "AggregateByRegionStep.h"
 
 #include <iostream>
 #include <vector>
@@ -17,10 +21,11 @@ using namespace std;
 
 void testCheckpoint();
 void testSource();
+void testTransformation();
 
 int main()
 {
-    cout << "Please type the number of test - 1 (Test Source) 2 (Test Checkpoint):";
+    cout << "Please type the number of test - 1 (Test Source) 2 (Test Checkpoint) 3 (Test Transformation):";
     int choice;
     cin >> choice;
     switch (choice)
@@ -30,6 +35,9 @@ int main()
         break;
     case 2:
         testCheckpoint();
+        break;
+    case 3:
+        testTransformation();
         break;
     default:
         cout << "Please enter a valid number";
@@ -165,4 +173,62 @@ void testSource()
     std::cout << "========================================" << std::endl;
     std::cout << "TEST COMPLETE" << std::endl;
     std::cout << "========================================" << std::endl;
+}
+
+void testTransformation(){
+    TransformationRegistry tr;
+    tr.registerStep("dedup", nullptr);
+    tr.registerStep("mykey", new AggregateByRegionStep());
+    tr.registerStep("dedup", new DeduplicateStep());
+    tr.registerStep("dedup", new DeduplicateStep());
+    tr.registerStep("aggregate", new AggregateByRegionStep());
+
+    //key is not in there,,,
+    Transformation* t = tr.create("key");
+    Transformation* Dedup = tr.create("dedup");
+    Transformation* Aggregate = tr.create("aggregate");
+    
+    if(t == nullptr){
+        std::cout << "Correctly returned nullptr.\n";
+    }
+
+    {
+        std::cout << "==========================Testing DeduplicateStep's apply()======================================" << endl;
+        cout << "The DeduplicateStep's name is " << Dedup->getName() << endl;
+
+        std::vector<std::string> arrayP;
+        arrayP = Dedup->apply(arrayP);
+
+        int size = arrayP.size();
+        for(int k = 0; k < size; k++){
+            std::cout << arrayP[k] << " - ";
+        }
+        cout << endl;
+
+        arrayP = {"a","a","b","a","a","c"};
+        arrayP = Dedup->apply(arrayP);
+
+        size = arrayP.size();
+        for(int k = 0; k < size; k++){
+            std::cout << arrayP[k] << " - ";
+        }
+        cout << endl;
+    }
+
+    std::cout << "==========================Testing AggregateByRegionStep's apply()======================================" << endl;
+    cout << "The AggregateByRegionStep's name is " << Aggregate->getName() << endl;
+
+    std::vector<std::string> arrayP(125,"2");
+    arrayP = Aggregate->apply(arrayP);
+    std::cout << arrayP[0] << endl;
+
+    arrayP = {};
+    arrayP = Aggregate->apply(arrayP);
+    std::cout << arrayP[0] << endl;
+
+    delete Dedup;
+    Dedup = nullptr;
+
+    delete Aggregate;
+    Aggregate = nullptr;
 }

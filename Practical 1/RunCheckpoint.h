@@ -1,8 +1,8 @@
 #ifndef RUNCHECKPOINT_H
 #define RUNCHECKPOINT_H
 
-#include "vector"
-#include "string"
+#include <vector>
+#include <string>
 
 class RunCheckpoint {
     private:

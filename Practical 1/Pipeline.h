@@ -4,7 +4,10 @@
 #include "RunCheckpoint.h"
 #include "ConnectorFactory.h"
 #include "Transformation.h"
+
 #include <vector>
+#include <iostream>
+#include <string>
 
 class Pipeline {
     protected: 
@@ -30,12 +33,18 @@ class BatchPipeline : public Pipeline {
     protected: 
         void extract() override;
         void load() override;
+
+    public:
+        BatchPipeline(ConnectorFactory* factory);
 };
 
 class StreamingPipeline : public Pipeline {
     protected: 
         void extract() override;
         void load() override;
+
+    public:
+        StreamingPipeline(ConnectorFactory* factory);
 };
 
 #endif

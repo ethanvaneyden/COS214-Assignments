@@ -64,14 +64,14 @@ void BatchPipeline::extract(){
     if(c != nullptr){
         this->records = c->extract();
         std::cout << "Batch extract: " << this->records.size() << " records" << std::endl;
-        this->stage= 2;
+        this->stage = 2;
         delete c;
     }    
 }
 
 void BatchPipeline::load(){
     std::cout << "Batch load: " << this->records.size() << " records written" << std::endl;
-    this->stage= 4;
+    this->stage = 4;
 }
 
 
@@ -85,12 +85,12 @@ void StreamingPipeline::extract(){
     if(c != nullptr){
         this->records = c->extract();
         std::cout << "Streaming extract: " << this->records.size() << " records" << std::endl;
-        this->stage= 2;
+        this->stage = 2;
         delete c;
     }   
 }
 
 void StreamingPipeline::load(){
     std::cout << "Streaming load: " << this->records.size() << " records streamed" << std::endl;
-    this->stage= 4;
+    this->stage = 4;
 }

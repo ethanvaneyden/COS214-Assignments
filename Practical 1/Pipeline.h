@@ -34,8 +34,8 @@ class BatchPipeline : public Pipeline {
 
 class StreamingPipeline : public Pipeline {
     protected: 
-        void extract();
-        void load();
+        void extract() override;
+        void load() override;
 };
 
 #endif

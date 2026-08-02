@@ -35,7 +35,7 @@ class BatchPipeline : public Pipeline {
         void load() override;
 
     public:
-        BatchPipeline(ConnectorFactory* factory);
+        BatchPipeline(ConnectorFactory*);
 };
 
 class StreamingPipeline : public Pipeline {
@@ -44,7 +44,7 @@ class StreamingPipeline : public Pipeline {
         void load() override;
 
     public:
-        StreamingPipeline(ConnectorFactory* factory);
+        StreamingPipeline(ConnectorFactory*);
 };
 
 #endif

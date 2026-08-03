@@ -22,10 +22,11 @@ void testCheckpoint();
 void testSource();
 void testTransformation();
 void testPipeline();
+void execute();
 
 int main()
 {
-    cout << "Please type the number of test - 1 (Test Source) 2 (Test Checkpoint) 3 (Test Transformation) 4 (Test Pipeline): ";
+    cout << "Please type the number of test - 1 (Test Source) 2 (Test Checkpoint) 3 (Test Transformation) 4 (Test Pipeline) 5 (Execute Program): ";
     int choice;
     cin >> choice;
     switch (choice)
@@ -42,10 +43,31 @@ int main()
     case 4:
         testPipeline();
         break;
+    case 5:
+        execute();
+        break;
     default:
         cout << "Invalid number entered, terminating program..." << endl;
         break;
     }
+}
+
+void execute()
+{
+    TransformationRegistry registry;
+    registry.registerStep("dedup", new DeduplicateStep());
+    registry.registerStep("aggregate", new AggregateByRegionStep());
+
+    BatchPipeline *bp = new BatchPipeline(new PostgresFactory());
+    bp->addStep(registry.create("dedup"));
+    bp->addStep(registry.create("aggregate"));
+
+    CheckpointManager *chkmanager = new CheckpointManager();
+    bp->run();
+    chkmanager->save(bp->createCheckpoint());
+
+    delete bp;
+    delete chkmanager;
 }
 
 void testCheckpoint()
@@ -178,7 +200,8 @@ void testSource()
     std::cout << "========================================" << std::endl;
 }
 
-void testTransformation(){
+void testTransformation()
+{
     TransformationRegistry tr;
     tr.registerStep("dedup", nullptr);
     tr.registerStep("mykey", new AggregateByRegionStep());
@@ -186,12 +209,13 @@ void testTransformation(){
     tr.registerStep("dedup", new DeduplicateStep());
     tr.registerStep("aggregate", new AggregateByRegionStep());
 
-    //key is not in there,,,
-    Transformation* t = tr.create("key");
-    Transformation* Dedup = tr.create("dedup");
-    Transformation* Aggregate = tr.create("aggregate");
-    
-    if(t == nullptr){
+    // key is not in there,,,
+    Transformation *t = tr.create("key");
+    Transformation *Dedup = tr.create("dedup");
+    Transformation *Aggregate = tr.create("aggregate");
+
+    if (t == nullptr)
+    {
         std::cout << "Correctly returned nullptr.\n";
     }
 
@@ -203,16 +227,18 @@ void testTransformation(){
         arrayP = Dedup->apply(arrayP);
 
         int size = arrayP.size();
-        for(int k = 0; k < size; k++){
+        for (int k = 0; k < size; k++)
+        {
             std::cout << arrayP[k] << " - ";
         }
         cout << endl;
 
-        arrayP = {"a","a","b","a","a","c"};
+        arrayP = {"a", "a", "b", "a", "a", "c"};
         arrayP = Dedup->apply(arrayP);
 
         size = arrayP.size();
-        for(int k = 0; k < size; k++){
+        for (int k = 0; k < size; k++)
+        {
             std::cout << arrayP[k] << " - ";
         }
         cout << endl;
@@ -221,7 +247,7 @@ void testTransformation(){
     std::cout << "==========================Testing AggregateByRegionStep's apply()======================================" << endl;
     cout << "The AggregateByRegionStep's name is " << Aggregate->getName() << endl;
 
-    std::vector<std::string> arrayP(125,"2");
+    std::vector<std::string> arrayP(125, "2");
     arrayP = Aggregate->apply(arrayP);
     std::cout << arrayP[0] << endl;
 
@@ -236,7 +262,8 @@ void testTransformation(){
     Aggregate = nullptr;
 }
 
-void testPipeline(){
+void testPipeline()
+{
     std::cout << "=====================================================\n";
     std::cout << "        TESTING: Batch Pipeline\n";
     std::cout << "=====================================================\n";
@@ -247,7 +274,7 @@ void testPipeline(){
     registry.registerStep("aggregate", new AggregateByRegionStep());
 
     // Create a batch pipeline
-    Pipeline* batch = new BatchPipeline(new PostgresFactory());
+    Pipeline *batch = new BatchPipeline(new PostgresFactory());
 
     // Add cloned transformations
     batch->addStep(registry.create("dedup"));
@@ -257,7 +284,7 @@ void testPipeline(){
     batch->run();
 
     // Test checkpoint creation
-    RunCheckpoint* cp = batch->createCheckpoint();
+    RunCheckpoint *cp = batch->createCheckpoint();
 
     std::cout << "\nCheckpoint created!" << std::endl;
     std::cout << "Stage = " << cp->getStage() << std::endl;
@@ -270,7 +297,7 @@ void testPipeline(){
     std::cout << "        TESTING: Streaming Pipeline\n";
     std::cout << "=====================================================\n";
 
-    Pipeline* stream = new StreamingPipeline(new CsvFactory());
+    Pipeline *stream = new StreamingPipeline(new CsvFactory());
 
     stream->addStep(registry.create("dedup"));
     stream->addStep(registry.create("aggregate"));
@@ -290,13 +317,13 @@ void testPipeline(){
     std::cout << "        TESTING: Restore()\n";
     std::cout << "=====================================================\n";
 
-    Pipeline* restoreTest = new BatchPipeline(new RestApiFactory());
+    Pipeline *restoreTest = new BatchPipeline(new RestApiFactory());
 
     restoreTest->addStep(registry.create("dedup"));
 
     restoreTest->run();
 
-    RunCheckpoint* saved = restoreTest->createCheckpoint();
+    RunCheckpoint *saved = restoreTest->createCheckpoint();
 
     std::cout << "\nCheckpoint saved at stage "
               << saved->getStage() << std::endl;

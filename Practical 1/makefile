@@ -6,7 +6,7 @@ SRCS = $(wildcard *.cpp)
 
 OBJS = $(SRCS:.cpp=.o)
 
-TARGET = main.exe
+TARGET = engine
 
 all: $(TARGET)
 

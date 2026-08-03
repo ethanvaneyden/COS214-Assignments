@@ -6,7 +6,6 @@
 #include "RestApiFactory.h"
 #include "CsvConnector.h"
 #include "PostgresFactory.h"
-#include "RestApiConnector.h"
 #include "CsvFactory.h"
 #include "Transformation.h"
 #include "TransformationRegistry.h"
@@ -22,10 +21,11 @@ using namespace std;
 void testCheckpoint();
 void testSource();
 void testTransformation();
+void testPipeline();
 
 int main()
 {
-    cout << "Please type the number of test - 1 (Test Source) 2 (Test Checkpoint) 3 (Test Transformation):";
+    cout << "Please type the number of test - 1 (Test Source) 2 (Test Checkpoint) 3 (Test Transformation) 4 (Test Pipeline): ";
     int choice;
     cin >> choice;
     switch (choice)
@@ -39,8 +39,11 @@ int main()
     case 3:
         testTransformation();
         break;
+    case 4:
+        testPipeline();
+        break;
     default:
-        cout << "Please enter a valid number";
+        cout << "Invalid number entered, terminating program..." << endl;
         break;
     }
 }
@@ -231,4 +234,83 @@ void testTransformation(){
 
     delete Aggregate;
     Aggregate = nullptr;
+}
+
+void testPipeline(){
+    std::cout << "=====================================================\n";
+    std::cout << "        TESTING: Batch Pipeline\n";
+    std::cout << "=====================================================\n";
+
+    // Create registry and register prototypes
+    TransformationRegistry registry;
+    registry.registerStep("dedup", new DeduplicateStep());
+    registry.registerStep("aggregate", new AggregateByRegionStep());
+
+    // Create a batch pipeline
+    Pipeline* batch = new BatchPipeline(new PostgresFactory());
+
+    // Add cloned transformations
+    batch->addStep(registry.create("dedup"));
+    batch->addStep(registry.create("aggregate"));
+
+    // Execute the template method
+    batch->run();
+
+    // Test checkpoint creation
+    RunCheckpoint* cp = batch->createCheckpoint();
+
+    std::cout << "\nCheckpoint created!" << std::endl;
+    std::cout << "Stage = " << cp->getStage() << std::endl;
+    std::cout << "Records stored = " << cp->getRecords().size() << std::endl;
+
+    delete cp;
+    delete batch;
+
+    std::cout << "\n=====================================================\n";
+    std::cout << "        TESTING: Streaming Pipeline\n";
+    std::cout << "=====================================================\n";
+
+    Pipeline* stream = new StreamingPipeline(new CsvFactory());
+
+    stream->addStep(registry.create("dedup"));
+    stream->addStep(registry.create("aggregate"));
+
+    stream->run();
+
+    cp = stream->createCheckpoint();
+
+    std::cout << "\nCheckpoint created!" << std::endl;
+    std::cout << "Stage = " << cp->getStage() << std::endl;
+    std::cout << "Records stored = " << cp->getRecords().size() << std::endl;
+
+    delete cp;
+    delete stream;
+
+    std::cout << "\n=====================================================\n";
+    std::cout << "        TESTING: Restore()\n";
+    std::cout << "=====================================================\n";
+
+    Pipeline* restoreTest = new BatchPipeline(new RestApiFactory());
+
+    restoreTest->addStep(registry.create("dedup"));
+
+    restoreTest->run();
+
+    RunCheckpoint* saved = restoreTest->createCheckpoint();
+
+    std::cout << "\nCheckpoint saved at stage "
+              << saved->getStage() << std::endl;
+
+    restoreTest->restore(saved);
+
+    std::cout << "Checkpoint restored successfully." << std::endl;
+    std::cout << "Restored stage = "
+              << saved->getStage() << std::endl;
+
+    delete saved;
+    delete restoreTest;
+
+    std::cout << "\n=====================================================\n";
+    std::cout << "Pipeline tests completed successfully!" << std::endl;
+    std::cout << "=====================================================\n";
 }

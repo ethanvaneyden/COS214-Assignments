@@ -2,15 +2,49 @@
 #define PIPELINE_H
 
 #include "RunCheckpoint.h"
+#include "ConnectorFactory.h"
+#include "Transformation.h"
+
 #include <vector>
+#include <iostream>
+#include <string>
 
 class Pipeline {
     protected: 
-    int stage;
-    std::vector<std::string> records;
+        int stage; //Mr E
+        std::vector<std::string> records; //Mr E
+        ConnectorFactory* factory;
+        std::vector<Transformation*> steps;
+        void connect();
+        virtual void extract() = 0;
+        void transform();
+        virtual void load() = 0;
+
     public:
-    RunCheckpoint* createCheckpoint();
-    void restore(RunCheckpoint*);
+        RunCheckpoint* createCheckpoint(); //Mr E
+        void restore(RunCheckpoint*); //Mr E
+        Pipeline(ConnectorFactory*);
+        void run();
+        void addStep(Transformation*);
+        virtual ~Pipeline();
+};
+
+class BatchPipeline : public Pipeline {
+    protected: 
+        void extract() override;
+        void load() override;
+
+    public:
+        BatchPipeline(ConnectorFactory*);
+};
+
+class StreamingPipeline : public Pipeline {
+    protected: 
+        void extract() override;
+        void load() override;
+
+    public:
+        StreamingPipeline(ConnectorFactory*);
 };
 
 #endif

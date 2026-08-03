@@ -26,34 +26,16 @@ void execute();
 
 int main()
 {
-    cout << "Please type the number of test - 1 (Test Source) 2 (Test Checkpoint) 3 (Test Transformation) 4 (Test Pipeline) 5 (Execute Program): ";
-    int choice;
-    cin >> choice;
-    switch (choice)
-    {
-    case 1:
-        testSource();
-        break;
-    case 2:
-        testCheckpoint();
-        break;
-    case 3:
-        testTransformation();
-        break;
-    case 4:
-        testPipeline();
-        break;
-    case 5:
-        execute();
-        break;
-    default:
-        cout << "Invalid number entered, terminating program..." << endl;
-        break;
-    }
+    testCheckpoint();
+    testPipeline();
+    testSource();
+    testTransformation();
+    execute();
 }
 
 void execute()
 {
+    cout << "===============\nExecuting program\n=============\n";
     TransformationRegistry registry;
     registry.registerStep("dedup", new DeduplicateStep());
     registry.registerStep("aggregate", new AggregateByRegionStep());
@@ -72,7 +54,7 @@ void execute()
 
 void testCheckpoint()
 {
-    cout << "Test 1: Run checkpoint" << "\n==================================";
+    cout << "Test 1: Run checkpoint" << "\n==================================\n";
     RunCheckpoint *checkpoint = new RunCheckpoint(2, {"a", "b", "c"});
     cout << "Stage is: " << checkpoint->getStage() << endl;
     cout << "Records size is: " << checkpoint->getRecords().size() << endl;

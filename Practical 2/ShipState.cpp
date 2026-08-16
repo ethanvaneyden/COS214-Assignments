@@ -31,27 +31,6 @@ void ShipState::move(Traveller *context)
     context->setCurrentPlace(newLocation);
     cout << "You travelled to " << newLocation->getName() << endl;
 }
-/*
-Handles the transition to rover state
-*/
-void ShipState::transition(Traveller *context, Map *location)
-{
-    if (context == nullptr || location == nullptr)
-    {
-        cout << "Failed to transition\n";
-        return;
-    }
-
-    std::string target = "rover";
-    if (!canTransition(target, location))
-    {
-        cout << "You are not allowed to do this!\n";
-        return;
-    }
-
-    context->setState(new RoverState());
-    cout << "You transitioned to RoverState\n";
-}
 
 /*
 Checks if a the player can transition state

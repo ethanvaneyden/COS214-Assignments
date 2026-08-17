@@ -60,7 +60,7 @@ void WalkState::displayMenu()
          << "Type the command you want to do\n"
          << "1. speak - Speak to an NPC\n"
          << "2. treasure - Hunt for treasure\n"
-         << "3. hazard - Explore this biomes hazard"
+         << "3. hazard - Explore this biomes hazard\n"
          << "4. landmark - Explore this biome's landmark"
          << "5. rover - Board the rover\n";
 }

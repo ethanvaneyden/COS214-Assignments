@@ -20,60 +20,72 @@ int Region::getPopulation() const{
 }
 
 void Region::growPopulation(int amount){
-    // to make it fair, we
-    // divide amount by num of children
-    // then grow each child by that factor.
-    // rounding up, when necessary
+    if(amount < 0){
+        std::cout << "Invalid amount. Population growth cannot be negative.\n";
+        return;
+    }
 
-    int numOfChildren = this->getChildCount();
+    int numOfChildren = getChildCount();
 
     if(numOfChildren == 0){
-        //no inhabitants
-        std::cout << "There are no inhabitants to grow\n";
+        std::cout << "There are no places in this region.\n";
+        return;
     }
-    else{
-        int factor = amount / numOfChildren;
 
-        //checking whether rounding is needed
-        if(numOfChildren * factor != amount)
-            factor++;       //rounding up by 1
+    // Divide the requested growth among the children
+    int baseAmount = amount / numOfChildren;
+    int remainder = amount % numOfChildren;
 
-        for(auto c : this->children){
-            c->growPopulation(factor);
+    for(int i = 0; i < numOfChildren; i++){
+        int childAmount = baseAmount;
+
+        // Give the remainder to the first few children
+        if(i < remainder){
+            childAmount++;
         }
-        
-        //getting total increase number
-        factor *= numOfChildren;
-        std::cout << "Region: Population grew by " << factor << std::endl;
+
+        children[i]->growPopulation(childAmount);
     }
 
+    std::cout << "Region: Population grew by " << amount << std::endl;
     describe();
 }
 
 void Region::decreasePopulation(int amount){
-    // to make it fair, we
-    // divide amount by num of children
-    // then decrease each child by that factor.
-    // rounding down, when necessary
+    if(amount < 0){
+        std::cout << "Invalid amount. Population decrease cannot be negative.\n";
+        return;
+    }
 
-    int numOfChildren = this->getChildCount();
+    int numOfChildren = getChildCount();
 
     if(numOfChildren == 0){
-        //no inhabitants
-        std::cout << "There are no inhabitants to decrease\n";
+        std::cout << "There are no places in this region.\n";
+        return;
     }
-    else{
-        int factor = amount / numOfChildren;       // also rounding down       
 
-        for(auto c : this->children){
-            c->decreasePopulation(factor);
+    // getting the population before the operation
+    int beforePopulation = getPopulation();
+
+    // Divide the requested decrease among the children
+    int baseAmount = amount / numOfChildren;
+    int remainder = amount % numOfChildren;
+
+    for(int i = 0; i < numOfChildren; i++){
+        int childAmount = baseAmount;
+
+        // Distribute the remainder
+        if(i < remainder){
+            childAmount++;
         }
-        
-        //getting total increase number
-        factor *= numOfChildren;
-        std::cout << "Region: Population decreased by " << factor << std::endl;
+
+        children[i]->decreasePopulation(childAmount);
     }
 
+    int afterPopulation = getPopulation();
+    int actualDecrease = beforePopulation - afterPopulation;
+
+    std::cout << "Region: Population decreased by " << actualDecrease << std::endl;
     describe();
 }
 

@@ -1,6 +1,8 @@
 #ifndef TREASURE_H
 #define TREASURE_H
 
+#include <iostream>
+
 class Treasure
 {
 public:

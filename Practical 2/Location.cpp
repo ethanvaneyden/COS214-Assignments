@@ -1,6 +1,6 @@
 #include "Location.h"
 
-Location::Location(const std::string& name, int pop = 0) : Map(name), population(pop) {
+Location::Location(const std::string& name, int pop) : Map(name), population(pop) {
 }
 
 void Location::describe() const{
@@ -13,6 +13,11 @@ int Location::getPopulation() const{
 
 void Location::growPopulation(int amount){
     this->population += amount;
+
+    // taking care of negative amount (e.g. -500)
+    if(this->population < 0) 
+        this->population = 0;
+
     std::cout << "Location: Population grew by " << amount << std::endl;
 
     describe();

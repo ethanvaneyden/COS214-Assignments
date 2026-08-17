@@ -1,5 +1,4 @@
 #include "ShipState.h"
-#include "RoverState.h"
 
 using namespace std;
 
@@ -34,7 +33,7 @@ void ShipState::move(Traveller *context)
 
 /*
 Checks if a the player can transition state
-Command must be ship and the planet must have the spaceport decorator
+Command must be "rover" and the planet must have the spaceport decorator
 */
 bool ShipState::canTransition(std::string &target, Map *currentLocation)
 {

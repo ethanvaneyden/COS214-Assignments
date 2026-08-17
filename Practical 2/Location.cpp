@@ -1,7 +1,8 @@
 #include "Location.h"
 
-Location::Location(const std::string& name, int pop) : Map(name), population(pop) {
-}
+Location::Location(const std::string& name, int pop, double distance)
+    : Map(name, distance), population(pop)
+{}
 
 void Location::describe() const{
     std::cout << "Location: " << getName() << " (Population: " << getPopulation() << ")\n";

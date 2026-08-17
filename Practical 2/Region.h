@@ -10,7 +10,7 @@ class Region : public Map {
         std::vector<Map*> children;  // OWNED by this Region
 
     public:
-        Region(const std::string& name);
+        Region(const std::string& name, double distance = 0.0);
         
         // (recursive func)
         void describe() const override;

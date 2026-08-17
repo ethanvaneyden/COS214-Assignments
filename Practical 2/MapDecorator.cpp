@@ -1,8 +1,8 @@
 #include "MapDecorator.h"
 
 MapDecorator::MapDecorator(Map* place)
-    : Map(place->getName()), wrapped(place) {
-}
+    : Map(place->getName(), place->getDistance()), wrapped(place)
+{}
 
 std::string MapDecorator::getName() const{
     return this->wrapped->getName();
@@ -38,6 +38,18 @@ Map* MapDecorator::getChild(int index) const{
 
 int MapDecorator::getChildCount() const{
     return this->wrapped->getChildCount();
+}
+
+double MapDecorator::getDistance() const{
+    return this->wrapped->getDistance();
+}
+
+void MapDecorator::setDistance(double distance){
+    this->wrapped->setDistance(distance);
+}
+
+bool MapDecorator::hasDecorator(const std::string& name) const{
+    return wrapped->hasDecorator(name);
 }
 
 MapDecorator::~MapDecorator(){

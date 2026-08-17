@@ -10,7 +10,7 @@ class Location : public Map {
 
     public:
         // takes name and optional population
-        Location(const std::string& name, int pop = 0);
+        Location(const std::string& name, int pop = 0, double distance = 0.0);
         
         // Prints the location details
         // Format: "Location: Mars (Population: 10000)\n"

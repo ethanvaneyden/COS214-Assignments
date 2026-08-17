@@ -22,6 +22,10 @@ class MapDecorator : public Map{
         Map* getChild(int index) const override;
         int getChildCount() const override;
 
+        double getDistance() const override;
+        void setDistance(double distance) override;
+        bool hasDecorator(const std::string& name) const override;
+
         ~MapDecorator() override;
 };
 

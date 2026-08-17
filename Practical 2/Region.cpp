@@ -1,7 +1,8 @@
 #include "Region.h"
 
-Region::Region(const std::string& name) : Map(name){
-}
+Region::Region(const std::string& name, double distance)
+    : Map(name, distance)
+{}
 
 void Region::describe() const{
     std::cout << "Region: " << getName() << " (Population: " << getPopulation() << ")\n";

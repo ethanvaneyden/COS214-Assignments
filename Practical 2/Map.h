@@ -2,13 +2,15 @@
 #define MAP_H
 
 #include <string>
+#include <iostream>
 
 class Map {
     private:
         std::string name;
+        double distance;
 
     protected:
-        Map(const std::string& name);
+        Map(const std::string& name, double distance = 0.0);
 
     public:
         // (recursive for Region)
@@ -25,6 +27,10 @@ class Map {
         virtual Map* getChild(int index) const;
         virtual int getChildCount() const;
 
+        virtual double getDistance() const;
+        virtual void setDistance(double distance);
+        virtual bool hasDecorator(const std::string& name) const;
+        
         virtual ~Map();
 };
 

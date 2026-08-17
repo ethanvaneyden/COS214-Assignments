@@ -1,5 +1,4 @@
 #include "SpaceportDecorator.h"
-#include <iostream>
 
 SpaceportDecorator::SpaceportDecorator(Map* place)
     : MapDecorator(place)

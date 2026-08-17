@@ -2,6 +2,7 @@
 #define SPACEPORTDECORATOR_H
 
 #include "MapDecorator.h"
+#include <iostream>
 
 class SpaceportDecorator : public MapDecorator {
     public:

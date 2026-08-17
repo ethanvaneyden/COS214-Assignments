@@ -2,6 +2,7 @@
 #define HAZARDDECORATOR_H
 
 #include "MapDecorator.h"
+#include <iostream>
 
 class HazardDecorator : public MapDecorator{
     public:

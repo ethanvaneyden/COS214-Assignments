@@ -10,6 +10,7 @@ class ShipState : public TravelState
 private:
     std::map<std::string, std::string> allowedTransitions = {
         {"rover", "spaceport"}};
+    std::string travelUnit = "AU";
 
 public:
     void move(Traveller *context);

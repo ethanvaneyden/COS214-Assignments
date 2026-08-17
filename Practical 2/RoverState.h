@@ -8,7 +8,7 @@
 class RoverState : public TravelState
 {
 private:
-    std::map<Trans, std::string> allowedTransitions = {
+    std::map<std::string, std::string> allowedTransitions = {
         {"ship", "spaceport"},
         {"walk", "anything"}};
 
@@ -16,6 +16,8 @@ public:
     void move(Traveller *context);
     std::string getModeName();
     bool canTransition(std::string &target, Map *currentLocation);
+    void displayMenu();
+    void handleInput(string &input, Traveller *context);
 };
 
 #endif

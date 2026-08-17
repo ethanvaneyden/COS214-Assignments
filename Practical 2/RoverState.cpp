@@ -62,3 +62,23 @@ string RoverState::getModeName()
 {
     return "Rover";
 }
+
+void RoverState::displayMenu()
+{
+    cout << "=== Inside rover ===\n"
+         << "Type the command you want to do\n"
+         << "1. move - Move to next location on the planet\n"
+         << "2. walk - Disembark rover and explore the location on foot\n";
+}
+
+void RoverState::handleInput(string &input, Traveller *context)
+{
+    if (input == "move")
+    {
+        move(context);
+    }
+    else
+    {
+        cout << "Invalid command\n";
+    }
+}

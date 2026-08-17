@@ -55,3 +55,23 @@ string ShipState::getModeName()
 {
     return "Ship";
 }
+
+void ShipState::displayMenu()
+{
+    cout << "=== Inside spaceship ===\n"
+         << "Type the command you want to do\n"
+         << "1. move - Move to next planet\n"
+         << "2. rover - Disembark ship into a rover if the planet has a spaceport\n";
+}
+
+void ShipState::handleInput(string &input, Traveller *context)
+{
+    if (input == "move")
+    {
+        move(context);
+    }
+    else
+    {
+        cout << "Invalid command\n";
+    }
+}

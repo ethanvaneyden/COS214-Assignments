@@ -13,7 +13,7 @@ int Location::getPopulation() const{
 
 void Location::growPopulation(int amount){
     this->population += amount;
-    std::cout << "Population grew by " << amount << std::endl;
+    std::cout << "Location: Population grew by " << amount << std::endl;
 
     describe();
 }

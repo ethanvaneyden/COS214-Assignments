@@ -3,6 +3,7 @@
 
 #include "Map.h"
 #include <vector>
+#include <iostream>
 
 class Region : public Map {
     private:
@@ -11,6 +12,7 @@ class Region : public Map {
     public:
         Region(const std::string& name);
         
+        // (recursive func)
         void describe() const override;
         int getPopulation() const override;
         void growPopulation(int amount) override;

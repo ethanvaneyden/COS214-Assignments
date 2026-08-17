@@ -78,7 +78,13 @@ void Region::decreasePopulation(int amount){
 }
 
 void Region::add(Map* child){
+    if(child == nullptr){
+        std::cout << "Invalid place\n";
+        return;
+    }
+
     this->children.push_back(child);
+    std::cout << "Successfully added a place\n";
 }
 
 void Region::remove(Map* child){
@@ -95,8 +101,6 @@ void Region::remove(Map* child){
             Map* c = this->children[p];
             this->children.erase(this->children.begin() + p);                   
             delete c;
-            c = nullptr;
-            child = nullptr;
 
             k = 1;
             std::cout << "Successfully deleted a place\n";
@@ -111,12 +115,12 @@ void Region::remove(Map* child){
 Map* Region::getChild(int index) const{
     int size = getChildCount();
     if(size <= 0){
-        std::cout << "Place not found, region is empty\n";
+        //std::cout << "Place not found, region is empty\n";
         return nullptr;
     }
 
     if(index < 0 || index >= size){
-        std::cout << "Invalid index\n";
+        //std::cout << "Invalid index\n";
         return nullptr;
     }
 
@@ -130,7 +134,11 @@ int Region::getChildCount() const{
 Region::~Region(){
     if(getChildCount() <= 0) return;
 
-    for (auto c : this->children){
-        remove(c);
+    for (int p = 0; p < getChildCount(); p++){
+        Map* c = this->children[p];
+        this->children.erase(this->children.begin() + p);                   
+        delete c;
+
+        p--;
     }
 }

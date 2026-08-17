@@ -12,6 +12,11 @@ int Location::getPopulation() const{
 }
 
 void Location::growPopulation(int amount){
+    if (amount < 0){
+        std::cout << "Invalid amount\n";
+        return;
+    }
+
     this->population += amount;
 
     // taking care of negative amount (e.g. -500)
@@ -24,6 +29,11 @@ void Location::growPopulation(int amount){
 }
 
 void Location::decreasePopulation(int amount){
+    if (amount < 0){
+        std::cout << "Invalid amount\n";
+        return;
+    }
+
     if(this->population <= 0){
         std::cout << "There are no inhabitants to decrease\n";
         describe();

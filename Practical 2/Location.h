@@ -16,6 +16,8 @@ class Location : public Map {
         void describe() const override;
         
         int getPopulation() const override;
+        void growPopulation(int amount) override;
+        void decreasePopulation(int amount) override;
 
         //nothing to clean up (no heap memory)
         ~Location() override;

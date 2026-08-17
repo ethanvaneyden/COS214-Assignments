@@ -10,12 +10,12 @@ class Map {
     protected:
         Map(const std::string& name);
 
-    public:        
-        // Describes this place (recursive for Region)
-        virtual void describe() const = 0;
-        
+    public:
         // (recursive for Region)
+        virtual void describe() const = 0;  // Describes this place
         virtual int getPopulation() const = 0;
+        virtual void growPopulation(int amount) = 0;
+        virtual void decreasePopulation(int amount) = 0;
 
         // Composite operations
         virtual void add(Map* child);

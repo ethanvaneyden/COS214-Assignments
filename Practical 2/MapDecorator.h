@@ -17,10 +17,10 @@ class MapDecorator : public Map{
         void growPopulation(int amount) override;
         void decreasePopulation(int amount) override;
 
-        virtual void add(Map* child) override;
-        virtual void remove(Map* child) override;
-        virtual Map* getChild(int index) const override;
-        virtual int getChildCount() const override;
+        void add(Map* child) override;
+        void remove(Map* child) override;
+        Map* getChild(int index) const override;
+        int getChildCount() const override;
 
         ~MapDecorator() override;
 };

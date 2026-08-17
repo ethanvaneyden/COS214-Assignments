@@ -2,6 +2,7 @@
 #define LOCATION_H
 
 #include "Map.h"
+#include <iostream>
 
 class Location : public Map {
     private:

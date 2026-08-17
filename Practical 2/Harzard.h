@@ -1,6 +1,7 @@
 #ifndef HAZARD_H
 #define HAZARD_H
 
+#include <iostream>
 class Hazard
 {
 public:

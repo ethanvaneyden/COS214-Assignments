@@ -67,7 +67,32 @@ void WalkState::displayMenu()
 
 void WalkState::handleInput(string &input, Traveller *context)
 {
-    Biome *currentBiome = context->getCurrentPlace()->getCurrentBiome();
+    if (context == nullptr)
+    {
+        cout << "No traveller context available\n";
+        return;
+    }
+
+    Map *currentLocation = context->getCurrentPlace();
+    if (currentLocation == nullptr)
+    {
+        cout << "No current location available\n";
+        return;
+    }
+
+    if (input.empty())
+    {
+        cout << "No command entered\n";
+        return;
+    }
+
+    Biome *currentBiome = currentLocation->getCurrentBiome();
+    if (currentBiome == nullptr)
+    {
+        cout << "No biome data available for this location\n";
+        return;
+    }
+
     if (input == "speak")
     {
         currentBiome->speakToNPC();

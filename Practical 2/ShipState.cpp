@@ -66,6 +66,18 @@ void ShipState::displayMenu()
 
 void ShipState::handleInput(string &input, Traveller *context)
 {
+    if (context == nullptr)
+    {
+        cout << "No traveller context available\n";
+        return;
+    }
+
+    if (input.empty())
+    {
+        cout << "No command entered\n";
+        return;
+    }
+
     if (input == "move")
     {
         move(context);

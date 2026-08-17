@@ -3,6 +3,7 @@
 
 #include "TravelState.h"
 #include <map>
+#include <string>
 
 class WalkState : public TravelState
 {

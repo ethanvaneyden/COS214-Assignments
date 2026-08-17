@@ -14,14 +14,11 @@ private:
     Map *currentLocation;
 
 public:
-    void setState(TravelState *);
+    void setState(TravelState *state);
     TravelState *getCurrentState();
     Map *getCurrentPlace();
-    void setCurrentPlace(Map *);
-    void tryTransitionTo(std::string &target);
-    void move();
-    Traveller(TravelState *, Map *);
-    virtual ~Traveller();
+    void setCurrentPlace(Map *map);
+    Traveller(TravelState *state, Map *map);
 };
 
 #endif

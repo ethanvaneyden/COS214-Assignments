@@ -25,18 +25,17 @@ void Region::growPopulation(int amount){
     // then grow each child by that factor.
     // rounding up, when necessary
 
-    int tempPopulation = this->getPopulation();
-    int factor;
+    int numOfChildren = this->getChildCount();
 
-    if(tempPopulation == 0){
+    if(numOfChildren == 0){
         //no inhabitants
-        factor = 0;
+        std::cout << "There are no inhabitants to grow\n";
     }
     else{
-        factor = amount / tempPopulation;
+        int factor = amount / numOfChildren;
 
         //checking whether rounding is needed
-        if(tempPopulation * factor != amount)
+        if(numOfChildren * factor != amount)
             factor++;       //rounding up by 1
 
         for(auto c : this->children){
@@ -44,10 +43,10 @@ void Region::growPopulation(int amount){
         }
         
         //getting total increase number
-        factor *= tempPopulation;
+        factor *= numOfChildren;
+        std::cout << "Region: Population grew by " << factor << std::endl;
     }
 
-    std::cout << "Region: Population grew by " << factor << std::endl;
     describe();
 }
 
@@ -57,25 +56,24 @@ void Region::decreasePopulation(int amount){
     // then decrease each child by that factor.
     // rounding down, when necessary
 
-    int tempPopulation = this->getPopulation();
-    int factor;
+    int numOfChildren = this->getChildCount();
 
-    if(tempPopulation == 0){
+    if(numOfChildren == 0){
         //no inhabitants
-        factor = 0;
+        std::cout << "There are no inhabitants to decrease\n";
     }
     else{
-        factor = amount / tempPopulation;       // also rounding down       
+        int factor = amount / numOfChildren;       // also rounding down       
 
         for(auto c : this->children){
-            c->growPopulation(factor);
+            c->decreasePopulation(factor);
         }
         
         //getting total increase number
-        factor *= tempPopulation;
+        factor *= numOfChildren;
+        std::cout << "Region: Population decreased by " << factor << std::endl;
     }
 
-    std::cout << "Region: Population decreased by " << factor << std::endl;
     describe();
 }
 

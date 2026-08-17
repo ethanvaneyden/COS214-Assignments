@@ -13,6 +13,8 @@ public:
     virtual void transition(Traveller *context, std::string &target) = 0;
     virtual std::string getModeName() = 0;
     virtual bool canTransition(std::string &target, Map *currentLocation) = 0;
+    virtual void displayMenu() = 0;
+    virtual void handleInput(std::string &input, Traveller *context) = 0;
 };
 
 #endif

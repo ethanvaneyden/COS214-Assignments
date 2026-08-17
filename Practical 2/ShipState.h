@@ -15,6 +15,8 @@ public:
     void move(Traveller *context);
     std::string getModeName();
     bool canTransition(std::string &target, Map *currentLocation);
+    void displayMenu();
+    void handleInput(std::string &input, Traveller *context);
 };
 
 #endif

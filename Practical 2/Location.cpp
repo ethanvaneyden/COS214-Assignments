@@ -1,7 +1,8 @@
 #include "Location.h"
+#include "Biome.h"
 
-Location::Location(const std::string& name, int pop, double distance)
-    : Map(name, distance), population(pop)
+Location::Location(const std::string& name, int pop, double distance, Biome* biome)
+    : Map(name, distance), population(pop), biome(biome)
 {}
 
 void Location::describe() const{
@@ -49,6 +50,15 @@ void Location::decreasePopulation(int amount){
     describe();
 }
 
+Biome* Location::getBiome() const{
+    return this->biome;
+}
+
+void Location::setBiome(Biome* biome){
+    this->biome = biome;
+}
+
 Location::~Location(){
-    //nothing to clean up (no heap memory)
+    if(biome != nullptr)
+        delete biome;
 }

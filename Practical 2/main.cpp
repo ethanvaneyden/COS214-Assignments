@@ -14,6 +14,11 @@
 #include "SafeRoute.h"
 #include "ScenicRoute.h"
 #include "Trip.h"
+#include "TravelState.h"
+#include "WalkState.h"
+#include "RoverState.h"
+#include "ShipState.h"
+#include "Traveller.h"
 
 #include <iostream>
 
@@ -23,12 +28,15 @@ void testComposite();
 void testDecorator();
 void testAbstractFactory();
 void testStrategy();
+void testState();
 
 int main(){
     testComposite();
     testDecorator();
     testAbstractFactory();
     testStrategy();
+    testState();
+
     return 0;
 }
 
@@ -535,4 +543,198 @@ void testStrategy(){
     delete scenic;
 
     cout << "\n===================  STRATEGY TESTING COMPLETE  =====================\n";
+}
+
+void testState(){
+    cout << "\n====================  STATE PATTERN TESTING  ====================\n";
+
+    Location* earth = new Location("Earth", 1000, 10.0);
+    Location* mars = new Location("Mars", 500, 20.0);
+    Location* decoratedMarsLocation = new Location("Mars", 500, 20.0);
+
+    Region* solarSystem = new Region("Solar System", 0.0);
+    solarSystem->add(earth);
+    solarSystem->add(mars);
+
+    Map* spaceportMars = new SpaceportDecorator(decoratedMarsLocation);
+
+    TravelState* walk = new WalkState();
+    TravelState* rover = new RoverState();
+    TravelState* ship = new ShipState();
+
+    cout << "\nCreating states\n";
+    cout << "Walk state: " << walk->getModeName() << endl;
+    cout << "Rover state: " << rover->getModeName() << endl;
+    cout << "Ship state: " << ship->getModeName() << endl;
+
+    cout << "\nCreating Traveller\n";
+    Traveller* traveller = new Traveller(walk, earth);
+
+    cout << "Current state: " << traveller->getCurrentState()->getModeName() << endl;
+    cout << "Current location: " << traveller->getCurrentPlace()->getName() << endl;
+
+    cout << "\nTesting Walk state menu\n";
+    walk->displayMenu();
+
+    cout << "\nTesting Walk state move\n";
+    walk->move(traveller);
+
+    cout << "\nTesting Walk state commands\n";
+
+    string input = "speak";
+    walk->handleInput(input, traveller);
+
+    input = "treasure";
+    walk->handleInput(input, traveller);
+
+    input = "hazard";
+    walk->handleInput(input, traveller);
+
+    input = "landmark";
+    walk->handleInput(input, traveller);
+
+    cout << "\nTesting invalid Walk command\n";
+    input = "invalid";
+    walk->handleInput(input, traveller);
+
+    cout << "\nTesting empty Walk command\n";
+    input = "";
+    walk->handleInput(input, traveller);
+
+    cout << "\nTesting Walk transitions\n";
+
+    string target = "rover";
+    cout << "Walk -> Rover: " << walk->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    target = "ship";
+    cout << "Walk -> Ship: " << walk->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    target = "invalid";
+    cout << "Walk -> Invalid: " << walk->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    cout << "\nChanging to Rover state\n";
+    traveller->setState(rover);
+
+    cout << "Current state: " << traveller->getCurrentState()->getModeName() << endl;
+
+    cout << "\nTesting Rover state menu\n";
+    rover->displayMenu();
+
+    cout << "\nTesting Rover state move\n";
+    rover->move(traveller);
+
+    cout << "Current location: " << traveller->getCurrentPlace()->getName() << endl;
+
+    cout << "\nTesting Rover state commands\n";
+
+    input = "move";
+    rover->handleInput(input, traveller);
+
+    cout << "\nTesting invalid Rover command\n";
+    input = "invalid";
+    rover->handleInput(input, traveller);
+
+    cout << "\nTesting empty Rover command\n";
+    input = "";
+    rover->handleInput(input, traveller);
+
+    cout << "\nTesting Rover transitions\n";
+
+    target = "walk";
+    cout << "Rover -> Walk: " << rover->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    target = "ship";
+    cout << "Rover -> Ship: " << rover->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    target = "invalid";
+    cout << "Rover -> Invalid: " << rover->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    cout << "\nTesting Rover transition with spaceport\n";
+
+    traveller->setCurrentPlace(spaceportMars);
+
+    target = "ship";
+    cout << "Rover -> Ship with spaceport: " << rover->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    cout << "\nChanging to Ship state\n";
+    traveller->setState(ship);
+
+    cout << "Current state: " << traveller->getCurrentState()->getModeName() << endl;
+
+    cout << "\nTesting Ship state menu\n";
+    ship->displayMenu();
+
+    cout << "\nTesting Ship state move\n";
+    ship->move(traveller);
+
+    cout << "Current location: " << traveller->getCurrentPlace()->getName() << endl;
+
+    cout << "\nTesting Ship state commands\n";
+
+    input = "move";
+    ship->handleInput(input, traveller);
+
+    cout << "\nTesting invalid Ship command\n";
+    input = "invalid";
+    ship->handleInput(input, traveller);
+
+    cout << "\nTesting empty Ship command\n";
+    input = "";
+    ship->handleInput(input, traveller);
+
+    cout << "\nTesting Ship transitions\n";
+
+    target = "rover";
+    cout << "Ship -> Rover: " << ship->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    target = "invalid";
+    cout << "Ship -> Invalid: " << ship->canTransition(target, traveller->getCurrentPlace()) << endl;
+
+    cout << "\nTesting null Traveller\n";
+
+    walk->move(nullptr);
+    rover->move(nullptr);
+    ship->move(nullptr);
+
+    input = "move";
+    walk->handleInput(input, nullptr);
+    rover->handleInput(input, nullptr);
+    ship->handleInput(input, nullptr);
+
+    cout << "\nTesting null location\n";
+
+    Traveller* nullLocationTraveller = new Traveller(walk, nullptr);
+
+    walk->move(nullLocationTraveller);
+    rover->move(nullLocationTraveller);
+    ship->move(nullLocationTraveller);
+
+    input = "speak";
+    walk->handleInput(input, nullLocationTraveller);
+
+    target = "rover";
+    cout << "Walk transition with null location: " << walk->canTransition(target, nullptr) << endl;
+
+    cout << "\nTesting Traveller setters\n";
+
+    nullLocationTraveller->setCurrentPlace(earth);
+    nullLocationTraveller->setState(ship);
+
+    cout << "State: " << nullLocationTraveller->getCurrentState()->getModeName() << endl;
+
+    cout << "Location: " << nullLocationTraveller->getCurrentPlace()->getName() << endl;
+
+    delete nullLocationTraveller;
+
+    delete traveller;
+
+    delete walk;
+    delete rover;
+    delete ship;
+
+    delete spaceportMars;
+
+    delete solarSystem;
+
+    cout << "\n===================  STATE TESTING COMPLETE  =====================\n";
 }

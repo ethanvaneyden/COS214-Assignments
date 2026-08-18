@@ -3,6 +3,11 @@
 
 #include "BiomeFactory.h"
 
+#include "DesertNPC.h"
+#include "DesertTreasure.h"
+#include "DesertHazard.h"
+#include "DesertLandmark.h"
+
 class DesertFactory : public BiomeFactory{
     public:
         NPC* createNPC() override;

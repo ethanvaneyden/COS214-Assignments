@@ -33,11 +33,11 @@ void testState();
 void testGameManager();
 
 int main(){
-    // testComposite();
-    // testDecorator();
-    // testAbstractFactory();
-    // testStrategy();
-    // testState();
+    testComposite();
+    testDecorator();
+    testAbstractFactory();
+    testStrategy();
+    testState();
     testGameManager();
 
     return 0;

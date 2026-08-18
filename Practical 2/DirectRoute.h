@@ -2,6 +2,9 @@
 #define DIRECTROUTE_H
 
 #include "RouteStrategy.h"
+#include <iostream>
+
+class Trip;
 
 class DirectRoute : public RouteStrategy
 {

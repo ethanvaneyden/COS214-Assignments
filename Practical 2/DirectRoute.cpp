@@ -1,4 +1,5 @@
 #include "DirectRoute.h"
+#include "Trip.h"
 
 using namespace std;
 

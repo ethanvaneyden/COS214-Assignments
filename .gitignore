@@ -38,6 +38,7 @@
 *.exe
 *.out
 *.app
+wayfarer
 
 # Build directories
 build/

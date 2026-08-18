@@ -44,6 +44,18 @@ bool Map::hasDecorator(const std::string& name) const{
     return false;
 }
 
+Map* Map::nextLocation(){
+    return nullptr;
+}
+
+Map* Map::nextPlanet(){
+    return nullptr;
+}
+
+Biome* Map::getCurrentBiome(){
+    return nullptr;
+}
+
 Map::~Map(){
     //Nothing to delete,,,
 }

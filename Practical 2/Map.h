@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 
+class Biome;
+
 class Map {
     private:
         std::string name;
@@ -30,6 +32,11 @@ class Map {
         virtual double getDistance() const;
         virtual void setDistance(double distance);
         virtual bool hasDecorator(const std::string& name) const;
+
+        virtual Map* nextLocation();
+        virtual Map* nextPlanet();
+
+        virtual Biome* getCurrentBiome();
         
         virtual ~Map();
 };

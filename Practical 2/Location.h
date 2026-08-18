@@ -25,6 +25,7 @@ class Location : public Map {
 
         Biome* getBiome() const;
         void setBiome(Biome* biome);
+        Biome* getCurrentBiome() override;
 
         //nothing to clean up (no heap memory)
         ~Location() override;

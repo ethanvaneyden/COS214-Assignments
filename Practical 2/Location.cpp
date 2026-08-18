@@ -58,6 +58,10 @@ void Location::setBiome(Biome* biome){
     this->biome = biome;
 }
 
+Biome* Location::getCurrentBiome(){
+    return this->biome;
+}
+
 Location::~Location(){
     if(biome != nullptr)
         delete biome;

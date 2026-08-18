@@ -5,6 +5,10 @@
 #include "SpaceportDecorator.h"
 #include "HazardDecorator.h"
 #include "ResourceDecorator.h"
+#include "Biome.h"
+#include "BiomeFactory.h"
+#include "ForestFactory.h"
+#include "DesertFactory.h"
 
 #include <iostream>
 
@@ -12,10 +16,12 @@ using namespace std;
 
 void testComposite();
 void testDecorator();
+void testAbstractFactory();
 
 int main(){
     testComposite();
     testDecorator();
+    testAbstractFactory();
     return 0;
 }
 
@@ -286,4 +292,131 @@ void testDecorator(){
     delete decoratedRegion;
 
     cout << "\n===================  DECORATOR TESTING COMPLETE  =====================\n";
+}
+
+void testAbstractFactory(){
+    cout << "\n====================  ABSTRACT FACTORY TESTING  ====================\n";
+
+    cout << "Creating Forest Factory\n";
+    BiomeFactory* forestFactory = new ForestFactory();
+
+    cout << "Creating Forest products\n";
+    NPC* forestNPC = forestFactory->createNPC();
+    Treasure* forestTreasure = forestFactory->createTreasure();
+    Hazard* forestHazard = forestFactory->createHazard();
+    Landmark* forestLandmark = forestFactory->createLandmark();
+
+    cout << "Testing Forest NPC\n";
+    forestNPC->speak();
+    cout << "\n\n";
+
+    cout << "Testing Forest Treasure\n";
+    forestTreasure->treasureHunt();
+    cout << "\n\n";
+
+    cout << "Testing Forest Hazard\n";
+    forestHazard->exploreHazard();
+    cout << "\n\n";
+
+    cout << "Testing Forest Landmark\n";
+    forestLandmark->exploreLandmark();
+    cout << "\n\n";
+
+    delete forestNPC;
+    delete forestTreasure;
+    delete forestHazard;
+    delete forestLandmark;
+
+    cout << "Creating Forest Biome\n";
+    Biome* forestBiome = forestFactory->createBiome();
+
+    cout << "Testing Forest Biome\n";
+    forestBiome->speakToNPC();
+    cout << "\n";
+    forestBiome->huntTreasure();
+    cout << "\n";
+    forestBiome->exploreHazard();
+    cout << "\n";
+    forestBiome->exploreLandmark();
+    cout << "\n\n";
+
+    delete forestBiome;
+    delete forestFactory;
+
+    cout << "Creating Desert Factory\n";
+    BiomeFactory* desertFactory = new DesertFactory();
+
+    cout << "Creating Desert products\n";
+    NPC* desertNPC = desertFactory->createNPC();
+    Treasure* desertTreasure = desertFactory->createTreasure();
+    Hazard* desertHazard = desertFactory->createHazard();
+    Landmark* desertLandmark = desertFactory->createLandmark();
+
+    cout << "Testing Desert NPC\n";
+    desertNPC->speak();
+    cout << "\n\n";
+
+    cout << "Testing Desert Treasure\n";
+    desertTreasure->treasureHunt();
+    cout << "\n\n";
+
+    cout << "Testing Desert Hazard\n";
+    desertHazard->exploreHazard();
+    cout << "\n\n";
+
+    cout << "Testing Desert Landmark\n";
+    desertLandmark->exploreLandmark();
+    cout << "\n\n";
+
+    delete desertNPC;
+    delete desertTreasure;
+    delete desertHazard;
+    delete desertLandmark;
+
+    cout << "Creating Desert Biome\n";
+    Biome* desertBiome = desertFactory->createBiome();
+
+    cout << "Testing Desert Biome\n";
+    desertBiome->speakToNPC();
+    cout << "\n";
+    desertBiome->huntTreasure();
+    cout << "\n";
+    desertBiome->exploreHazard();
+    cout << "\n";
+    desertBiome->exploreLandmark();
+    cout << "\n\n";
+
+    delete desertBiome;
+    delete desertFactory;
+
+    cout << "Testing Biome with Location\n";
+
+    BiomeFactory* locationFactory = new ForestFactory();
+    Biome* locationBiome = locationFactory->createBiome();
+
+    Location* location = new Location(
+        "Enchanted Forest",
+        1000,
+        25.0,
+        locationBiome
+    );
+
+    cout << "Location: " << location->getName() << endl;
+    cout << "Population: " << location->getPopulation() << endl;
+    cout << "Distance: " << location->getDistance() << endl;
+
+    cout << "Testing Location biome\n";
+    location->getBiome()->speakToNPC();
+    cout << "\n";
+    location->getBiome()->huntTreasure();
+    cout << "\n";
+    location->getBiome()->exploreHazard();
+    cout << "\n";
+    location->getBiome()->exploreLandmark();
+    cout << "\n";
+
+    delete location;
+    delete locationFactory;
+
+    cout << "\n===================  ABSTRACT FACTORY TESTING COMPLETE  =====================\n";
 }

@@ -1,14 +1,17 @@
 #ifndef ROUTESTRATEGY_H
 #define ROUTESTRATEGY_H
-#include "Trip.h"
 
-class RouteStrategy
-{
+#include <string>
 
-public:
-    double calculateDistance(double distance);
-    void printMessage(Trip *context, const std::string distanceUnits);
-    std::string getStrategyName();
+class Trip;
+
+class RouteStrategy{
+    public:
+        virtual double calculateDistance(double distance) = 0;
+        virtual void printMessage(Trip *context, const std::string &distanceUnits) = 0;
+        virtual std::string getStrategyName() = 0;
+
+        virtual ~RouteStrategy() {}
 };
 
 #endif

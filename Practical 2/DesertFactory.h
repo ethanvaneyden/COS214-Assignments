@@ -10,6 +10,8 @@
 
 class DesertFactory : public BiomeFactory{
     public:
+        Biome* createBiome() override;
+        
         NPC* createNPC() override;
         Treasure* createTreasure() override;
         Hazard* createHazard() override;

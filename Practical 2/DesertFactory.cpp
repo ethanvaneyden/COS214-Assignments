@@ -1,5 +1,9 @@
 #include "DesertFactory.h"
 
+Biome* DesertFactory::createBiome(){
+    return new Biome(createNPC(), createTreasure(), createHazard(), createLandmark());
+}
+
 NPC* DesertFactory::createNPC(){
     return new DesertNPC();
 }

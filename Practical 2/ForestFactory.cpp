@@ -1,5 +1,9 @@
 #include "ForestFactory.h"
 
+Biome* ForestFactory::createBiome(){
+    return new Biome(createNPC(), createTreasure(), createHazard(), createLandmark());
+}
+
 NPC* ForestFactory::createNPC(){
     return new ForestNPC();
 }

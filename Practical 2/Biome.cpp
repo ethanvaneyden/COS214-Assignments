@@ -25,6 +25,7 @@ void Biome::exploreLandmark(){
 }
 
 Biome::~Biome(){
+    //checking null, just to be safe
     if(npc != nullptr)
         delete npc;
 

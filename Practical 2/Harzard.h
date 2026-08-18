@@ -6,7 +6,7 @@ class Hazard
 {
 public:
     virtual void exploreHazard() = 0;
-    virtual ~Hazard();
+    virtual ~Hazard() = default;
 };
 
 #endif

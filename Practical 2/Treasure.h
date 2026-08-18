@@ -7,7 +7,7 @@ class Treasure
 {
 public:
     virtual void treasureHunt() = 0;
-    virtual ~Treasure();
+    virtual ~Treasure() = default;
 };
 
 #endif

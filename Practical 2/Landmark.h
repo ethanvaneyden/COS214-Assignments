@@ -6,7 +6,7 @@ class Landmark
 {
 public:
     virtual void exploreLandmark() = 0;
-    virtual ~Landmark();
+    virtual ~Landmark() = default;
 };
 
 #endif

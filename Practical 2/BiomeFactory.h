@@ -17,7 +17,7 @@ class BiomeFactory{
         virtual Hazard* createHazard() = 0;
         virtual Landmark* createLandmark() = 0;
 
-        virtual ~BiomeFactory();
+        virtual ~BiomeFactory() = default;
 };
 
 #endif

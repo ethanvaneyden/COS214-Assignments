@@ -9,6 +9,11 @@
 #include "BiomeFactory.h"
 #include "ForestFactory.h"
 #include "DesertFactory.h"
+#include "RouteStrategy.h"
+#include "DirectRoute.h"
+#include "SafeRoute.h"
+#include "ScenicRoute.h"
+#include "Trip.h"
 
 #include <iostream>
 
@@ -17,11 +22,13 @@ using namespace std;
 void testComposite();
 void testDecorator();
 void testAbstractFactory();
+void testStrategy();
 
 int main(){
     testComposite();
     testDecorator();
     testAbstractFactory();
+    testStrategy();
     return 0;
 }
 
@@ -419,4 +426,113 @@ void testAbstractFactory(){
     delete locationFactory;
 
     cout << "\n===================  ABSTRACT FACTORY TESTING COMPLETE  =====================\n";
+}
+
+void testStrategy(){
+    cout << "\n====================  STRATEGY PATTERN TESTING  ====================\n";
+
+    cout << "\nCreating strategies\n";
+
+    RouteStrategy* direct = new DirectRoute();
+    RouteStrategy* safe = new SafeRoute();
+    RouteStrategy* scenic = new ScenicRoute();
+
+    cout << "Direct strategy name: " << direct->getStrategyName() << endl;
+
+    cout << "Safe strategy name: " << safe->getStrategyName() << endl;
+
+    cout << "Scenic strategy name: " << scenic->getStrategyName() << endl;
+
+    cout << "\nTesting distance calculations\n";
+
+    cout << "Direct distance (100): " << direct->calculateDistance(100) << endl;
+
+    cout << "Safe distance (100): " << safe->calculateDistance(100) << endl;
+
+    cout << "Scenic distance (100): " << scenic->calculateDistance(100) << endl;
+
+    cout << "\nTesting zero distance\n";
+
+    cout << "Direct distance (0): " << direct->calculateDistance(0) << endl;
+
+    cout << "Safe distance (0): " << safe->calculateDistance(0) << endl;
+
+    cout << "Scenic distance (0): " << scenic->calculateDistance(0) << endl;
+
+    cout << "\nCreating Trip with Direct strategy\n";
+
+    Trip* trip = new Trip(direct, 100);
+
+    cout << "Base distance: " << trip->getBaseDistance() << endl;
+
+    cout << "Current strategy: " << trip->getStrategy()->getStrategyName() << endl;
+
+    cout << "\nTesting Direct strategy message\n";
+
+    trip->getStrategy()->printMessage(trip, "KM");
+    cout << endl;
+
+    cout << "\nChanging to Safe strategy\n";
+
+    trip->setStrategy(safe);
+
+    cout << "Current strategy: " << trip->getStrategy()->getStrategyName() << endl;
+
+    trip->getStrategy()->printMessage(trip, "KM");
+    cout << endl;
+
+    cout << "\nChanging to Scenic strategy\n";
+
+    trip->setStrategy(scenic);
+
+    cout << "Current strategy: " << trip->getStrategy()->getStrategyName() << endl;
+
+    trip->getStrategy()->printMessage(trip, "KM");
+    cout << endl;
+
+    cout << "\nChanging base distance\n";
+
+    trip->setBaseDistance(200);
+
+    cout << "New base distance: " << trip->getBaseDistance() << endl;
+    cout << "Direct calculation: " << direct->calculateDistance(trip->getBaseDistance()) << endl;
+    cout << "Safe calculation: " << safe->calculateDistance(trip->getBaseDistance()) << endl;
+    cout << "Scenic calculation: " << scenic->calculateDistance(trip->getBaseDistance()) << endl;
+    cout << "\nTesting strategy after changing distance\n";
+
+    trip->setStrategy(direct);
+    trip->getStrategy()->printMessage(trip, "KM");
+    cout << endl;
+
+    trip->setStrategy(safe);
+    trip->getStrategy()->printMessage(trip, "KM");
+    cout << endl;
+
+    trip->setStrategy(scenic);
+    trip->getStrategy()->printMessage(trip, "KM");
+    cout << endl;
+
+    cout << "\nTesting different distance units\n";
+
+    trip->setStrategy(direct);
+    trip->getStrategy()->printMessage(trip, "AU");
+    cout << endl;
+
+    trip->setStrategy(safe);
+    trip->getStrategy()->printMessage(trip, "AU");
+    cout << endl;
+
+    trip->setStrategy(scenic);
+    trip->getStrategy()->printMessage(trip, "AU");
+    cout << endl;
+
+    delete trip;
+
+    //The Trip does not own the strategies.
+    //Therefore the strategies are deleted separately.
+    delete direct;
+    delete safe;
+    delete scenic;
+
+    cout << "\n===================  STRATEGY TESTING COMPLETE  =====================\n";
 }

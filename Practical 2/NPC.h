@@ -8,6 +8,7 @@ class NPC
 {
 public:
     virtual void speak() = 0;
+    virtual ~NPC();
 };
 
 #endif

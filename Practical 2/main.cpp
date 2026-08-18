@@ -11,9 +11,11 @@
 using namespace std;
 
 void testComposite();
+void testDecorator();
 
 int main(){
     testComposite();
+    testDecorator();
     return 0;
 }
 
@@ -188,4 +190,100 @@ void testComposite(){
     cout << endl;
 
     cout << "\n===================  COMPOSITE TESTING COMPLETE  =====================\n";
+}
+
+void testDecorator(){
+    cout << "\n====================  DECORATOR PATTERN TESTING  ====================\n";
+
+    Location* mars = new Location("Mars", 500, 20.0);
+
+    cout << "Creating Location\n";
+    cout << "Name: " << mars->getName() << endl;
+    cout << "Population: " << mars->getPopulation() << endl;
+    cout << "Distance: " << mars->getDistance() << endl;
+    cout << endl;
+
+    cout << "Checking decorators before decoration\n";
+    cout << "Spaceport: " << mars->hasDecorator("spaceport") << endl;
+    cout << "Hazard: " << mars->hasDecorator("hazard") << endl;
+    cout << "Resource: " << mars->hasDecorator("resource") << endl;
+    cout << endl;
+
+    cout << "Decorating with Spaceport\n";
+    Map* spaceport = new SpaceportDecorator(mars);
+
+    cout << "Spaceport: " << spaceport->hasDecorator("spaceport") << endl;
+    cout << "Hazard: " << spaceport->hasDecorator("hazard") << endl;
+    cout << "Resource: " << spaceport->hasDecorator("resource") << endl;
+    cout << endl;
+
+    cout << "Testing delegated operations\n";
+    cout << "Name: " << spaceport->getName() << endl;
+    cout << "Population: " << spaceport->getPopulation() << endl;
+    cout << "Distance: " << spaceport->getDistance() << endl;
+    spaceport->describe();
+    cout << endl;
+
+    cout << "Testing delegated population operations\n";
+    spaceport->growPopulation(100);
+    spaceport->decreasePopulation(50);
+    cout << endl;
+
+    cout << "Adding Hazard decorator\n";
+    Map* hazard = new HazardDecorator(spaceport);
+
+    cout << "Spaceport: " << hazard->hasDecorator("spaceport") << endl;
+    cout << "Hazard: " << hazard->hasDecorator("hazard") << endl;
+    cout << "Resource: " << hazard->hasDecorator("resource") << endl;
+    cout << endl;
+
+    cout << "Adding Resource decorator\n";
+    Map* resource = new ResourceDecorator(hazard);
+
+    cout << "Spaceport: " << resource->hasDecorator("spaceport") << endl;
+    cout << "Hazard: " << resource->hasDecorator("hazard") << endl;
+    cout << "Resource: " << resource->hasDecorator("resource") << endl;
+    cout << endl;
+
+    cout << "Testing stacked decorator operations\n";
+    cout << "Name: " << resource->getName() << endl;
+    cout << "Population: " << resource->getPopulation() << endl;
+    cout << "Distance: " << resource->getDistance() << endl;
+    resource->describe();
+    cout << endl;
+
+    cout << "Changing distance through decorator\n";
+    cout << "Before: " << resource->getDistance() << endl;
+    resource->setDistance(50.0);
+    cout << "After: " << resource->getDistance() << endl;
+    cout << endl;
+
+    cout << "Invalid distance through decorator\n";
+    resource->setDistance(-10.0);
+    cout << "Distance: " << resource->getDistance() << endl;
+    cout << endl;
+
+    cout << "Testing decorator with Region\n";
+    Region* solarSystem = new Region("Solar System", 0.0);
+
+    solarSystem->add(new Location("Earth", 1000, 10.0));
+    solarSystem->add(new Location("Moon", 100, 5.0));
+
+    Map* decoratedRegion = new SpaceportDecorator(solarSystem);
+
+    cout << "Region name: " << decoratedRegion->getName() << endl;
+    cout << "Region population: " << decoratedRegion->getPopulation() << endl;
+    cout << "Spaceport: " << decoratedRegion->hasDecorator("spaceport") << endl;
+    decoratedRegion->describe();
+    cout << endl;
+
+    cout << "Testing decorator composite operations\n";
+    cout << "Child count: " << decoratedRegion->getChildCount() << endl;
+    cout << "Child 0: " << decoratedRegion->getChild(0)->getName() << endl;
+    cout << endl;
+
+    delete resource;
+    delete decoratedRegion;
+
+    cout << "\n===================  DECORATOR TESTING COMPLETE  =====================\n";
 }

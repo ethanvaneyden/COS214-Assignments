@@ -94,9 +94,12 @@ void GameManager::assignBiome(Map *location, BiomeFactory *factory)
     if (location == nullptr || factory == nullptr)
         return;
 
-    // Delegate to the location to set its biome.
-    // This works for all Map nodes (Location, Region) following Composite pattern.
-    // Leaf nodes (Location) store and return the biome.
-    // Composite nodes (Region) can inherit the default behavior or override as needed.
-    location->setBiome(factory->createBiome());
+    // Only assign biome to leaf nodes (Locations).
+    // Composite nodes (Regions) don't store biomes; only their leaf children do.
+    // To be safe and avoid memory leaks, we only create the biome if we can store it.
+    Location *leaf = dynamic_cast<Location *>(location);
+    if (leaf == nullptr)
+        return; // Not a leaf node; cannot store biome
+
+    leaf->setBiome(factory->createBiome());
 }

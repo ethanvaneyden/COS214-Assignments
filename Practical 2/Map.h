@@ -6,39 +6,42 @@
 
 class Biome;
 
-class Map {
-    private:
-        std::string name;
-        double distance;
+class Map
+{
+private:
+    std::string name;
+    double distance;
 
-    protected:
-        Map(const std::string& name, double distance = 0.0);
+protected:
+    Map(const std::string &name, double distance = 0.0);
 
-    public:
-        // (recursive for Region)
-        virtual void describe() const = 0;  // Describes this place
-        virtual int getPopulation() const = 0;
-        virtual void growPopulation(int amount) = 0;
-        virtual void decreasePopulation(int amount) = 0;
+public:
+    // (recursive for Region)
+    virtual void describe() const = 0; // Describes this place
+    virtual int getPopulation() const = 0;
+    virtual void growPopulation(int amount) = 0;
+    virtual void decreasePopulation(int amount) = 0;
 
-        // Composite operations
-        virtual void add(Map* child);
-        virtual void remove(Map* child);
-        
-        virtual std::string getName() const;
-        virtual Map* getChild(int index) const;
-        virtual int getChildCount() const;
+    // Composite operations
+    virtual void add(Map *child);
+    virtual void remove(Map *child);
 
-        virtual double getDistance() const;
-        virtual void setDistance(double distance);
-        virtual bool hasDecorator(const std::string& name) const;
+    virtual std::string getName() const;
+    virtual Map *getChild(int index) const;
+    virtual int getChildCount() const;
 
-        virtual Map* nextLocation();
-        virtual Map* nextPlanet();
+    virtual double getDistance() const;
+    virtual void setDistance(double distance);
+    virtual bool hasDecorator(const std::string &name) const;
 
-        virtual Biome* getCurrentBiome();
-        
-        virtual ~Map();
+    virtual Map *nextLocation();
+    virtual Map *nextPlanet();
+
+    // Biome management - polymorphic across all node types
+    virtual void setBiome(Biome *biome);
+    virtual Biome *getCurrentBiome();
+
+    virtual ~Map();
 };
 
 #endif

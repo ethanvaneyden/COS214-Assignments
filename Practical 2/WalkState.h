@@ -17,6 +17,7 @@ public:
     bool canTransition(std::string &target, Map *currentLocation);
     void displayMenu();
     void handleInput(std::string &input, Traveller *context);
+    std::string getDistanceUnit();
 };
 
 #endif

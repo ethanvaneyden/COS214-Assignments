@@ -15,6 +15,7 @@ public:
     virtual bool canTransition(std::string &target, Map *currentLocation) = 0;
     virtual void displayMenu() = 0;
     virtual void handleInput(std::string &input, Traveller *context) = 0;
+    virtual std::string getDistanceUnit() = 0;
     virtual ~TravelState() = default;
 };
 

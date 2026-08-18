@@ -1,8 +1,26 @@
 #include "Traveller.h"
+#include "TravelState.h"
+#include <iostream>
 
-void Traveller::setState(TravelState *state)
+using namespace std;
+
+bool Traveller::setState(TravelState *state, const std::string &targetMode)
 {
+    if (state == nullptr || currentState == nullptr)
+    {
+        currentState = state;
+        return true;
+    }
+
+    // Check if transition is valid using the current state's canTransition method
+    std::string target = targetMode;
+    if (!currentState->canTransition(target, currentPlanet))
+    {
+        return false; // Transition not allowed
+    }
+
     currentState = state;
+    return true;
 }
 
 TravelState *Traveller::getCurrentState()
@@ -20,6 +38,17 @@ void Traveller::setCurrentPlace(Map *place)
     currentLocation = place;
 }
 
-Traveller::Traveller(TravelState *state, Map *map) : currentState(state), currentLocation(map)
+Map *Traveller::getCurrentPlanet()
+{
+    return currentPlanet;
+}
+
+void Traveller::setCurrentPlanet(Map *planet)
+{
+    currentPlanet = planet;
+}
+
+Traveller::Traveller(TravelState *state, Map *map, Map *planet)
+    : currentState(state), currentLocation(map), currentPlanet(planet)
 {
 }

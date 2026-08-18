@@ -70,7 +70,8 @@ void RoverState::displayMenu()
     cout << "=== Inside rover ===\n"
          << "Type the command you want to do\n"
          << "1. move - Move to next location on the planet\n"
-         << "2. walk - Disembark rover and explore the location on foot\n";
+         << "2. walk - Disembark rover and explore the location on foot\n"
+         << "3. ship - Board the spaceship if there is a space port";
 }
 
 void RoverState::handleInput(string &input, Traveller *context)
@@ -95,4 +96,9 @@ void RoverState::handleInput(string &input, Traveller *context)
     {
         cout << "Invalid command\n";
     }
+}
+
+string RoverState::getDistanceUnit()
+{
+    return distanceUnit;
 }

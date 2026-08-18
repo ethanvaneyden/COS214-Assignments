@@ -117,3 +117,8 @@ void WalkState::handleInput(string &input, Traveller *context)
         cout << "Invalid command\n";
     }
 }
+
+string WalkState::getDistanceUnit()
+{
+    return "KM";
+}

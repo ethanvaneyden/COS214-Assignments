@@ -89,3 +89,8 @@ void ShipState::handleInput(string &input, Traveller *context)
         cout << "Invalid command\n";
     }
 }
+
+string ShipState::getDistanceUnit()
+{
+    return travelUnit;
+}

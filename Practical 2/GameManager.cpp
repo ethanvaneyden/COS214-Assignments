@@ -8,83 +8,95 @@
 
 GameManager::GameManager()
     : traveller(nullptr), world(nullptr), trip(nullptr)
-{}
+{
+}
 
-GameManager::~GameManager(){
-    if(traveller != nullptr)
+GameManager::~GameManager()
+{
+    if (traveller != nullptr)
         delete traveller;
 
-    if(world != nullptr)
+    if (world != nullptr)
         delete world;
 
-    if(trip != nullptr)
+    if (trip != nullptr)
         delete trip;
 }
 
-void GameManager::setWorld(Map* world){
+void GameManager::setWorld(Map *world)
+{
     this->world = world;
 }
 
-Map* GameManager::getWorld() const{
+Map *GameManager::getWorld() const
+{
     return world;
 }
 
-void GameManager::setTraveller(Traveller* traveller){
+void GameManager::setTraveller(Traveller *traveller)
+{
     this->traveller = traveller;
 }
 
-Traveller* GameManager::getTraveller() const{
+Traveller *GameManager::getTraveller() const
+{
     return traveller;
 }
 
-void GameManager::setTrip(Trip* trip){
+void GameManager::setTrip(Trip *trip)
+{
     this->trip = trip;
 }
 
-Trip* GameManager::getTrip() const{
+Trip *GameManager::getTrip() const
+{
     return trip;
 }
 
-void GameManager::setState(TravelState* state){
-    if(traveller != nullptr)
-        traveller->setState(state);
+void GameManager::setState(TravelState *state)
+{
+    if (traveller != nullptr && state != nullptr)
+        traveller->setState(state, state->getModeName());
 }
 
-TravelState* GameManager::getState() const{
-    if(traveller == nullptr)
+TravelState *GameManager::getState() const
+{
+    if (traveller == nullptr)
         return nullptr;
 
     return traveller->getCurrentState();
 }
 
-void GameManager::displayStateMenu(){
-    if(traveller == nullptr)
+void GameManager::displayStateMenu()
+{
+    if (traveller == nullptr)
         return;
 
-    TravelState* state = traveller->getCurrentState();
+    TravelState *state = traveller->getCurrentState();
 
-    if(state != nullptr)
+    if (state != nullptr)
         state->displayMenu();
 }
 
-void GameManager::handleInput(std::string input){
-    if(traveller == nullptr)
+void GameManager::handleInput(std::string input)
+{
+    if (traveller == nullptr)
         return;
 
-    TravelState* state = traveller->getCurrentState();
+    TravelState *state = traveller->getCurrentState();
 
-    if(state != nullptr)
+    if (state != nullptr)
         state->handleInput(input, traveller);
 }
 
-void GameManager::assignBiome(Map* location, BiomeFactory* factory){
-    if(location == nullptr || factory == nullptr)
+void GameManager::assignBiome(Map *location, BiomeFactory *factory)
+{
+    if (location == nullptr || factory == nullptr)
         return;
 
-    Location* currentLocation = dynamic_cast<Location*>(location);
-
-    if(currentLocation == nullptr)
-        return;
-
-    currentLocation->setBiome(factory->createBiome());
+    // Delegate to the location to set its biome.
+    // This works for all Map nodes (Location, Region) following Composite pattern.
+    // Leaf nodes (Location) store and return the biome.
+    // Composite nodes (Region) can inherit the default behavior or override as needed.
+    location->setBiome(factory->createBiome());
 }

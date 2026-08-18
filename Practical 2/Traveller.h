@@ -12,13 +12,16 @@ class Traveller
 private:
     TravelState *currentState;
     Map *currentLocation;
+    Map *currentPlanet;
 
 public:
-    void setState(TravelState *state);
+    bool setState(TravelState *state, const std::string &targetMode);
     TravelState *getCurrentState();
     Map *getCurrentPlace();
     void setCurrentPlace(Map *map);
-    Traveller(TravelState *state, Map *map);
+    Map *getCurrentPlanet();
+    void setCurrentPlanet(Map *planet);
+    Traveller(TravelState *state, Map *map, Map *planet);
 };
 
 #endif

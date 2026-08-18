@@ -19,6 +19,7 @@
 #include "RoverState.h"
 #include "ShipState.h"
 #include "Traveller.h"
+#include "GameManager.h"
 
 #include <iostream>
 
@@ -29,13 +30,15 @@ void testDecorator();
 void testAbstractFactory();
 void testStrategy();
 void testState();
+void testGameManager();
 
 int main(){
-    testComposite();
-    testDecorator();
-    testAbstractFactory();
-    testStrategy();
-    testState();
+    // testComposite();
+    // testDecorator();
+    // testAbstractFactory();
+    // testStrategy();
+    // testState();
+    testGameManager();
 
     return 0;
 }
@@ -737,4 +740,240 @@ void testState(){
     delete solarSystem;
 
     cout << "\n===================  STATE TESTING COMPLETE  =====================\n";
+}
+
+void testGameManager(){
+    cout << "\n====================  GAME MANAGER TESTING  ====================\n";
+
+    cout << "\nCreating GameManager\n";
+
+    GameManager* manager = new GameManager();
+
+    cout << "Testing empty GameManager\n";
+    cout << "World: " << manager->getWorld() << endl;
+    cout << "Traveller: " << manager->getTraveller() << endl;
+    cout << "Trip: " << manager->getTrip() << endl;
+    cout << "State: " << manager->getState() << endl;
+
+    cout << "\nTesting empty manager state functions\n";
+    manager->displayStateMenu();
+    manager->handleInput("move");
+    manager->setState(nullptr);
+
+    cout << "\nCreating world\n";
+
+    Region* world = new Region("Solar System", 0.0);
+
+    Location* earth = new Location(
+        "Earth",
+        1000,
+        10.0
+    );
+
+    Location* mars = new Location(
+        "Mars",
+        500,
+        20.0
+    );
+
+    world->add(earth);
+    world->add(mars);
+
+    cout << "World name: " << world->getName() << endl;
+    cout << "World children: " << world->getChildCount() << endl;
+
+    cout << "\nTesting setWorld/getWorld\n";
+
+    manager->setWorld(world);
+
+    cout << "Manager world: "
+         << manager->getWorld()->getName()
+         << endl;
+
+    cout << "Manager world population: "
+         << manager->getWorld()->getPopulation()
+         << endl;
+
+    cout << "\nCreating Traveller and states\n";
+
+    TravelState* walk = new WalkState();
+    TravelState* rover = new RoverState();
+    TravelState* ship = new ShipState();
+
+    Traveller* traveller = new Traveller(
+        walk,
+        earth
+    );
+
+    cout << "Traveller state: "
+         << traveller->getCurrentState()->getModeName()
+         << endl;
+
+    cout << "Traveller location: "
+         << traveller->getCurrentPlace()->getName()
+         << endl;
+
+    cout << "\nTesting setTraveller/getTraveller\n";
+
+    manager->setTraveller(traveller);
+
+    cout << "Manager traveller: "
+         << manager->getTraveller()
+         << endl;
+
+    cout << "Manager state: "
+         << manager->getState()->getModeName()
+         << endl;
+
+    cout << "\nTesting GameManager state menu delegation\n";
+
+    manager->displayStateMenu();
+
+    cout << "\nTesting GameManager input delegation\n";
+
+    manager->handleInput("speak");
+
+    cout << "\nTesting GameManager setState\n";
+
+    manager->setState(rover);
+
+    cout << "Current state after setState: "
+         << manager->getState()->getModeName()
+         << endl;
+
+    manager->displayStateMenu();
+
+    cout << "\nChanging GameManager state to Ship\n";
+
+    manager->setState(ship);
+
+    cout << "Current state after setState: "
+         << manager->getState()->getModeName()
+         << endl;
+
+    manager->displayStateMenu();
+
+    cout << "\nTesting GameManager input with Ship state\n";
+
+    manager->handleInput("move");
+
+    cout << "\nTesting Trip with GameManager\n";
+
+    RouteStrategy* direct = new DirectRoute();
+
+    Trip* trip = new Trip(
+        direct,
+        100
+    );
+
+    manager->setTrip(trip);
+
+    cout << "Trip base distance: "
+         << manager->getTrip()->getBaseDistance()
+         << endl;
+
+    cout << "Trip strategy: "
+         << manager->getTrip()->getStrategy()->getStrategyName()
+         << endl;
+
+    cout << "\nTesting assignBiome()\n";
+
+    BiomeFactory* forestFactory = new ForestFactory();
+
+    cout << "Earth biome before assignment: "
+         << earth->getBiome()
+         << endl;
+
+    manager->assignBiome(
+        earth,
+        forestFactory
+    );
+
+    cout << "Earth biome after assignment: "
+         << earth->getBiome()
+         << endl;
+
+    cout << "\nTesting assigned Earth biome\n";
+
+    if(earth->getBiome() != nullptr){
+        earth->getBiome()->speakToNPC();
+
+        cout << endl;
+
+        earth->getBiome()->huntTreasure();
+
+        cout << endl;
+
+        earth->getBiome()->exploreHazard();
+
+        cout << endl;
+
+        earth->getBiome()->exploreLandmark();
+    }
+
+    cout << "\nTesting assignBiome() with nullptr location\n";
+
+    manager->assignBiome(
+        nullptr,
+        forestFactory
+    );
+
+    cout << "Completed nullptr location test\n";
+
+    cout << "\nTesting assignBiome() with nullptr factory\n";
+
+    manager->assignBiome(
+        mars,
+        nullptr
+    );
+
+    cout << "Completed nullptr factory test\n";
+
+    cout << "\nTesting assignBiome() with Region\n";
+
+    manager->assignBiome(
+        world,
+        forestFactory
+    );
+
+    cout << "Completed Region assignment test\n";
+
+    cout << "\nTesting null state\n";
+
+    manager->setState(nullptr);
+
+    cout << "State after nullptr setState: "
+         << manager->getState()
+         << endl;
+
+    cout << "\nRestoring Walk state\n";
+
+    manager->setState(walk);
+
+    cout << "Current state: "
+         << manager->getState()->getModeName()
+         << endl;
+
+    cout << "\nCleaning up GameManager\n";
+
+    delete manager;
+
+    // GameManager owns:
+    // - traveller
+    // - world
+    // - trip
+    
+    // GameManager does NOT own:
+    // - TravelState objects
+    // - RouteStrategy objects
+    // - BiomeFactory
+    
+    delete walk;
+    delete rover;
+    delete ship;
+
+    delete direct;
+    delete forestFactory;
+
+    cout << "\n===================  GAMEMANAGER TESTING COMPLETE  =====================\n";
 }

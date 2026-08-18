@@ -2,6 +2,9 @@
 #define SCENICROUTE_H
 
 #include "RouteStrategy.h"
+#include <iostream>
+
+class Trip;
 
 class ScenicRoute : public RouteStrategy
 {

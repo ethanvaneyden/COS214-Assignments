@@ -1,4 +1,5 @@
 #include "SafeRoute.h"
+#include "Trip.h"
 
 using namespace std;
 
@@ -11,4 +12,9 @@ void SafeRoute::printMessage(Trip *context, const string &distanceUnits)
 {
     double distance = calculateDistance(context->getBaseDistance());
     cout << "You took the safe route: " << distance << " " << distanceUnits;
+}
+
+string SafeRoute::getStrategyName()
+{
+    return "Safe";
 }

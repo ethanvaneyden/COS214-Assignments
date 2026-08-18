@@ -1,4 +1,5 @@
 #include "ScenicRoute.h"
+#include "Trip.h"
 
 using namespace std;
 
@@ -11,4 +12,9 @@ void ScenicRoute::printMessage(Trip *context, const string &distanceUnits)
 {
     double distance = calculateDistance(context->getBaseDistance());
     cout << "You took the scenic route: " << distance << " " << distanceUnits;
+}
+
+string ScenicRoute::getStrategyName()
+{
+    return "Scenic";
 }

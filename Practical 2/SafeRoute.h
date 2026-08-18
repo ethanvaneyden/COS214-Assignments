@@ -2,6 +2,9 @@
 #define SAFEROUTE_H
 
 #include "RouteStrategy.h"
+#include <iostream>
+
+class Trip;
 
 class SafeRoute : public RouteStrategy
 {

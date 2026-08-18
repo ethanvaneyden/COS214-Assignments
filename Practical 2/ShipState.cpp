@@ -1,4 +1,6 @@
 #include "ShipState.h"
+#include "Traveller.h"
+#include "Map.h"
 
 using namespace std;
 

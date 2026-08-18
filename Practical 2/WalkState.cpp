@@ -1,4 +1,7 @@
 #include "WalkState.h"
+#include "Traveller.h"
+#include "Map.h"
+#include "Biome.h"
 
 using namespace std;
 

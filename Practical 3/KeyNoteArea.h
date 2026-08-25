@@ -7,7 +7,6 @@ class Technician;
 class KeyNoteArea : public SignalSubscriber {
 public:
     explicit KeyNoteArea(
-        std::string name,
         std::vector<std::string> presenters = {
             "Satoshi Nakamoto", "Marti Stair", "Zink Weiss",
             "Fiorello Rocco", "Lorato Ramatlapeng"

@@ -13,7 +13,6 @@ class BackgroundTimer;
 class SignalSubscriber {
 public:
     SignalSubscriber(
-        std::string name,
         const std::vector<std::string> &presenters,
         const std::vector<Technician> &onDuty,
         std::chrono::minutes presenterInterval,
@@ -36,7 +35,6 @@ public:
     virtual void update(const TechSignal& signal) = 0;
 
 protected:
-    std::string areaName;
     bool isOpen{true};
     std::string status;
 

@@ -2,44 +2,31 @@
 #define KEYNOTEAREA_H
 
 #include "SignalSubscriber.h"
-#include <vector>
-#include <string>
-#include <atomic>
-
-class BackgroundTimer;
 class Technician;
 
 class KeyNoteArea : public SignalSubscriber {
 public:
-    explicit KeyNoteArea(std::string name);
-    void startTimers();
-    void stopTimers();
-    void pausePresenting();
-    void resumePresenting();
+    explicit KeyNoteArea(
+        std::string name,
+        std::vector<std::string> presenters = {
+            "Satoshi Nakamoto", "Marti Stair", "Zink Weiss",
+            "Fiorello Rocco", "Lorato Ramatlapeng"
+        },
+        std::vector<Technician> onDuty = {
+            Technician("Stephen Groos", "082 555 1234"),
+            Technician("John MacMillan", "084 742 9051"),
+            Technician("Njabulo Sishebo", "083 123 4567"),
+            Technician("Moaltegi Tlhabane", "083 987 6543"),
+            Technician("Anthoni van Nordy", "082 111 2222"),
+            Technician("Montechristo Delgado", "084 555 6666")
+        },
+        std::chrono::minutes presenterInterval = std::chrono::minutes(2),
+        std::chrono::minutes onDutyInterval = std::chrono::minutes(5)
+    );
 
-    void advancePresenter();
-    void advanceOnDuty();
+    void update(const TechSignal &signal) override;
 
-    std::string getPresenter() const;
-    std::string getOnDuty() const;
-    std::string getStatus() const;
-
-    void update(const TechSignal &signal);
-
-    ~KeyNoteArea() = default;
-private:
-    std::string areaName;
-    bool isOpen;
-    std::string status;
-
-    std::vector<std::string> presenters;
-    std::vector<Technician> onDuty;
-
-    std::atomic<size_t> presenterIndex;
-    std::atomic<size_t> onDutyIndex;
-
-    BackgroundTimer presenterTimer;
-    BackgroundTimer onDutyTimer;
+    ~KeyNoteArea() override = default;
 };
 
-#endif /* KEYNOTEAREA_H */
+#endif

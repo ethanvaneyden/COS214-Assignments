@@ -6,13 +6,16 @@
 #include <string>
 #include <atomic>
 
-
 class BackgroundTimer;
+class Technician;
 
 class KeyNoteArea : public SignalSubscriber {
+public:
     explicit KeyNoteArea(std::string name);
     void startTimers();
     void stopTimers();
+    void pausePresenting();
+    void resumePresenting();
 
     void advancePresenter();
     void advanceOnDuty();
@@ -28,15 +31,8 @@ private:
     bool isOpen;
     std::string status;
 
-    const std::vector<std::string> presenters = {
-        "Satoshi Nakamoto", "Marti Stair", "Zink Weiss",
-        "Fiorello Rocco", "Lorato Ramatlapeng"
-    };
-
-    const std::vector<std::string> onDuty = {
-        "Stephen Groos", "John MacMillan", "Njabulo Sishebo",
-        "Moaltegi Tlhabane", "Anthoni van Nordy", "Montechristo Delgado"
-    };
+    std::vector<std::string> presenters;
+    std::vector<Technician> onDuty;
 
     std::atomic<size_t> presenterIndex;
     std::atomic<size_t> onDutyIndex;

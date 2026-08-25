@@ -2,11 +2,11 @@
 
 KeyNoteArea::KeyNoteArea(
     std::string name,
-    std::vector<std::string> presenters,
-    std::vector<Technician> onDuty,
+    const std::vector<std::string> &presenters,
+    const std::vector<Technician> &onDuty,
     std::chrono::minutes presenterInterval,
     std::chrono::minutes onDutyInterval ) 
-    : SignalSubscriber((name), std::move(presenters), std::move(onDuty), presenterInterval, onDutyInterval) {}
+    : SignalSubscriber(name, presenters, onDuty, presenterInterval, onDutyInterval) {}
 
 void KeyNoteArea::update(const TechSignal &signal) {
     TechSignal::Type type = signal.getType();

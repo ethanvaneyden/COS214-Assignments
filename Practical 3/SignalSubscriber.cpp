@@ -1,14 +1,16 @@
 #include "SignalSubscriber.h"
+#include "BackgroundTimer.h"
+#include "Technician.h"
 
 SignalSubscriber::SignalSubscriber(
     std::string name,
-    std::vector<std::string> presenters,
-    std::vector<Technician> onDuty,
+    const std::vector<std::string> &presenters,
+    const std::vector<Technician> &onDuty,
     std::chrono::minutes presenterInterval,
     std::chrono::minutes onDutyInterval
 ) : areaName(std::move(name)),
-    presenters(std::move(presenters)),
-    onDuty(std::move(onDuty)),
+    presenters(presenters),
+    onDuty(onDuty),
     presenterInterval(presenterInterval),
     onDutyInterval(onDutyInterval) {}
 

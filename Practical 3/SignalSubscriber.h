@@ -1,20 +1,21 @@
 #ifndef SIGNALSUBSCRIBER_H
 #define SIGNALSUBSCRIBER_H
 
-#include "BackgroundTimer.h"
-#include "Technician.h"
 #include "TechSignal.h"
 #include <vector>
 #include <string>
 #include <atomic>
 #include <chrono>
 
+class Technician;
+class BackgroundTimer;
+
 class SignalSubscriber {
 public:
     SignalSubscriber(
         std::string name,
-        std::vector<std::string> presenters,
-        std::vector<Technician> onDuty,
+        const std::vector<std::string> &presenters,
+        const std::vector<Technician> &onDuty,
         std::chrono::minutes presenterInterval,
         std::chrono::minutes onDutyInterval
     );

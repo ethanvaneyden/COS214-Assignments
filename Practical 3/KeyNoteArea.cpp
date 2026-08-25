@@ -83,6 +83,11 @@ std::string KeyNoteArea::getOnDuty() const
     return onDuty[onDutyIndex.load(std::memory_order_relaxed)];
 }
 
+std::string KeyNoteArea::getStatus() const
+{
+    return status;
+}
+
 void KeyNoteArea::update(const TechSignal &signal)
 {
     TechSignal::Type type = signal.getType();
@@ -95,9 +100,24 @@ void KeyNoteArea::update(const TechSignal &signal)
             isOpen = true;
             resumePresenting();
             break;
+        case TechSignal::Type::CLOSED:
+            status = "Area " + areaName + " is now closed.";
+            isOpen = false;
+            stopTimers();
+            break;
+        case TechSignal::Type::FULL_CAPACITY:
+            status = "Area " + areaName + " has reached full capacity.";
+            break;
+        case TechSignal::Type::SCHEDULE_CHANGE:
+            status = "Schedule change in " + areaName + ".\n Please contact the technician on duty: " + getOnDuty();
+            break;
         case TechSignal::Type::POWER_FAILURE: 
             status = "Power failure in " + areaName + ".\n Please contact the technician on duty: " + getOnDuty();
             isOpen = false;
+            pausePresenting();
+            break;
+        case TechSignal::Type::EMERGENCY_PAUSE:
+            status = "Emergency pause in " + areaName + ".\n Please contact the technician on duty: " + getOnDuty();
             pausePresenting();
             break;
         default:

@@ -22,6 +22,7 @@ public:
 
     std::string getPresenter() const;
     std::string getOnDuty() const;
+    std::string getStatus() const;
 
     void update(const TechSignal &signal);
 

@@ -10,8 +10,8 @@ public:
     {
         UNKNOWN,
         OPEN,
-        CLOSE,
-        CAPACITY_ALERT,
+        CLOSED,
+        FULL_CAPACITY,
         SCHEDULE_CHANGE,
         POWER_FAILURE,
         EMERGENCY_PAUSE

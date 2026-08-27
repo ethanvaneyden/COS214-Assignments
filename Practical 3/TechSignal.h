@@ -9,7 +9,7 @@ public:
     UNKNOWN,
     OPEN,
     CLOSE,
-    CAPACITY_ALERT,
+    FULL_CAPACITY,
     SCHEDULE_CHANGE,
     POWER_FAILURE,
     EMERGENCY_PAUSE,
@@ -23,6 +23,7 @@ private:
   std::string message;
   Type parseType(const std::string &typeStr) const;
   Priority parsePriority(const std::string &priorityStr) const;
+  Priority inferPriority(Type type);
 
 public:
   /**
@@ -35,12 +36,30 @@ public:
   TechSignal(const std::string &type, const std::string &priority,
              const std::string &message);
   /**
-   * @brief Construct a new Tech Signal object
+   * @brief Construct a new Tech Signal object with priority infered
    *
    * @param type
    * @param message
    */
   TechSignal(const std::string &type, const std::string &message = "");
+  /**
+   * @brief Construct a new Tech Signal object with enum types given
+   *
+   * @param type
+   * @param priority
+   * @param message
+   */
+  TechSignal(const Type type, const Priority priority,
+             const std::string &message);
+
+  /**
+   * @brief Construct a new Tech Signal object with enum types
+   * and priority infered
+   *
+   * @param type
+   * @param message
+   */
+  TechSignal(const Type type, const std::string &message);
   /**
    * @brief Destroy the Tech Signal object
    *

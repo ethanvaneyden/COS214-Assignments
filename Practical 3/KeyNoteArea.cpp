@@ -1,14 +1,17 @@
 #include "KeyNoteArea.h"
+#include "BackgroundTimer"
 
 using namespace std::chrono;
 
-KeyNoteArea::KeyNoteArea(
-    const std::vector<std::string> &presenters,
-    const std::vector<Technician> &onDuty,
-    minutes presenterInterval,
-    minutes onDutyInterval 
-) 
-    : SignalSubscriber(presenters, onDuty, presenterInterval, onDutyInterval) {}
+KeyNoteArea::KeyNoteArea() {
+    presenters = { 
+        "Satoshi Nakamoto", "Marti Stair", "Zink Weiss",
+        "Fiorello Rocco", "Lorato Ramatlapeng"
+    };
+    presenterInterval = minutes(2);
+    presenterIndex = 0;
+    isOpen = true;
+}
 
 void KeyNoteArea::update(const TechSignal &signal) {
     TechSignal::Type type = signal.getType();
@@ -44,4 +47,38 @@ void KeyNoteArea::update(const TechSignal &signal) {
         default:
             break;
     }
+}
+
+void KeyNoteArea::startPresenterTimer() {
+    presenterTimer.start(presenterInterval, [this]() { advancePresenter(); });
+    if (!isOpen) { pausePresenting(); }
+}
+
+void KeyNoteArea::stopPresenterTimer() {
+    presenterTimer.stop();
+}
+
+void KeyNoteArea::pausePresenterTimer() {
+    presenterTimer.pause();
+}
+
+void KeyNoteArea::resumePresenterTimer() {
+    presenterTimer.resume();
+}
+
+void KeyNoteArea::advancePresenter() {
+    if (presenters.empty()) return;
+    size_t next = (presenterIndex.load(std::memory_order_relaxed) + 1) % presenters.size();
+    presenterIndex.store(next, std::memory_order_relaxed);
+}
+
+std::string SignalSubscriber::getPresenter() const {
+    if (isOpen && !presenters.empty()) {
+        return presenters[presenterIndex.load(std::memory_order_relaxed)];
+    }
+    return "Area is closed. No presenter available.";
+}
+
+std::string SignalSubscriber::getStatus() const {
+    return status;
 }

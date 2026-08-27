@@ -7,11 +7,11 @@ class Technician;
 class KeyNoteArea : public SignalSubscriber {
 public:
     explicit KeyNoteArea(
-        std::vector<std::string> presenters = {
+        const std::vector<std::string>& presenters = {
             "Satoshi Nakamoto", "Marti Stair", "Zink Weiss",
             "Fiorello Rocco", "Lorato Ramatlapeng"
         },
-        std::vector<Technician> onDuty = {
+        const std::vector<Technician>& onDuty = {
             Technician("Stephen Groos", "082 555 1234"),
             Technician("John MacMillan", "084 742 9051"),
             Technician("Njabulo Sishebo", "083 123 4567"),

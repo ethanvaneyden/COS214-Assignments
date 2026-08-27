@@ -20,7 +20,7 @@ public:
    * @brief Construct a new Signal Broadcaster object
    *
    */
-  SignalBroadcaster();
+  SignalBroadcaster() = default;
   /**
    * @brief Destroy the Signal Broadcaster object
    *

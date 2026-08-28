@@ -17,13 +17,16 @@ MainStage::MainStage()
 
 void MainStage::startStaffTimer()
 {
-    staffTimer.start(staffInterval, [this]()
-                     { advanceStaff(); });
+    if (!staffTimer.isRunning()) {
+        staffTimer.start(staffInterval, [this]() { advanceStaff(); });
+    }
 }
 
 void MainStage::stopStaffTimer()
 {
-    staffTimer.stop();
+    if (staffTimer.isRunning()) {
+        staffTimer.stop();
+    }
 }
 
 void MainStage::advanceStaff()

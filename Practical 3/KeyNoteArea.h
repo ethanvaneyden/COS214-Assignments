@@ -7,18 +7,20 @@
 #include <chrono>
 
 #include "SignalSubscriber.h"
+#include "MainStage.h"
 
 class BackgroundTimer;
 
-class KeyNoteArea : public SignalSubscriber {
+class KeyNoteArea : public SignalSubscriber, public MainStage {
 public:
     explicit KeyNoteArea();
     void update(const TechSignal &signal) override;
+    void add(SignalSubscriber* subscriber) override;
 
     void startPresenterTimer();
     void stopPresenterTimer();
     void pausePresenterTimer();
-    void resumePresenterTime();
+    void resumePresenterTimer();
     void advancePresenter();
 
     std::string getPresenter() const;

@@ -14,35 +14,42 @@ KeyNoteArea::KeyNoteArea() {
     isOpen = true;
 }
 
+void KeyNoteArea::add(SignalSubscriber* subscriber) {}
+
 void KeyNoteArea::update(const TechSignal &signal) {
     TechSignal::Type type = signal.getType();
     switch (type) {
-        case TechSignal::Type::UNKNOWN:
+        case TechSignal::Type::UNKNOWN :
             status = "Unknown signal received.";
             break;
-        case TechSignal::Type::OPEN:
+        case TechSignal::Type::OPEN :
             status = "Key Note Area is now open.";
             isOpen = true;
-            resumePresenting();
+
+            if (presenterTimer.isPaused()) {
+                resumePresenterTimer();
+            } else if (!presenterTimer.isRunning()) {
+                startPresenterTimer();
+            }
             break;
-        case TechSignal::Type::CLOSED:
+        case TechSignal::Type::CLOSE :
             status = "Key Note Area is now closed.";
             isOpen = false;
-            stopTimers();
+            stopPresenterTimer();
             break;
-        case TechSignal::Type::FULL_CAPACITY:
+        case TechSignal::Type::FULL_CAPACITY :
             status = "Key Note Area has reached full capacity.";
             break;
-        case TechSignal::Type::SCHEDULE_CHANGE:
-            status = "Schedule change in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
+        case TechSignal::Type::SCHEDULE_CHANGE :
+            status = "Schedule change in Key Note Area.\n Please contact the technician on duty: " + getStaff();
             break;
-        case TechSignal::Type::POWER_FAILURE:
-            status = "Power failure in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
+        case TechSignal::Type::POWER_FAILURE :
+            status = "Power failure in Key Note Area.\n Please contact the technician on duty: " + getStaff();
             isOpen = false;
             pausePresenterTimer();
             break;
-        case TechSignal::Type::EMERGENCY_PAUSE:
-            status = "Emergency pause in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
+        case TechSignal::Type::EMERGENCY_PAUSE :
+            status = "Emergency pause in Key Note Area.\n Please contact the technician on duty: " + getStaff();
             pausePresenterTimer();
             break;
         default:
@@ -73,13 +80,13 @@ void KeyNoteArea::advancePresenter() {
     presenterIndex.store(next, std::memory_order_relaxed);
 }
 
-std::string SignalSubscriber::getPresenter() const {
+std::string KeyNoteArea::getPresenter() const {
     if (isOpen && !presenters.empty()) {
         return presenters[presenterIndex.load(std::memory_order_relaxed)];
     }
     return "Area is closed. No presenter available.";
 }
 
-std::string SignalSubscriber::getStatus() const {
+std::string KeyNoteArea::getStatus() const {
     return status;
 }

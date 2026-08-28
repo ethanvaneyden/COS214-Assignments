@@ -70,8 +70,9 @@ BackgroundTimer::~BackgroundTimer() {
     stop();
 }
 
-void BackgroundTimer::transitionTo(std::unique_ptr<TimerState> newState) {
-    std::lock_guard<std::mutex> lock(stateMutex);
+void BackgroundTimer::transitionTo(std::unique_ptr<TimerState> newState)
+{
+    // State transitions are already performed while stateMutex is held.
     state = std::move(newState);
 }
 

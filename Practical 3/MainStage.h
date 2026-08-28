@@ -18,9 +18,11 @@ public:
     void startStaffTimer();
     void stopStaffTimer();
     void advanceStaff();
+
     std::string getStaff() const;
-    void update(const TechSignal &signal);
-    void add(SignalSubscriber* subscriber);
+    
+    virtual void update(const TechSignal &signal);
+    virtual void add(SignalSubscriber* subscriber);
 
     ~MainStage() override = default;
 

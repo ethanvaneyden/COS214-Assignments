@@ -1,34 +1,35 @@
 #ifndef MAINSTAGE_H
 #define MAINSTAGE_H
 
-#include <vector>
 #include <atomic>
-#include <string>
 #include <chrono>
+#include <string>
+#include <vector>
 
 #include "SignalSubscriber.h"
-
-
+#include "TechSignal.h"
+class BackgroundTimer;
 class Technician;
 
 class MainStage : public SignalSubscriber {
 public:
-    explicit MainStage();
+    MainStage();
 
     void startStaffTimer();
     void stopStaffTimer();
     void advanceStaff();
     std::string getStaff() const;
+    void update(const TechSignal &signal);
+    void add(SignalSubscriber* subscriber);
 
     ~MainStage() override = default;
 
 private:
+    std::vector<SignalSubscriber*> subscribers;
     std::vector<Technician> staff;
     std::atomic<size_t> staffIndex;
     BackgroundTimer staffTimer;
     std::chrono::minutes staffInterval;
 };
-
-
 
 #endif

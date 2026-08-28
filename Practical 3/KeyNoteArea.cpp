@@ -1,5 +1,6 @@
 #include "KeyNoteArea.h"
-#include "BackgroundTimer"
+#include "TechSignal.h"
+#include "BackgroundTimer.h"
 
 using namespace std::chrono;
 
@@ -38,11 +39,11 @@ void KeyNoteArea::update(const TechSignal &signal) {
         case TechSignal::Type::POWER_FAILURE:
             status = "Power failure in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
             isOpen = false;
-            pausePresenting();
+            pausePresenterTimer();
             break;
         case TechSignal::Type::EMERGENCY_PAUSE:
             status = "Emergency pause in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
-            pausePresenting();
+            pausePresenterTimer();
             break;
         default:
             break;
@@ -51,7 +52,7 @@ void KeyNoteArea::update(const TechSignal &signal) {
 
 void KeyNoteArea::startPresenterTimer() {
     presenterTimer.start(presenterInterval, [this]() { advancePresenter(); });
-    if (!isOpen) { pausePresenting(); }
+    if (!isOpen) { pausePresenterTimer(); }
 }
 
 void KeyNoteArea::stopPresenterTimer() {

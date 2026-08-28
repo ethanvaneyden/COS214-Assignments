@@ -6,22 +6,28 @@ class TechSignal;
 class SignalSubscriber {
 public:
   /**
-   * @brief Construct a new Signal Subscriber object
-   *
+   * @brief Constructs a new signal subscriber.
    */
   SignalSubscriber() = default;
+
   /**
-   * @brief Destroy the Signal Subscriber object
-   *
+   * @brief Destroys the signal subscriber.
    */
   virtual ~SignalSubscriber() = default;
+
   /**
-   * @brief Receives a signal from its subscribed broadcaster do
-   * something with it
+   * @brief Handles a signal received from a broadcaster.
    *
-   * @param signal
+   * @param signal The signal received from the broadcaster.
    */
-  virtual void update(const TechSignal &signal) = 0;
+  virtual void update(const TechSignal& signal) = 0;
+
+  /**
+   * @brief Adds a subscriber.
+   *
+   * @param subscriber The subscriber to add.
+   */
+  virtual void add(SignalSubscriber* subscriber) = 0;
 };
 
 #endif

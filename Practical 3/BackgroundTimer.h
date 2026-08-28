@@ -1,59 +1,95 @@
+/**
+ * @file BackgroundTimer.h
+ * @brief Thread-safe background timer
+ */
+
 #ifndef BACKGROUNDTIMER_H
 #define BACKGROUNDTIMER_H
 
-#include <iostream>
-#include <vector>
-#include <string>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
 #include <chrono>
-#include <atomic>
+#include <memory>
 #include <functional>
 
+class BackgroundTimer;
+
+/**
+ * @brief Abstract base class for BackgroundTimer states.
+ */
+class TimerState {
+public:
+    virtual ~TimerState() = default;
+    virtual void start(BackgroundTimer& context, std::chrono::milliseconds interval, std::function<void()> task) {}
+    virtual void pause(BackgroundTimer& context) {}
+    virtual void resume(BackgroundTimer& context) {}
+    virtual void stop(BackgroundTimer& context) {}
+    virtual bool isRunning() const { return false; }
+    virtual bool isPaused() const { return false; }
+};
+
+/**
+ * @brief Represents the stopped state of the timer.
+ */
+class StoppedState : public TimerState {
+public:
+    void start(BackgroundTimer& context, std::chrono::milliseconds interval, std::function<void()> task) override;
+};
+
+/**
+ * @brief Represents the actively running state of the timer.
+ */
+class RunningState : public TimerState {
+public:
+    void pause(BackgroundTimer& context) override;
+    void stop(BackgroundTimer& context) override;
+    bool isRunning() const override { return true; }
+};
+
+/**
+ * @brief Represents the paused state of the timer.
+ */
+class PausedState : public TimerState {
+public:
+    void resume(BackgroundTimer& context) override;
+    void stop(BackgroundTimer& context) override;
+    bool isRunning() const override { return true; }
+    bool isPaused() const override { return true; }
+};
 
 /**
  * @class BackgroundTimer
- * @brief Executes a user-defined task periodically in a dedicated background thread.
- * 
- * Uses a condition variable to efficiently sleep between intervals without burning CPU cycles
- * and allows for an immediate stop/shutdown without waiting for active sleep intervals to expire.
+ * @brief Manages a background thread timer using an internal State Machine.
  */
 class BackgroundTimer {
 public:
-    /**
-     * @brief Constructs an idle BackgroundTimer instance.
-     */
     BackgroundTimer();
-
-    /**
-     * @brief Destructor. Automatically calls stop() to safely terminate the background thread.
-     */
     ~BackgroundTimer();
 
-    /**
-     * @brief Starts executing a task periodically at a specified interval.
-     * 
-     * If a worker thread is already running, it is stopped before the new task is started.
-     * 
-     * @param interval Duration to wait between successive task executions.
-     * @param task Callable object (lambda, function pointer, or std::function) to run.
-     */
     void start(std::chrono::milliseconds interval, std::function<void()> task);
-
-    /**
-     * @brief Stops the background worker thread if running.
-     * 
-     * Signals the worker thread to exit immediately and joins it. Safe to call multiple times.
-     */
+    void pause();
+    void resume();
     void stop();
 
-private:
-    std::atomic<bool> running;  /** Flag indicating if the background thread is active. */
-    std::mutex mutex;           /** Mutex protecting internal cv wait condition state. */
-    std::condition_variable cv; /** Condition variable used for interruptible interval sleeps. */
-    std::thread worker;         /** Worker thread handle. */
-};
+    bool isRunning() const;
+    bool isPaused() const;
 
+    void transitionTo(std::unique_ptr<TimerState> newState);
+
+private:
+    friend class StoppedState;
+    friend class RunningState;
+    friend class PausedState;
+
+    std::unique_ptr<TimerState> state;
+    std::mutex stateMutex;
+    std::mutex cvMutex;
+    std::condition_variable cv;
+    std::thread worker;
+
+    std::chrono::milliseconds activeInterval{0};
+    std::function<void()> activeTask;
+};
 
 #endif /* BACKGROUNDTIMER_H */

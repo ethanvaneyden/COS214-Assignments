@@ -5,7 +5,8 @@
 #include <atomic>
 #include <string>
 #include <chrono>
-#include "SignalSubscriber.h"
+#include "EventComponent.h"
+#include "SignalBroadcaster.h"
 
 // Forward declarations
 class TechSignal;
@@ -14,16 +15,16 @@ class Technician;
 
 /**
  * @class MainStage
- * @brief Represents a Composite node in the hierarchy that holds child components
+ * @brief Composite node in the hierarchy that holds child components
  *        and manages active technician rotations.
  */
-class MainStage : public SignalSubscriber {
+class MainStage : public EventComponent, public SignalBroadcaster {
 public:
     /**
      * @brief Construct a new MainStage composite object.
      * @param parent Pointer to the parent component in the hierarchy (default: nullptr).
      */
-    explicit MainStage(SignalSubscriber* parent = nullptr);
+    explicit MainStage(EventComponent* parent = nullptr);
 
     /**
      * @brief Destructor that cleans up dynamic timer allocations.
@@ -31,22 +32,22 @@ public:
     ~MainStage() override;
 
     /**
-     * @brief Broadcasts the incoming signal to all registered child components.
-     * @param signal The TechSignal to propagate.
+     * @brief Receives a signal and broadcasts it to all child subscribers.
+     * @param signal The TechSignal to propagate down the tree.
      */
-    void update(const TechSignal &signal) override;
+    void update(const TechSignal& signal) override;
 
     /**
-     * @brief Adds a child subscriber to this composite node and assigns itself as parent.
-     * @param subscriber Pointer to the child subscriber to add.
+     * @brief Adds a child component to this stage and registers it as a signal subscriber.
+     * @param component Pointer to the child EventComponent to add.
      */
-    void add(SignalSubscriber* subscriber) override;
+    void add(EventComponent* component) override;
 
     /**
-     * @brief Removes a child subscriber from this composite node.
-     * @param subscriber Pointer to the child subscriber to remove.
+     * @brief Removes a child component from this stage and unregisters it from broadcast signals.
+     * @param component Pointer to the child EventComponent to remove.
      */
-    void remove(SignalSubscriber* subscriber) override;
+    void remove(EventComponent* component) override;
 
     /**
      * @brief Starts the background rotation timer for technical staff.
@@ -64,25 +65,24 @@ public:
     void advanceStaff();
 
     /**
-     * @brief Overrides Component method to provide current technician on duty at this level.
-     * @return `std::string` Information of current technician, or delegates to parent if empty.
+     * @brief Overrides Component method to provide the current technician on duty.
+     * @return std::string Information of current technician, or delegates to parent.
      */
     std::string getStaff() const override;
 
-
     /**
-     * @brief Overrides Component method to recursively query the current operational status message of the MainStage.
-     * @return `std::string` Name of Stage and status of subscribers.
+     * @brief Recursively collects and formats the status of all child components.
+     * @return std::string Summary status string for the stage and its sub-components.
      */
     std::string getStatus() const override;
-    
+
 private:
-    std::vector<SignalSubscriber*> subscribers; /**< Child components managed by this composite */
-    std::vector<Technician> staff;               /**< Roster of technicians assigned to stage */
-    std::atomic<size_t> staffIndex{0};           /**< Thread-safe index for current staff member */
-    
-    BackgroundTimer* staffTimer;                 /**< Pointer to background timer thread */
-    std::chrono::minutes staffInterval;          /**< Time interval between staff rotations */
+    std::vector<EventComponent*> children; /**< Collection of child components */
+    std::vector<Technician> staff;          /**< Roster of technicians assigned to stage */
+    std::atomic<size_t> staffIndex{0};      /**< Thread-safe index for current staff member */
+
+    BackgroundTimer* staffTimer;            /**< Background timer thread for staff rotation */
+    std::chrono::minutes staffInterval;     /**< Time interval between staff rotations */
 };
 
 #endif /* MAINSTAGE_H */

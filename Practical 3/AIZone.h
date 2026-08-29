@@ -46,24 +46,24 @@ class AIZone : public EventComponent, public SignalBroadcaster {
         /**
          * @brief Opens the AI zone and its components.
         */
-        void open();
+        void open() override;
 
         /**
          * @brief Closes the AI zone and its components.
         */
-        void close();
+        void close() override;
 
         /**
          * @brief Reports the status of the AI zone.
         */
-        void reportStatus() const;
+        void reportStatus() const override;
 
         /**
          * @brief Returns the total capacity of the AI zone.
          *
          * @return The total capacity.
         */
-        int getCapacity() const;
+        int getCapacity() const override;
 
         /**
          * @brief Handles a received technology signal.

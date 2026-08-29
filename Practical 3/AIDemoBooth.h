@@ -38,24 +38,24 @@ class AIDemoBooth : public EventComponent {
         /**
          * @brief Opens the AI demonstration booth.
         */
-        void open();
+        void open() override;
 
         /**
          * @brief Closes the AI demonstration booth.
         */
-        void close();
+        void close() override;
 
         /**
          * @brief Reports the booth status.
         */
-        void reportStatus() const;
+        void reportStatus() const override;
 
         /**
          * @brief Returns the booth capacity.
          *
          * @return Maximum visitor capacity.
         */
-        int getCapacity() const;
+        int getCapacity() const override;
 
         /**
          * @brief Destroys the AI demonstration booth.

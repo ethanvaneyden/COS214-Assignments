@@ -6,22 +6,22 @@
 #include <vector>
 
 /**
- * @brief Composite representing the AI zone.
+ * @brief Represents the AI zone.
+ * 
+ * It is a composite that will have RoboticsBooth and AIDemoBooth at the start
+ * It is also an Observer (SignalSubscriber) and Subject to it's children (SignalBroadcaster)
+ * It owns its children as the composite
+ * but does not own its observers
  */
 class AIZone : public SignalSubscriber, public SignalBroadcaster {
     private:
-        std::vector<SignalSubscriber*> components;
+        std::vector<SignalSubscriber*> children;
 
     public:
         /**
          * @brief Constructs an empty AI zone.
         */
         AIZone();
-
-        /**
-         * @brief Destroys the AI zone and its components.
-        */
-        ~AIZone() override;
 
         /**
          * @brief Adds a component to the AI zone.
@@ -65,6 +65,11 @@ class AIZone : public SignalSubscriber, public SignalBroadcaster {
          * @param signal The received signal.
         */
         void update(const TechSignal& signal) override;
+
+        /**
+         * @brief Destroys the AI zone and its components.
+        */
+        ~AIZone() override;
 };
 
 #endif

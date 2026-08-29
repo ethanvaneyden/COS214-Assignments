@@ -2,13 +2,14 @@
 #define ROBOTICSBOOTH_H
 
 #include "SignalSubscriber.h"
+#include "EventComponent.h"
 
 /**
  * @brief Leaf representing a robotics demonstration booth.
 */
-class RoboticsBooth : public SignalSubscriber {
+class RoboticsBooth : public EventComponent {
     private:
-        bool openState;
+        bool isOpen;
         bool active;
         bool safeMode;
         int capacity;
@@ -21,8 +22,9 @@ class RoboticsBooth : public SignalSubscriber {
          * @brief Constructs a robotics demonstration booth.
          *
          * @param capacity Maximum visitor capacity.
+         * @param name Name of the booth.
         */
-        explicit RoboticsBooth(int capacity);
+        explicit RoboticsBooth(int capacity, std::string name);
 
         /**
          * @brief Handles a received technology signal.

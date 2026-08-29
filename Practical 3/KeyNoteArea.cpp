@@ -4,8 +4,8 @@
 
 using namespace std::chrono;
 
-KeyNoteArea::KeyNoteArea(SignalSubscriber* parent)
-    : SignalSubscriber(parent),
+KeyNoteArea::KeyNoteArea(EventComponent* parent)
+    : EventComponent(parent),
       isOpen(true),
       presenterIndex(0),
       presenterInterval(minutes(2)),

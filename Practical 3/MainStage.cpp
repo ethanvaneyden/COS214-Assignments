@@ -4,8 +4,8 @@
 #include "TechSignal.h"
 #include <algorithm>
 
-MainStage::MainStage(SignalSubscriber* parent)
-    : SignalSubscriber(parent),
+MainStage::MainStage(EventComponent* parent)
+    : EventComponent(parent),
       staffIndex(0),
       staffInterval(std::chrono::minutes(5)),
       staffTimer(new BackgroundTimer()) {
@@ -23,27 +23,25 @@ MainStage::~MainStage() {
     delete staffTimer;
 }
 
-void MainStage::add(SignalSubscriber* subscriber) {
-    if (subscriber && std::find(subscribers.begin(), subscribers.end(), subscriber) == subscribers.end()) {
-        subscribers.push_back(subscriber);
-        subscriber->setParent(this);
+void MainStage::add(EventComponent* component) {
+    if (component && std::find(children.begin(), children.end(), component) == children.end()) {
+        children.push_back(component);
+        component->setParent(this);
+        subscribe(component);
     }
 }
 
-void MainStage::remove(SignalSubscriber* subscriber) {
-    auto it = std::find(subscribers.begin(), subscribers.end(), subscriber);
-    if (it != subscribers.end()) {
+void MainStage::remove(EventComponent* component) {
+    auto it = std::find(children.begin(), children.end(), component);
+    if (it != children.end()) {
         (*it)->setParent(nullptr);
-        subscribers.erase(it);
+        unsubscribe(component);
+        children.erase(it);
     }
 }
 
-void MainStage::update(const TechSignal &signal) {
-    for (SignalSubscriber* sub : subscribers) {
-        if (sub) {
-            sub->update(signal);
-        }
-    }
+void MainStage::update(const TechSignal& signal) {
+    transmit(signal);
 }
 
 void MainStage::startStaffTimer() {
@@ -66,18 +64,17 @@ void MainStage::advanceStaff() {
 
 std::string MainStage::getStaff() const {
     if (staff.empty()) {
-        // Fallback to parent hierarchy if local staff list is empty
-        return SignalSubscriber::getStaff();
+        return EventComponent::getStaff();
     }
     return staff[staffIndex.load(std::memory_order_relaxed)];
 }
 
-std::string MainStage::getStatus() const
-{
+std::string MainStage::getStatus() const {
     std::string status = "-----MAIN STAGE----\n";
-    for (SignalSubscriber* sub : subscribers) {
-        if (sub)
-            status += sub->getStatus();
+    for (EventComponent* child : children) {
+        if (child) {
+            status += child->getStatus();
+        }
     }
     return status;
 }

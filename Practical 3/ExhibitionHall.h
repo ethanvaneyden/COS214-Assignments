@@ -34,7 +34,7 @@ class ExhibitionHall : public SignalSubscriber, public SignalBroadcaster {
          *
          * @param component The component to remove.
         */
-        void remove(SignalSubscriber* component);
+        void remove(SignalSubscriber* component) override;
 
         /**
          * @brief Opens the exhibition hall and its components.

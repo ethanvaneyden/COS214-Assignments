@@ -2,13 +2,14 @@
 #define AIDEMOBOOTH_H
 
 #include "SignalSubscriber.h"
+#include "EventComponent.h"
 
 /**
  * @brief Leaf representing an AI demonstration booth.
 */
-class AIDemoBooth : public SignalSubscriber {
+class AIDemoBooth : public EventComponent {
     private:
-        bool openState;
+        bool isOpen;
         bool active;
         int capacity;
         int currentVisitors;
@@ -20,8 +21,9 @@ class AIDemoBooth : public SignalSubscriber {
          * @brief Constructs an AI demonstration booth.
          *
          * @param capacity Maximum visitor capacity.
+         * @param name Name of the booth.
         */
-        explicit AIDemoBooth(int capacity);
+        explicit AIDemoBooth(int capacity, std::string name);
 
         /**
          * @brief Handles a received technology signal.

@@ -3,6 +3,9 @@
 
 #include "SignalSubscriber.h"
 #include "EventComponent.h"
+#include "TechSignal.h"
+
+#include <iostream>
 
 /**
  * @brief Leaf representing a robotics demonstration booth.

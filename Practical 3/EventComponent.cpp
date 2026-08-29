@@ -1,7 +1,7 @@
 #include "EventComponent.h"
 
-EventComponent::EventComponent(EventComponent* parentComponent)
-    : parent(parentComponent) {}
+EventComponent::EventComponent(std::string name, EventComponent* parentComponent)
+    : name(name), parent(parentComponent) {}
 
 void EventComponent::setParent(EventComponent* parentComponent) {
     parent = parentComponent;
@@ -29,4 +29,8 @@ EventComponent& operator>>(EventComponent& child, EventComponent& newParent) {
 
     newParent.add(&child);
     return newParent;
+}
+
+std::string EventComponent::getName() const{
+    return this->name;
 }

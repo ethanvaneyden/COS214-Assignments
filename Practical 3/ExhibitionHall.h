@@ -11,6 +11,7 @@
  * It is a Composite that has other components (SignalSubscriber)
  * It is also the Observer (SignalSubscriber) and the Subject (SignalBroadcaster)
  * for its children
+ * Onws its children but not its observers
  */
 class ExhibitionHall : public SignalSubscriber, public SignalBroadcaster {
     private:
@@ -34,7 +35,7 @@ class ExhibitionHall : public SignalSubscriber, public SignalBroadcaster {
          *
          * @param component The component to remove.
         */
-        void remove(SignalSubscriber* component);
+        void remove(SignalSubscriber* component) override;
 
         /**
          * @brief Opens the exhibition hall and its components.

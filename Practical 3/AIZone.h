@@ -34,14 +34,14 @@ class AIZone : public EventComponent, public SignalBroadcaster {
          *
          * @param component The component to add.
         */
-        void add(SignalSubscriber* component) override;
+        void add(EventComponent* component) override;
 
         /**
          * @brief Removes a component from the AI zone.
          *
          * @param component The component to remove.
         */
-        void remove(SignalSubscriber* component) override;
+        void remove(EventComponent* component) override;
 
         /**
          * @brief Opens the AI zone and its components.

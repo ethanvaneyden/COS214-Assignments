@@ -71,6 +71,28 @@ public:
      */
     friend EventComponent& operator>>(EventComponent& child, EventComponent& newParent);
 
+    /**
+     * @brief Opens the component and its children.
+    */
+    virtual void open() = 0;
+
+    /**
+     * @brief Closes the component and its children.
+    */
+    virtual void close() = 0;
+
+    /**
+     * @brief Reports the status of the AI zone.
+    */
+    virtual void reportStatus() const = 0;
+
+    /**
+     * @brief Returns the total capacity of a component.
+     *
+     * @return The total capacity.
+    */
+    virtual int getCapacity() const = 0;
+
 private:
     EventComponent* parent; /**< Pointer to parent node in composite hierarchy */
 };

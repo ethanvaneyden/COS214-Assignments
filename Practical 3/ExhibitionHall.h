@@ -11,6 +11,7 @@
  * It is a Composite that has other components (SignalSubscriber)
  * It is also the Observer (SignalSubscriber) and the Subject (SignalBroadcaster)
  * for its children
+ * Onws its children but not its observers
  */
 class ExhibitionHall : public SignalSubscriber, public SignalBroadcaster {
     private:

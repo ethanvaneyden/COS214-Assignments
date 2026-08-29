@@ -86,5 +86,5 @@ std::string KeyNoteArea::getPresenter() const {
 
 std::string KeyNoteArea::getStatus() const {
     std::lock_guard<std::mutex> lock(stateMutex);
-    return status;
+    return "- Key Note Area: " + status + "\n";
 }

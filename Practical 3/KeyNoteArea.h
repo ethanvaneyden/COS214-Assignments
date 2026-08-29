@@ -70,10 +70,10 @@ public:
     std::string getPresenter() const;
 
     /**
-     * @brief Gets the current operational status message of the KeyNoteArea.
+     * @brief Overrides component method to return the current operational status message of the KeyNoteArea.
      * @return `std::string` Status description string.
      */
-    std::string getStatus() const;
+    std::string getStatus() const override; 
 
 private:
     mutable std::mutex stateMutex;      /**< Mutex protecting internal status and open state */

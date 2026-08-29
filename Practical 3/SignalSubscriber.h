@@ -65,6 +65,12 @@ public:
      */
     virtual std::string getStaff() const;
 
+    /**
+     * @brief Pure virtual method that recursively queries the tree hierarchy to find the status of the area/zone.
+     * @return `std::string` Status description of the subscriber
+     */
+    virtual std::string getStatus() const = 0;
+
 private:
     SignalSubscriber* parent; /**< Pointer to parent node in composite hierarchy */
 };

@@ -71,3 +71,13 @@ std::string MainStage::getStaff() const {
     }
     return staff[staffIndex.load(std::memory_order_relaxed)];
 }
+
+std::string MainStage::getStatus() const
+{
+    std::string status = "-----MAIN STAGE----\n";
+    for (SignalSubscriber* sub : subscribers) {
+        if (sub)
+            status += sub->getStatus();
+    }
+    return status;
+}

@@ -69,6 +69,13 @@ public:
      */
     std::string getStaff() const override;
 
+
+    /**
+     * @brief Overrides Component method to recursively query the current operational status message of the MainStage.
+     * @return `std::string` Name of Stage and status of subscribers.
+     */
+    std::string getStatus() const override;
+    
 private:
     std::vector<SignalSubscriber*> subscribers; /**< Child components managed by this composite */
     std::vector<Technician> staff;               /**< Roster of technicians assigned to stage */

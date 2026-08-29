@@ -3,7 +3,10 @@
 
 #include "SignalSubscriber.h"
 #include "SignalBroadcaster.h"
+#include "EventComponent.h"
+
 #include <vector>
+#include <iostream>
 
 /**
  * @brief Represents the AI zone.
@@ -13,15 +16,18 @@
  * It owns its children as the composite
  * but does not own its observers
  */
-class AIZone : public SignalSubscriber, public SignalBroadcaster {
+class AIZone : public EventComponent, public SignalBroadcaster {
     private:
-        std::vector<SignalSubscriber*> children;
+        std::vector<EventComponent*> children;
+        bool isOpen;
 
     public:
         /**
-         * @brief Constructs an empty AI zone.
+         * @brief Constructs an AI zone.
+         *
+         * @param name Name of the zone.
         */
-        AIZone();
+        AIZone(std::string name);
 
         /**
          * @brief Adds a component to the AI zone.

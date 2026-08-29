@@ -1,48 +1,60 @@
 #include "KeyNoteArea.h"
-#include "BackgroundTimer"
+#include "BackgroundTimer.h"
+#include "TechSignal.h"
 
 using namespace std::chrono;
 
-KeyNoteArea::KeyNoteArea() {
-    presenters = { 
+KeyNoteArea::KeyNoteArea(SignalSubscriber* parent)
+    : SignalSubscriber(parent),
+      isOpen(true),
+      presenterIndex(0),
+      presenterInterval(minutes(2)),
+      presenterTimer(new BackgroundTimer()) {
+    presenters = {
         "Satoshi Nakamoto", "Marti Stair", "Zink Weiss",
         "Fiorello Rocco", "Lorato Ramatlapeng"
     };
-    presenterInterval = minutes(2);
-    presenterIndex = 0;
-    isOpen = true;
+}
+
+KeyNoteArea::~KeyNoteArea() {
+    delete presenterTimer;
 }
 
 void KeyNoteArea::update(const TechSignal &signal) {
-    TechSignal::Type type = signal.getType();
-    switch (type) {
+    std::lock_guard<std::mutex> lock(stateMutex);
+
+    switch (signal.getType()) {
         case TechSignal::Type::UNKNOWN:
             status = "Unknown signal received.";
             break;
         case TechSignal::Type::OPEN:
             status = "Key Note Area is now open.";
             isOpen = true;
-            resumePresenting();
+            if (presenterTimer->isPaused()) {
+                resumePresenterTimer();
+            } else if (!presenterTimer->isRunning()) {
+                startPresenterTimer();
+            }
             break;
-        case TechSignal::Type::CLOSED:
+        case TechSignal::Type::CLOSE:
             status = "Key Note Area is now closed.";
             isOpen = false;
-            stopTimers();
+            stopPresenterTimer();
             break;
         case TechSignal::Type::FULL_CAPACITY:
             status = "Key Note Area has reached full capacity.";
             break;
         case TechSignal::Type::SCHEDULE_CHANGE:
-            status = "Schedule change in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
+            status = "Schedule change in Key Note Area.\n Please contact the technician on duty: " + getStaff();
             break;
         case TechSignal::Type::POWER_FAILURE:
-            status = "Power failure in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
+            status = "Power failure in Key Note Area.\n Please contact the technician on duty: " + getStaff();
             isOpen = false;
-            pausePresenting();
+            pausePresenterTimer();
             break;
         case TechSignal::Type::EMERGENCY_PAUSE:
-            status = "Emergency pause in Key Note Area.\n Please contact the technician on duty: " + getOnDuty();
-            pausePresenting();
+            status = "Emergency pause in Key Note Area.\n Please contact the technician on duty: " + getStaff();
+            pausePresenterTimer();
             break;
         default:
             break;
@@ -50,21 +62,13 @@ void KeyNoteArea::update(const TechSignal &signal) {
 }
 
 void KeyNoteArea::startPresenterTimer() {
-    presenterTimer.start(presenterInterval, [this]() { advancePresenter(); });
-    if (!isOpen) { pausePresenting(); }
+    presenterTimer->start(presenterInterval, [this]() { advancePresenter(); });
+    if (!isOpen) { pausePresenterTimer(); }
 }
 
-void KeyNoteArea::stopPresenterTimer() {
-    presenterTimer.stop();
-}
-
-void KeyNoteArea::pausePresenterTimer() {
-    presenterTimer.pause();
-}
-
-void KeyNoteArea::resumePresenterTimer() {
-    presenterTimer.resume();
-}
+void KeyNoteArea::stopPresenterTimer() { presenterTimer->stop(); }
+void KeyNoteArea::pausePresenterTimer() { presenterTimer->pause(); }
+void KeyNoteArea::resumePresenterTimer() { presenterTimer->resume(); }
 
 void KeyNoteArea::advancePresenter() {
     if (presenters.empty()) return;
@@ -72,13 +76,15 @@ void KeyNoteArea::advancePresenter() {
     presenterIndex.store(next, std::memory_order_relaxed);
 }
 
-std::string SignalSubscriber::getPresenter() const {
+std::string KeyNoteArea::getPresenter() const {
+    std::lock_guard<std::mutex> lock(stateMutex);
     if (isOpen && !presenters.empty()) {
         return presenters[presenterIndex.load(std::memory_order_relaxed)];
     }
     return "Area is closed. No presenter available.";
 }
 
-std::string SignalSubscriber::getStatus() const {
-    return status;
+std::string KeyNoteArea::getStatus() const {
+    std::lock_guard<std::mutex> lock(stateMutex);
+    return "- Key Note Area: " + status + "\n";
 }

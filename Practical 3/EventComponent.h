@@ -16,14 +16,15 @@ class EventComponent : public SignalSubscriber {
 public:
     /**
      * @brief Construct a new EventComponent object.
+     * @param name Name of the component.
      * @param parentComponent Pointer to the parent component in the hierarchy (default: nullptr).
      */
-    explicit EventComponent(EventComponent* parentComponent = nullptr);
+    explicit EventComponent(std::string name, EventComponent* parentComponent = nullptr);
 
     /**
      * @brief Virtual destructor for EventComponent.
      */
-    ~EventComponent() override = default;
+    virtual ~EventComponent() override = default;
 
     /**
      * @brief Adds a child component to this node (Composite pattern interface).
@@ -93,8 +94,17 @@ public:
     */
     virtual int getCapacity() const = 0;
 
+    /**
+     * @brief Returns the name of a component.
+     *
+     * @return The name.
+    */
+    std::string getName() const;
+
+
 private:
     EventComponent* parent; /**< Pointer to parent node in composite hierarchy */
+    std::string name;
 };
 
 #endif /* EVENTCOMPONENT_H */

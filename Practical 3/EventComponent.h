@@ -101,6 +101,28 @@ public:
     */
     std::string getName() const;
 
+    /**
+     * @brief Attempts to admit visitors into this event component.
+     *
+     * @param visitors Number of visitors attempting to enter.
+     * @return The number of visitors actually admitted.
+    */
+    virtual int enterVisitor(int visitors) = 0;
+    
+    /**
+     * @brief Removes visitors from this event component.
+     *
+     * @param visitors Number of visitors attempting to leave.
+     * @return The number of visitors actually removed.
+    */
+    virtual int leaveVisitor(int visitors) = 0;
+    
+    /**
+     * @brief Returns the number of visitors currently inside this component.
+     *
+     * @return The current visitor count.
+    */
+    virtual int getCurrentVisitors() const = 0;
 
 private:
     EventComponent* parent; /**< Pointer to parent node in composite hierarchy */

@@ -59,6 +59,29 @@ class RoboticsBooth : public EventComponent {
         int getCapacity() const override;
 
         /**
+         * @brief Attempts to admit visitors into the robotics demonstration booth.
+         *
+         * Visitors are admitted only when the booth is open. The number admitted
+         * cannot exceed the booth's remaining capacity. If the booth reaches
+         * capacity, a FULL_CAPACITY signal is handled by the booth.
+         *
+         * @param visitors Number of visitors attempting to enter. Must be positive.
+         * @return The number of visitors actually admitted.
+        */
+        int RoboticsBooth::enterVisitor(int visitors);
+
+        /**
+         * @brief Removes visitors from the robotics demonstration booth.
+         *
+         * The booth cannot remove more visitors than are currently present.
+         * The visitor count therefore never becomes negative.
+         *
+         * @param visitors Number of visitors attempting to leave. Must be positive.
+         * @return The number of visitors actually removed.
+        */
+        int leaveVisitor(int visitors);
+
+        /**
          * @brief Destroys the robotics demonstration booth.
         */
         ~RoboticsBooth() override = default;

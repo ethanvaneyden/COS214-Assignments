@@ -12,6 +12,10 @@ void RoboticsBooth::update(const TechSignal& signal) {
             }
             break;
 
+        case TechSignal::Type::SCHEDULE_CHANGE:
+            std::cout << getName() << " received a schedule change: " << signal.getMessage() << std::endl;
+            break;
+
         case TechSignal::Type::POWER_FAILURE:
             active = false;
             robotsActive = false;
@@ -26,6 +30,16 @@ void RoboticsBooth::update(const TechSignal& signal) {
             safeMode = true;
 
             std::cout << getName() << " stopped its robot showcase for an emergency.\n";
+            break;
+
+        case TechSignal::Type::RESUME:
+            if(isOpen && safeMode){
+                active = true;
+                safeMode = false;
+                robotsActive = true;
+
+                std::cout << getName() << " resumed its robot showcase.\n";
+            }
             break;
 
         default:
@@ -52,9 +66,65 @@ void RoboticsBooth::close(){
 }
 
 void RoboticsBooth::reportStatus() const{
-    std::cout << getName() << " | " << (isOpen ? "OPEN" : "CLOSED") << " | Visitors: " << currentVisitors << "/" << capacity << " | Robots showcase: " << (robotsActive ? "ACTIVE" : "STOPPED") << std::endl;
+    std::cout << getName() << " | " << (isOpen ? "OPEN" : "CLOSED") << " | Visitors: " << currentVisitors 
+            << "/" << capacity << " | Robots showcase: " << (robotsActive ? "ACTIVE" : "STOPPED") << " | Safe mode: " 
+            << (safeMode ? "ON" : "OFF") << std::endl;
 }
 
 int RoboticsBooth::getCapacity() const{
     return this->capacity;
 }
+
+int RoboticsBooth::enterVisitor(int visitors){
+    if(visitors <= 0)
+        return 0;
+
+    if(!isOpen){
+        std::cout << getName() << " is closed. Visitors cannot enter.\n";
+        return 0;
+    }
+
+    int availableSpace = capacity - currentVisitors;
+    int accepted = (visitors < availableSpace) ? visitors : availableSpace;
+
+    if(accepted <= 0){
+        std::cout << getName() << " is full. No more visitors accepted.\n";
+
+        TechSignal signal(
+            TechSignal::Type::FULL_CAPACITY,
+            "Robotics Booth has reached full capacity."
+        );
+
+        update(signal);
+
+        return 0;
+    }
+
+    currentVisitors += accepted;
+
+    std::cout << accepted << " visitor(s) entered "
+              << getName() << ". Visitors: "
+              << currentVisitors << "/" << capacity << "\n";
+
+    if(currentVisitors >= capacity){
+        TechSignal signal(TechSignal::Type::FULL_CAPACITY, "Robotics Booth has reached full capacity."
+        );
+
+        update(signal);
+    }
+
+    return accepted;
+}
+
+int RoboticsBooth::leaveVisitor(int visitors){
+    if(visitors <= 0)
+        return 0;
+
+    int removed = (visitors < currentVisitors) ? visitors : currentVisitors;
+
+    currentVisitors -= removed;
+    std::cout << removed << " visitor(s) left " << getName() << ". Visitors: " << currentVisitors << "/" << capacity << "\n";
+    return removed;
+}
+
+

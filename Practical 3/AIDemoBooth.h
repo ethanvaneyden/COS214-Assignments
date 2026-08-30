@@ -78,7 +78,7 @@ class AIDemoBooth : public EventComponent {
          * @param visitors Number of visitors attempting to leave. Must be positive.
          * @return The number of visitors actually removed.
         */
-        int AIDemoBooth::leaveVisitor(int visitors);
+        int leaveVisitor(int visitors);
 
         /**
          * @brief Destroys the AI demonstration booth.

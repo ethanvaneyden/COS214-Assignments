@@ -73,9 +73,34 @@ class AIZone : public EventComponent, public SignalBroadcaster {
         */
         void update(const TechSignal& signal) override;
 
-        void enterVisitor(int visitors);
-        void leaveVisitor(int visitors);
-        
+        /**
+         * @brief Distributes incoming visitors among the zone's children.
+         *
+         * The zone attempts to distribute the requested visitors sequentially
+         * among its child components. Each child decides how many visitors it
+         * can actually accept through polymorphic dispatch.
+         *
+         * Visitors that cannot be accommodated by one child are passed to the
+         * next child. This continues until all visitors have been admitted or
+         * all children have been given an opportunity to accept them.
+         *
+         * @param visitors Number of visitors attempting to enter the zone.
+         * @return The total number of visitors actually admitted into the zone.
+        */
+        int enterVisitor(int visitors);
+
+        /**
+         * @brief Distributes departing visitors among the zone's children.
+         *
+         * The zone asks each child to remove as many visitors as possible,
+         * continuing with the remaining number until all requested visitors
+         * have been removed or all children have been checked.
+         *
+         * @param visitors Number of visitors attempting to leave the zone.
+         * @return The total number of visitors actually removed from the zone.
+        */
+        int leaveVisitor(int visitors);
+
         /**
          * @brief Destroys the AI zone and its components.
         */

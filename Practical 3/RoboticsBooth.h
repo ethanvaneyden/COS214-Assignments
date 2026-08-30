@@ -68,7 +68,7 @@ class RoboticsBooth : public EventComponent {
          * @param visitors Number of visitors attempting to enter. Must be positive.
          * @return The number of visitors actually admitted.
         */
-        int RoboticsBooth::enterVisitor(int visitors);
+        int enterVisitor(int visitors);
 
         /**
          * @brief Removes visitors from the robotics demonstration booth.

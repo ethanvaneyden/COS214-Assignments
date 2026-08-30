@@ -4,6 +4,7 @@
 #include "SignalSubscriber.h"
 #include "SignalBroadcaster.h"
 #include "EventComponent.h"
+#include "TechSignal.h"
 
 #include <vector>
 #include <iostream>
@@ -72,6 +73,9 @@ class AIZone : public EventComponent, public SignalBroadcaster {
         */
         void update(const TechSignal& signal) override;
 
+        void enterVisitor(int visitors);
+        void leaveVisitor(int visitors);
+        
         /**
          * @brief Destroys the AI zone and its components.
         */

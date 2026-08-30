@@ -32,6 +32,7 @@ TechSignal::Type TechSignal::parseType(const std::string &typeStr) const {
   const unordered_map<string, TechSignal::Type> types = {
       {"open", TechSignal::Type::OPEN},
       {"close", TechSignal::Type::CLOSE},
+      {"resume", TechSignal::Type::RESUME},
       {"full capacity", TechSignal::Type::FULL_CAPACITY},
       {"change schedule", TechSignal::Type::SCHEDULE_CHANGE},
       {"power failure", TechSignal::Type::POWER_FAILURE},
@@ -66,6 +67,7 @@ TechSignal::Priority TechSignal::inferPriority(TechSignal::Type type) {
   switch (type) {
   case Type::OPEN:
   case Type::CLOSE:
+  case Type::RESUME:
     return Priority::LOW;
 
   case Type::FULL_CAPACITY:

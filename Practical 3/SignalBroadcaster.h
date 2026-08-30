@@ -5,6 +5,12 @@
 class SignalSubscriber;
 class TechSignal;
 
+/**
+ * @brief This class is the subject. It will transmit any message down to its
+ * children. It is owned by a composite object. Declares the contract for how to transmit a tech signal and keeps a record
+ *
+ */
+
 class SignalBroadcaster {
 protected:
   std::vector<SignalSubscriber *> subscribers;

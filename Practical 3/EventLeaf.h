@@ -3,6 +3,26 @@
 
 #include "EventComponent.h"
 
-class EventLeaf : public EventComponent {};
+/**
+ * @brief The interface representing the leaves of the hierachy
+ *
+ */
+
+class EventLeaf : public EventComponent {
+protected:
+  /**
+   * @brief Constructs a new EventLeaf.
+   *
+   * @param name Name of the leaf component.
+   * @param parent Parent component in the hierarchy.
+   */
+  EventLeaf(std::string name, EventComponent *parent = nullptr);
+
+public:
+  /**
+   * @brief Virtual destructor for EventLeaf.
+   */
+  ~EventLeaf() override = default;
+};
 
 #endif

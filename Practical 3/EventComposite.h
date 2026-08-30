@@ -7,6 +7,13 @@
 #include <algorithm>
 #include <memory>
 #include <vector>
+
+/**
+ * @brief This is the class that represents a composite in the hierachy. It has
+ * a list of children and a broadcaster object.
+ *
+ *
+ */
 class EventComposite : public EventComponent {
 
 protected:
@@ -14,8 +21,26 @@ protected:
   std::unique_ptr<SignalBroadcaster> broadcaster;
 
 public:
+  /**
+   * @brief Adds a component to the hieracy and also subscribes it to the
+   * broadcaster.
+   *
+   *
+   * @param component
+   */
   void add(EventComponent *component) override;
+  /**
+ * @brief Removes a component from the hierachy and unsubscribes it
+ from the broadcaster.
+ *
+ * @param component
+ */
   void remove(EventComponent *component) override;
+
+  virtual ~EventComposite();
+
+protected:
+  EventComposite(std::string name, EventComponent *parent = nullptr);
 };
 
 #endif

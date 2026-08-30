@@ -1,11 +1,12 @@
 #include "MainStage.h"
 #include "BackgroundTimer.h"
+#include "EventComposite.h"
 #include "TechSignal.h"
 #include "Technician.h"
 #include <algorithm>
 
 MainStage::MainStage(EventComponent *parent)
-    : EventComponent(parent), staffIndex(0),
+    : EventComposite("Main Stage", parent), staffIndex(0),
       staffInterval(std::chrono::minutes(5)),
       staffTimer(new BackgroundTimer()) {
   staff = {Technician("Stephen Groos", "082 555 1234"),
@@ -18,16 +19,9 @@ MainStage::MainStage(EventComponent *parent)
 
 MainStage::~MainStage() { delete staffTimer; }
 
-void MainStage::remove(EventComponent *component) {
-  auto it = std::find(children.begin(), children.end(), component);
-  if (it != children.end()) {
-    (*it)->setParent(nullptr);
-    unsubscribe(component);
-    children.erase(it);
-  }
+void MainStage::update(const TechSignal &signal) {
+  broadcaster->transmit(signal);
 }
-
-void MainStage::update(const TechSignal &signal) { transmit(signal); }
 
 void MainStage::startStaffTimer() {
   if (!staffTimer->isRunning()) {

@@ -62,8 +62,135 @@ int AIZone::getCapacity() const{
 }
 
 void AIZone::update(const TechSignal& signal){
-    //still decideing on what to change,,,
+    switch(signal.getType()){
+        case TechSignal::Type::OPEN:
+            isOpen = true;
+            std::cout << "AI Zone is now OPEN.\n";
+            transmit(signal);
+            break;
+
+        case TechSignal::Type::CLOSE:
+            isOpen = false;
+            std::cout << "AI Zone is now CLOSED.\n";
+            transmit(signal);
+            break;
+
+        case TechSignal::Type::FULL_CAPACITY:
+        case TechSignal::Type::SCHEDULE_CHANGE:
+        case TechSignal::Type::POWER_FAILURE:
+        case TechSignal::Type::EMERGENCY_PAUSE:
+        case TechSignal::Type::RESUME:
+            transmit(signal);
+            break;
+
+        default:
+            break;
+    }
 }
+
+void void AIDemoBooth::enterVisitor(int visitors){
+    if(visitors <= 0)
+        return;
+
+    if(!isOpen){
+        std::cout << getName() << " is closed. Visitors cannot enter.\n";
+        return;
+    }
+
+    this->currentVisitors += visitors;
+
+    std::cout << visitors << " visitor(s) entered " << getName() << ". Visitors: " << currentVisitors << "/" << capacity << "\n";
+
+    if(currentVisitors >= capacity){
+        TechSignal signal(TechSignal::Type::FULL_CAPACITY, "AI Demo Booth has reached full capacity.");
+
+        update(signal);
+    }
+}
+
+void AIDemoBooth::leaveVisitor(int visitors){
+    if(visitors <= 0)
+        return;
+
+    currentVisitors -= visitors;
+
+    if(currentVisitors < 0)
+        currentVisitors = 0;
+
+    std::cout << visitors << " visitor(s) left " << getName() << ". Visitors: " << currentVisitors << "/" << capacity << "\n";
+}::enterVisitor(int visitors){
+    if(visitors <= 0)
+        return;
+
+    if(!isOpen){
+        std::cout << getName() << " is closed. Visitors cannot enter.\n";
+        return;
+    }
+
+    this->currentVisitors += visitors;
+
+    std::cout << visitors << " visitor(s) entered " << getName() << ". Visitors: " << currentVisitors << "/" << capacity << "\n";
+
+    if(currentVisitors >= capacity){
+        TechSignal signal(TechSignal::Type::FULL_CAPACITY, "AI Demo Booth has reached full capacity.");
+
+        update(signal);
+    }
+}
+
+int AIZone::enterVisitor(int visitors){
+    if(visitors <= 0 || !isOpen)
+        return 0;
+
+    int remaining = visitors;
+    int accepted = 0;
+
+    for(auto child : children){
+        if(child == nullptr || remaining <= 0)
+            continue;
+
+        int added = child->enterVisitor(remaining);
+
+        accepted += added;
+        remaining -= added;
+    }
+
+    if(accepted > 0){
+        std::cout << accepted << " visitor(s) entered " << getName() << ".\n";
+    }
+
+    if(remaining > 0){
+        std::cout << remaining << " visitor(s) could not enter " << getName() << " because there was not enough capacity.\n";
+    }
+
+    return accepted;
+}
+
+int AIZone::leaveVisitor(int visitors){
+    if(visitors <= 0)
+        return 0;
+
+    int remaining = visitors;
+    int removed = 0;
+
+    for(auto child : children){
+        if(child == nullptr || remaining <= 0)
+            continue;
+
+        int left = child->leaveVisitor(remaining);
+
+        removed += left;
+        remaining -= left;
+    }
+
+    if(removed > 0){
+        std::cout << removed << " visitor(s) left " << getName() << ".\n";
+    }
+
+    return removed;
+}
+
+
 
 AIZone::~AIZone(){
     for (auto child : this->children){

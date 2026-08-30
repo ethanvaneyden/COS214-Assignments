@@ -9,6 +9,7 @@ public:
     UNKNOWN,
     OPEN,
     CLOSE,
+    RESUME,
     FULL_CAPACITY,
     SCHEDULE_CHANGE,
     POWER_FAILURE,

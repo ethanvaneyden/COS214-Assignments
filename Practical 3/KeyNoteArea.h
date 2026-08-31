@@ -73,11 +73,19 @@ public:
   std::string getPresenter() const;
 
   /**
-   * @brief Overrides Component method to return the operational status of the
+   * @brief Overrides Component method to print the operational status of the
    * KeyNoteArea.
-   * @return std::string Status description string.
    */
+  void reportStatus() const override;
+
   std::string getStatus() const override;
+  
+  void open() override;
+  void close() override;
+  int getCapacity() const override;
+  int enterVisitor(int visitors) override;
+  int leaveVisitor(int visitors) override;
+  int getCurrentVisitors() const override;
 
 private:
   mutable std::mutex

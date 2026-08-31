@@ -60,6 +60,14 @@ public:
    */
   std::string getStaff() const override;
 
+  void open() override;
+  void close() override;
+  void reportStatus() const override;
+  int getCapacity() const override;
+  int enterVisitor(int visitors) override;
+  int leaveVisitor(int visitors) override;
+  int getCurrentVisitors() const override;
+
   /**
    * @brief Recursively collects and formats the status of all child components.
    * @return std::string Summary status string for the stage and its

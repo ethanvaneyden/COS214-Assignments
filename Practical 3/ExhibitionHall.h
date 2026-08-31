@@ -40,6 +40,11 @@ public:
    */
   int getCapacity() const override;
 
+  int enterVisitor(int visitors) override;
+  int leaveVisitor(int visitors) override;
+  int getCurrentVisitors() const override;
+  std::string getStatus() const override;
+
   /**
    * @brief Handles a received technology signal.
    *

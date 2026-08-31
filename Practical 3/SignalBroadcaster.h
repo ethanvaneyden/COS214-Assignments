@@ -2,6 +2,8 @@
 #define SIGNALBROADCASTER_H
 
 #include <vector>
+#include <cstddef>
+
 class SignalSubscriber;
 class TechSignal;
 

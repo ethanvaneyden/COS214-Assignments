@@ -54,6 +54,18 @@ class AIDemoBooth : public EventLeaf {
         std::string getStatus() const override;
 
         /**
+         * @brief Reports the status.
+        */
+        void reportStatus() const override;
+
+        /**
+         * @brief Gets the current number of visitors.
+         *
+         * @return The current number of visitors.
+        */
+        int getCurrentVisitors() const override;
+
+        /**
          * @brief Returns the booth capacity.
          *
          * @return Maximum visitor capacity.

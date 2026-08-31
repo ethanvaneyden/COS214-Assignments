@@ -31,14 +31,14 @@ public:
      * @param component Pointer to the child EventComponent to add.
      * @note Default implementation is a no-op for leaf nodes.
      */
-    virtual void add(EventComponent* component) {}
+    virtual void add(EventComponent*) {}
 
     /**
      * @brief Removes a child component from this node (Composite pattern interface).
      * @param component Pointer to the child EventComponent to remove.
      * @note Default implementation is a no-op for leaf nodes.
      */
-    virtual void remove(EventComponent* component) {}
+    virtual void remove(EventComponent*) {}
 
     /**
      * @brief Sets the parent component in the hierarchy.
@@ -125,8 +125,8 @@ public:
     virtual int getCurrentVisitors() const = 0;
 
 private:
-    EventComponent* parent; /**< Pointer to parent node in composite hierarchy */
     std::string name;
+    EventComponent* parent; /**< Pointer to parent node in composite hierarchy */
 };
 
 #endif /* EVENTCOMPONENT_H */

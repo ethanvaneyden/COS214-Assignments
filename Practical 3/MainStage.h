@@ -80,10 +80,8 @@ private:
   std::atomic<size_t> staffIndex{
       0}; /**< Thread-safe index for current staff member */
 
-  BackgroundTimer
-      *staffTimer; /**< Background timer thread for staff rotation */
-  std::chrono::minutes
-      staffInterval; /**< Time interval between staff rotations */
+  std::chrono::minutes staffInterval; /**< Time interval between staff rotations */
+  BackgroundTimer* staffTimer; /**< Background timer thread for staff rotation */
 };
 
 #endif /* MAINSTAGE_H */

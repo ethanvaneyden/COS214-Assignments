@@ -1,7 +1,7 @@
 #include "AIZone.h"
 
 AIZone::AIZone(std::string name) 
-    : EventComponent(name), isOpen(false)
+    : EventComposite(name), isOpen(false)
 {}
 
 void AIZone::add(EventComponent* component){
@@ -41,13 +41,18 @@ void AIZone::close(){
     }
 }
 
-void AIZone::reportStatus() const{
-    std::cout << "AI Zone: " << (this->isOpen ? "OPEN" : "CLOSED") << std::endl;
+std::string AIZone::getStatus() const{
+    std::string output = "AI Zone: ";
+    std::string temp = this->isOpen ? "OPEN" : "CLOSED";
+    output += temp;
+    output += "\n";
 
     for (auto child : this->children){
         if(child != nullptr)
-            child->reportStatus();
+            output += child->getStatus();
     }
+
+    return output;
 }
 
 int AIZone::getCapacity() const{

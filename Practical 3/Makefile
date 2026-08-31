@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -g
+CXXFLAGS = -std=c++11 -Wall -Wextra -Werror -g
 
 TARGET = expo
 
@@ -17,5 +17,8 @@ $(TARGET): $(OBJS)
 
 clean:
 	rm -f $(TARGET) $(OBJS)
+
+valgrind:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./expo
 
 .PHONY: all clean

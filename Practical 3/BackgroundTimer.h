@@ -21,10 +21,10 @@ class BackgroundTimer;
 class TimerState {
 public:
     virtual ~TimerState() = default;
-    virtual void start(BackgroundTimer& context, std::chrono::milliseconds interval, std::function<void()> task) {}
-    virtual void pause(BackgroundTimer& context) {}
-    virtual void resume(BackgroundTimer& context) {}
-    virtual void stop(BackgroundTimer& context) {}
+    virtual void start(BackgroundTimer&, std::chrono::milliseconds, std::function<void()>) {}
+    virtual void pause(BackgroundTimer&) {}
+    virtual void resume(BackgroundTimer&) {}
+    virtual void stop(BackgroundTimer&) {}
     virtual bool isRunning() const { return false; }
     virtual bool isPaused() const { return false; }
 };

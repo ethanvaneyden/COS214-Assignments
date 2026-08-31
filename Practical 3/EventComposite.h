@@ -45,6 +45,8 @@ public:
    */
   bool hasChildren() const override;
 
+  std::vector<EventComponent*> getChildren() const { return children;}
+
   virtual ~EventComposite() = default;
 
 protected:

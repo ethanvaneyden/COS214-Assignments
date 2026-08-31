@@ -7,7 +7,7 @@
 using namespace std::chrono;
 
 KeyNoteArea::KeyNoteArea(EventComponent *parent)
-    : EventLeaf("Keynote area", parent), isOpen(true), presenterIndex(0),
+    : EventLeaf("Keynote_Area", parent), isOpen(true), presenterIndex(0),
       presenterInterval(minutes(2)), presenterTimer(new BackgroundTimer()) {
   presenters = {"Satoshi Nakamoto", "Marti Stair", "Zink Weiss",
                 "Fiorello Rocco", "Lorato Ramatlapeng"};

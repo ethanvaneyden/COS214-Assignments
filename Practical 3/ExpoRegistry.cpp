@@ -5,42 +5,45 @@
 #include "MainStage.h"
 #include <iostream>
 
-EventComponent *ExpoRegistry::createComponent(ComponentType type,
-                                              const std::string &parentName) {
-  EventComponent *parent =
-      !parentName.empty() ? findComponent(parentName) : nullptr;
-  std::unique_ptr<EventComponent> newComponent;
+EventComponent *ExpoRegistry::createComponent(
+    ComponentType type,
+    EventComponent *parent)
+{
+    std::unique_ptr<EventComponent> newComponent;
 
-  switch (type) {
-  case ComponentType::EXHIBITION_HALL:
-    newComponent.reset(new ExhibitionHall());
-    break;
-  case ComponentType::MAIN_STAGE:
-    newComponent.reset(new MainStage(parent));
-    break;
-  case ComponentType::KEYNOTE_AREA:
-    newComponent.reset(new KeyNoteArea(parent));
-    break;
-  case ComponentType::DEMO_AREA:
-    newComponent.reset(new DemoArea(parent));
-    break;
-  }
+    switch (type) {
+    case ComponentType::EXHIBITION_HALL:
+        newComponent.reset(new ExhibitionHall());
+        break;
 
-  if (!newComponent)
-    return nullptr;
+    case ComponentType::MAIN_STAGE:
+        newComponent.reset(new MainStage(parent));
+        break;
 
-  std::string name = newComponent->getName();
-  EventComponent *rawPtr = newComponent.get();
+    case ComponentType::KEYNOTE_AREA:
+        newComponent.reset(new KeyNoteArea(parent));
+        break;
 
-  // Attach to parent composite if specified
-  if (parent) {
-    parent->add(rawPtr);
-  }
+    case ComponentType::DEMO_AREA:
+        newComponent.reset(new DemoArea(parent));
+        break;
+    }
 
-  lookupTable[name] = rawPtr;
-  registryMap[name] = std::move(newComponent);
+    if (!newComponent)
+        return nullptr;
 
-  return rawPtr;
+    EventComponent *rawPtr = newComponent.get();
+
+    if (parent) {
+        parent->add(rawPtr);
+    }
+
+    std::string name = rawPtr->getName();
+
+    lookupTable[name] = rawPtr;
+    registryMap[name] = std::move(newComponent);
+
+    return rawPtr;
 }
 
 bool ExpoRegistry::removeComponent(const std::string &name) {
@@ -147,22 +150,40 @@ void ExpoRegistry::printMap(const std::string &rootName) const {
   std::cout << "==========================================\n\n";
 }
 
-void ExpoRegistry::printTreeRecursive(const EventComponent *component,
-                                      int depth) const {
-  if (!component)
-    return;
+void ExpoRegistry::printTreeRecursive(const EventComponent* component,
+                                      int depth) const
+{
+    if (!component)
+        return;
 
-  std::string indent(depth * 4, ' ');
-  std::cout << indent << "|-- " << component->getName() << " ("
-            << component->getStaff() << ")" << "\n";
+    std::string indent(depth * 4, ' ');
+
+    std::cout << indent << "|-- "
+              << component->getName()
+              << " (" << component->getStaff() << ")\n";
+
+    if (auto* composite = dynamic_cast<const EventComposite*>(component))
+    {
+        for (const EventComponent* child : composite->getChildren())
+        {
+            printTreeRecursive(child, depth + 1);
+        }
+    }
 }
 
-void ExpoRegistry::printStatusReport() const {
-  std::cout << "\n============= STATUS REPORT =============\n";
-  for (const auto &pair : lookupTable) {
-    if (pair.second) {
-      pair.second->reportStatus();
+void ExpoRegistry::printStatusReport() const
+{
+    std::cout << "\n============= STATUS REPORT =============\n";
+
+    for (const auto& pair : lookupTable)
+    {
+        EventComponent* component = pair.second;
+
+        if (component != nullptr && component->getParent() == nullptr)
+        {
+            std::cout << component->getStatus();
+        }
     }
-  }
-  std::cout << "==========================================\n\n";
+
+    std::cout << "==========================================\n\n";
 }

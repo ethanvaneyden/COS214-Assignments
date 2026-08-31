@@ -1,7 +1,7 @@
 #include "ExhibitionHall.h"
 
 ExhibitionHall::ExhibitionHall()
-    : EventComposite("Main Exhibition Hall"), isOpen(false) 
+    : EventComposite("Main_Exhibition_Hall"), isOpen(false) 
 {}
 
 

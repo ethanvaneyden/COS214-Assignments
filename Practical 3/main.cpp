@@ -6,7 +6,7 @@
 #include "TechSignal.h"
 
 void printHelp() {
-    std::cout << "\n================ EXPO COMMAND MENU ================\n"
+    std::cout << "\n================ EVENTFLOW COMMAND MENU ================\n"
               << "  map                       : Print the EXPO map\n"
               << "  status                    : Print operational status report\n"
               << "  capacity <name>           : Show capacity info for a component\n"
@@ -30,7 +30,7 @@ int main() {
     }
 
     std::cout << "====================================================\n"
-              << "      WELCOME TO THE EXPO MANAGEMENT SYSTEM         \n"
+              << "      WELCOME TO THE EVENTFLOW MANAGEMENT SYSTEM         \n"
               << "====================================================\n";
     printHelp();
 
@@ -45,7 +45,7 @@ int main() {
         ss >> command;
 
         if (command == "exit" || command == "quit") {
-            std::cout << "Exiting Expo System. Goodbye!\n";
+            std::cout << "Exiting EventFlow. Goodbye!\n";
             break;
         } 
         else if (command == "map") {

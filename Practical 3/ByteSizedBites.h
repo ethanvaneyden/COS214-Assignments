@@ -8,29 +8,42 @@
 
 #include <iostream>
 #include <unordered_map>
+#include <string>
 
 class ByteSizedBites : public EventLeaf {
-    private:
-        bool isOpen;
-        int TotalChairs;
-        int visitorOnChairs;
+private:
+    bool isOpen;
 
-        //drinks(cokes and juice...) , food, snacks, energyBars, sandwhich
+    // Seating
+    int TotalChairs;
+    int visitorsOnChairs;
 
-    public:
-        explicit ByteSizedBites();
+    // Food & drinks
+    int foodStock;
+    int drinkStock;
+    int snackStock;
+    int energyBarStock;
 
-        void update(const TechSignal& signal) override;
+    // Service
+    int staffCount;
+    int ordersInProgress;
 
-        void open() override;
+    // Basic information
+    std::string specialOfTheDay;
 
-        void close() override;
+public:
+    explicit ByteSizedBites();
 
-        std::string getStatus() const override;
+    void update(const TechSignal& signal) override;
 
-        int getCapacity() const override; //int TotalChairs and int visitorsOnChairs;
+    void open() override;
+    void close() override;
 
-        ~ByteSizedBites() override = default;
+    std::string getStatus() const override;
+
+    int getCapacity() const override;
+
+    ~ByteSizedBites() override = default;
 };
 
 #endif

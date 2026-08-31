@@ -69,7 +69,6 @@ void ByteSizedBites::setIsOpen(bool status){
     isOpen = status;
 }
 
-// Seating
 int ByteSizedBites::getTotalChairs() const{
     return TotalChairs;
 }

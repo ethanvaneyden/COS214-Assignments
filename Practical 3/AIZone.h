@@ -4,6 +4,7 @@
 #include "SignalSubscriber.h"
 #include "SignalBroadcaster.h"
 #include "EventComponent.h"
+#include "EventComposite.h"
 #include "TechSignal.h"
 
 #include <vector>
@@ -17,9 +18,8 @@
  * It owns its children as the composite
  * but does not own its observers
  */
-class AIZone : public EventComponent, public SignalBroadcaster {
+class AIZone : public EventComposite, public SignalBroadcaster {
     private:
-        std::vector<EventComponent*> children;
         bool isOpen;
 
     public:
@@ -57,7 +57,7 @@ class AIZone : public EventComponent, public SignalBroadcaster {
         /**
          * @brief Reports the status of the AI zone.
         */
-        void reportStatus() const override;
+        std::string getStatus() const override;
 
         /**
          * @brief Returns the total capacity of the AI zone.

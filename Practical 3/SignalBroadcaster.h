@@ -2,8 +2,16 @@
 #define SIGNALBROADCASTER_H
 
 #include <vector>
+#include <cstddef>
+
 class SignalSubscriber;
 class TechSignal;
+
+/**
+ * @brief This class is the subject. It will transmit any message down to its
+ * children. It is owned by a composite object. Declares the contract for how to transmit a tech signal and keeps a record
+ *
+ */
 
 class SignalBroadcaster {
 protected:
@@ -25,19 +33,19 @@ public:
    * @brief Destroy the Signal Broadcaster object
    *
    */
-  virtual ~SignalBroadcaster() = default;
+  ~SignalBroadcaster() = default;
   /**
    * @brief Allows an observer to subscribe to this broadcaster
    *
    * @param subscriber
    */
-  virtual void subscribe(SignalSubscriber *subscriber);
+  void subscribe(SignalSubscriber *subscriber);
   /**
    * @brief Allows an observer to unsubscribe to the broadcaster
    *
    * @param subscriber
    */
-  virtual void unsubscribe(SignalSubscriber *subscriber);
+  void unsubscribe(SignalSubscriber *subscriber);
   /**
    * @brief Transmits the command to all signal subscribers
    *

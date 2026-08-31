@@ -94,13 +94,11 @@ private:
   std::string status; /**< Current status message */
 
   std::vector<std::string> presenters; /**< Schedule of presenters */
-  std::atomic<size_t> presenterIndex{
-      0}; /**< Thread-safe index for current presenter */
+  std::atomic<size_t> presenterIndex{0}; /**< Thread-safe index for current presenter */
 
-  BackgroundTimer
-      *presenterTimer; /**< Pointer to background timer for rotation */
-  std::chrono::minutes
-      presenterInterval; /**< Interval between presenter shifts */
+  std::chrono::minutes presenterInterval; /**< Interval between presenter shifts */
+  BackgroundTimer* presenterTimer; /**< Pointer to background timer for rotation */
+
 };
 
 #endif /* KEYNOTEAREA_H */

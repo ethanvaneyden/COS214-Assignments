@@ -14,8 +14,8 @@ DemoArea::DemoArea(EventComponent* parent)
       capacity(100),
       currentVisitors(0),
       demoIndex(0),
-      demoInterval(minutes(3)),
-      demoTimer(new BackgroundTimer()) {
+      demoTimer(new BackgroundTimer()),
+      demoInterval(minutes(3)) {
     
     demoSchedule = {
         "Autonomous Drone Navigation Demo",

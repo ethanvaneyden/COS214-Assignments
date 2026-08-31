@@ -31,9 +31,15 @@ void EventComposite::remove(EventComponent *component) {
   }
 }
 
+std::string EventComposite::getDisplayDetails() const
+{
+  return getName() + " (" + getStaff() + ")";  
+}
+
 EventComposite::EventComposite(std::string name, EventComponent *parent)
     : EventComponent(name, parent),
-      broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster())) {
+      broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster()))
+{
 }
 
 bool EventComposite::hasChildren() const { return !children.empty(); }

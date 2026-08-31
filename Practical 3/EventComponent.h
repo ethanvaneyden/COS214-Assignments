@@ -141,6 +141,12 @@ public:
    */
   virtual int getCurrentVisitors() const = 0;
 
+  /**
+     * @brief Pure virtual hook for returning class-specific display metadata in tree views.
+     * @return Extra details string to append to the component name during print rendering.
+     */
+    virtual std::string getDisplayDetails() const = 0;
+
 private:
   std::string name;
   EventComponent *parent; /**< Pointer to parent node in composite hierarchy */

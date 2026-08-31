@@ -62,6 +62,18 @@ class AIZone : public EventComposite, public SignalBroadcaster {
         std::string getStatus() const override;
 
         /**
+         * @brief Reports the status.
+        */
+        void reportStatus() const override;
+
+        /**
+         * @brief Gets the current number of visitors.
+         *
+         * @return The current number of visitors.
+        */
+        int getCurrentVisitors() const override;
+
+        /**
          * @brief Returns the total capacity of the AI zone.
          *
          * @return The total capacity.

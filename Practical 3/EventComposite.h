@@ -37,6 +37,8 @@ public:
  */
   void remove(EventComponent *component) override;
 
+  bool hasChildren() const override;
+
   virtual ~EventComposite() = default;
 
 protected:

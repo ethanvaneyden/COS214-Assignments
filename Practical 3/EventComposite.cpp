@@ -1,22 +1,18 @@
 #include "EventComposite.h"
 #include "EventComponent.h"
 
-void EventComposite::add(EventComponent *component)
-{
+void EventComposite::add(EventComponent *component) {
   if (component && std::find(children.begin(), children.end(), component) ==
-                       children.end())
-  {
+                       children.end()) {
     children.push_back(component);
     component->setParent(this);
     broadcaster->subscribe(component);
   }
 }
 
-void EventComposite::remove(EventComponent *component)
-{
+void EventComposite::remove(EventComponent *component) {
   auto it = std::find(children.begin(), children.end(), component);
-  if (it != children.end())
-  {
+  if (it != children.end()) {
     (*it)->setParent(nullptr);
     broadcaster->unsubscribe(component);
     children.erase(it);
@@ -25,4 +21,7 @@ void EventComposite::remove(EventComponent *component)
 
 EventComposite::EventComposite(std::string name, EventComponent *parent)
     : EventComponent(name, parent),
-      broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster())) {}
+      broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster())) {
+}
+
+bool EventComposite::hasChildren() const { return !children.empty(); }

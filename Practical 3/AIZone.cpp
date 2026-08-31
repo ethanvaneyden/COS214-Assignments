@@ -141,11 +141,3 @@ int AIZone::leaveVisitor(int visitors){
     return removed;
 }
 
-
-
-AIZone::~AIZone(){
-    for (auto child : this->children){
-        if(child != nullptr) 
-            delete child;
-    }
-}

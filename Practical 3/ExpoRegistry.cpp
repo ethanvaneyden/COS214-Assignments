@@ -131,42 +131,50 @@ int ExpoRegistry::leaveVisitors(const std::string &componentName, int count) {
   return comp->leaveVisitor(count);
 }
 
-void ExpoRegistry::printMap(const std::string &rootName) const {
-  std::cout << "\n================ EXPO MAP ================\n";
-  if (!rootName.empty()) {
-    EventComponent *root = findComponent(rootName);
-    if (root) {
-      printTreeRecursive(root, 0);
+void ExpoRegistry::printMap(const std::string& rootName) const {
+    std::cout << "\n================ EVENTFLOW MAP ================\n";
+    if (!rootName.empty()) {
+        EventComponent* root = findComponent(rootName);
+        if (root) {
+            printTreeRecursive(root, 0, true, "");
+        } else {
+            std::cout << "Root component '" << rootName << "' not found.\n";
+        }
     } else {
-      std::cout << "Root component '" << rootName << "' not found.\n";
+        for (const auto& pair : lookupTable) {
+            if (pair.second && pair.second->getParent() == nullptr) {
+                printTreeRecursive(pair.second, 0, true, "");
+            }
+        }
     }
-  } else {
-    for (const auto &pair : lookupTable) {
-      if (pair.second && pair.second->getParent() == nullptr) {
-        printTreeRecursive(pair.second, 0);
-      }
-    }
-  }
-  std::cout << "==========================================\n\n";
+    std::cout << "==========================================\n\n";
 }
 
-void ExpoRegistry::printTreeRecursive(const EventComponent* component,
-                                      int depth) const
+void ExpoRegistry::printTreeRecursive(const EventComponent* component, int depth, bool isLast, std::string prefix) const 
 {
-    if (!component)
-        return;
+    if (!component) return;
 
-    std::string indent(depth * 4, ' ');
+    std::cout << prefix;
 
-    std::cout << indent << "|-- "
-              << component->getName()
-              << " (" << component->getStaff() << ")\n";
+    if (depth > 0) {
+        std::cout << (isLast ? "└── " : "├── ");
+    }
 
-    if (auto* composite = dynamic_cast<const EventComposite*>(component))
-    {
-        for (const EventComponent* child : composite->getChildren())
-        {
-            printTreeRecursive(child, depth + 1);
+    // Displays (Name + Staff) for composites, or (Name) for leaves
+    std::cout << component->getDisplayDetails() << "\n";
+
+    if (const auto* composite = dynamic_cast<const EventComposite*>(component)) {
+        const auto& children = composite->getChildren();
+        size_t totalChildren = children.size();
+
+        std::string childPrefix = prefix;
+        if (depth > 0) {
+            childPrefix += (isLast ? "    " : "│   ");
+        }
+
+        for (size_t i = 0; i < totalChildren; ++i) {
+            bool lastChild = (i == totalChildren - 1);
+            printTreeRecursive(children[i], depth + 1, lastChild, childPrefix);
         }
     }
 }

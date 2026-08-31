@@ -108,7 +108,7 @@ private:
     std::unordered_map<std::string, std::unique_ptr<EventComponent>> registryMap; /**< Ownership storage */
     std::unordered_map<std::string, EventComponent*> lookupTable;                 /**< Lookup map */
 
-    void printTreeRecursive(const EventComponent* component, int depth) const;
+    void printTreeRecursive(const EventComponent* component, int depth = 0, bool isLast = true, std::string prefix = "") const;
 };
 
 #endif /* EXPOREGISTRY_H */

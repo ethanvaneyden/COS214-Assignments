@@ -19,7 +19,6 @@ class EventComposite : public EventComponent {
 protected:
   std::vector<EventComponent *> children;
   std::unique_ptr<SignalBroadcaster> broadcaster;
-
 public:
   /**
    * @brief Adds a component to the hieracy and also subscribes it to the
@@ -48,6 +47,8 @@ public:
   std::vector<EventComponent*> getChildren() const { return children;}
 
   virtual ~EventComposite() = default;
+
+  std::string getDisplayDetails() const override;
 
 protected:
   EventComposite(std::string name, EventComponent *parent = nullptr);

@@ -88,7 +88,9 @@ int main() {
     std::string line;
 
     while (true) {
-        std::cout << "expo> ";
+        std::cout << "EventFlow> ";
+        if (!std::getline(std::cin, line)) break;
+        if (line.empty()) continue;
 
         // Stop the application if input is closed or unavailable.
         if (!std::getline(std::cin, line)) {

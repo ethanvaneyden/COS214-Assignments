@@ -136,6 +136,7 @@ void EventComposite::remove(EventComponent *component){
     }
 }
 
+<<<<<<< HEAD
 
 EventComposite::EventComposite(
     std::string name,
@@ -146,6 +147,17 @@ EventComposite::EventComposite(
               new SignalBroadcaster()
           )
       ){
+=======
+std::string EventComposite::getDisplayDetails() const
+{
+  return getName() + " (" + getStaff() + ")";  
+}
+
+EventComposite::EventComposite(std::string name, EventComponent *parent)
+    : EventComponent(name, parent),
+      broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster()))
+{
+>>>>>>> debug/staticmain
 }
 
 

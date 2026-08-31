@@ -7,7 +7,7 @@
 using namespace std::chrono;
 
 DemoArea::DemoArea(EventComponent* parent)
-    : EventLeaf("Demo Area", parent),
+    : EventLeaf("Demo_Area", parent),
       isOpen(true),
       handsOnAllowed(false),
       equipmentReady(true),

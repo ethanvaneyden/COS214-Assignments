@@ -20,7 +20,8 @@ clean:
 
 cleandoc:
 	rm -r /docs
+
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./expo
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET)
 
 .PHONY: all clean

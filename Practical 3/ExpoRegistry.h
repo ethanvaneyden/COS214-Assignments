@@ -39,7 +39,7 @@ public:
      * @param parentName Optional name of the parent component to attach to (default: empty).
      * @return EventComponent* Pointer to the created component, or nullptr on failure.
      */
-    EventComponent* createComponent(ComponentType type, const std::string& parentName = "");
+    EventComponent* createComponent(ComponentType type, EventComponent *parent);
 
     /**
      * @brief Unregisters and destroys a component from the registry by name.

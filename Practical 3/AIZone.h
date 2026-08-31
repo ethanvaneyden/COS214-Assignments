@@ -104,7 +104,7 @@ class AIZone : public EventComposite, public SignalBroadcaster {
         /**
          * @brief Destroys the AI zone and its components.
         */
-        ~AIZone() override;
+        virtual ~AIZone() override = default;
 };
 
 #endif

@@ -63,9 +63,6 @@ void DemoArea::close() {
     stopDemoTimer();
 }
 
-void DemoArea::reportStatus() const {
-    std::cout << getStatus();
-}
 
 int DemoArea::getCapacity() const {
     std::lock_guard<std::mutex> lock(stateMutex);

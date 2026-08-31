@@ -40,7 +40,6 @@ public:
     // Component lifecycle and capacity interface methods
     void open() override;
     void close() override;
-    void reportStatus() const override;
     int getCapacity() const override;
     int enterVisitor(int visitors) override;
     int leaveVisitor(int visitors) override;

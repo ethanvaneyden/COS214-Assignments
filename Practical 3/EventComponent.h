@@ -99,10 +99,6 @@ public:
    */
   virtual bool hasChildren() const { return false; }
 
-  /**
-   * @brief Reports the status of the AI zone.
-   */
-  virtual void reportStatus() const = 0;
 
   /**
    * @brief Returns the total capacity of a component.
@@ -147,7 +143,7 @@ public:
      */
     virtual std::string getDisplayDetails() const = 0;
 
-private:
+protected:
   std::string name;
   EventComponent *parent; /**< Pointer to parent node in composite hierarchy */
 };

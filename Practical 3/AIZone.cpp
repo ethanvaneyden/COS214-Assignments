@@ -1,7 +1,7 @@
 #include "AIZone.h"
 
-AIZone::AIZone(std::string name) 
-    : EventComposite(name), isOpen(false)
+AIZone::AIZone(EventComponent* parent) 
+    : EventComposite("AI_Zone", parent), isOpen(false)
 {}
 
 void AIZone::add(EventComponent* component) {
@@ -14,7 +14,6 @@ void AIZone::remove(EventComponent* component) {
 
 void AIZone::open(){
     isOpen = true;
-
     for(auto child : children){
         if(child != nullptr)
             child->open();
@@ -23,7 +22,6 @@ void AIZone::open(){
 
 void AIZone::close(){
     this->isOpen = false;
-
     for (auto child : this->children){
         if(child != nullptr)
             child->close();
@@ -31,28 +29,31 @@ void AIZone::close(){
 }
 
 std::string AIZone::getStatus() const{
-    std::string output = "AI Zone: ";
-    std::string temp = this->isOpen ? "OPEN" : "CLOSED";
-    output += temp;
-    output += "\n";
-
+    std::string output = "AI Zone: " + std::string(this->isOpen ? "OPEN" : "CLOSED") + "\n";
     for (auto child : this->children){
         if(child != nullptr)
             output += child->getStatus();
     }
-
     return output;
 }
 
+
 int AIZone::getCapacity() const{
     int totalCapacity = 0;
-
     for (auto child : this->children){
         if(child != nullptr)
             totalCapacity += child->getCapacity();
     }
-
     return totalCapacity;
+}
+
+int AIZone::getCurrentVisitors() const {
+    int totalVisitors = 0;
+    for (auto child : this->children){
+        if(child != nullptr)
+            totalVisitors += child->getCurrentVisitors();
+    }
+    return totalVisitors;
 }
 
 void AIZone::update(const TechSignal& signal){
@@ -94,7 +95,6 @@ int AIZone::enterVisitor(int visitors){
             continue;
 
         int admitted = child->enterVisitor(remaining);
-
         accepted += admitted;
         remaining -= admitted;
     }
@@ -118,7 +118,6 @@ int AIZone::leaveVisitor(int visitors){
             continue;
 
         int departed = child->leaveVisitor(remaining);
-
         removed += departed;
         remaining -= departed;
     }
@@ -129,4 +128,3 @@ int AIZone::leaveVisitor(int visitors){
 
     return removed;
 }
-

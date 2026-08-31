@@ -38,11 +38,6 @@ class ExhibitionHall : public EventComposite, public SignalBroadcaster {
     void close() override;
 
     /**
-     * @brief Reports the status of the exhibition hall.
-    */
-    void reportStatus() const override;
-
-    /**
      * @brief Returns the total capacity of the exhibition hall.
      *
      * @return The total capacity.

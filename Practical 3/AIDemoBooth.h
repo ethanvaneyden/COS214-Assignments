@@ -48,6 +48,8 @@ class AIDemoBooth : public EventLeaf {
 
         /**
          * @brief Reports the booth status.
+         * 
+         * @return std::string Status description string.
         */
         std::string getStatus() const override;
 

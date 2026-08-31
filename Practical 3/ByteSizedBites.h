@@ -32,7 +32,7 @@ class ByteSizedBites : public EventLeaf {
         std::string specialOfTheDay;
 
     public:
-        explicit ByteSizedBites();
+        explicit ByteSizedBites(std::string name);
 
         // Event functionality
         void update(const TechSignal& signal) override;

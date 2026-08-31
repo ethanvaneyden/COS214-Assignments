@@ -23,6 +23,8 @@ public:
    * @brief Virtual destructor for EventLeaf.
    */
   ~EventLeaf() override = default;
+
+  std::string getDisplayDetails() const override;
 };
 
 #endif

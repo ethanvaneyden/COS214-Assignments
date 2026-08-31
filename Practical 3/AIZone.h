@@ -56,6 +56,8 @@ class AIZone : public EventComposite, public SignalBroadcaster {
 
         /**
          * @brief Reports the status of the AI zone.
+         * 
+         * @return std::string Status description string.
         */
         std::string getStatus() const override;
 

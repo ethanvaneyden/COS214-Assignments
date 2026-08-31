@@ -4,23 +4,12 @@ AIZone::AIZone(std::string name)
     : EventComposite(name), isOpen(false)
 {}
 
-void AIZone::add(EventComponent* component){
-    for(auto child : this->children){
-        if(child == component) return; //prevents double addition
-    }
-
-    this->children.push_back(component);
+void AIZone::add(EventComponent* component) {
+    EventComposite::add(component);
 }
 
-void AIZone::remove(EventComponent* component){
-    if(component == nullptr) return;
-
-    for(auto it = children.begin(); it != children.end(); ++it){
-        if(*it == component){
-            children.erase(it);
-            return; //not deleting as another parent could possible take ownership
-        }
-    }
+void AIZone::remove(EventComponent* component) {
+    EventComposite::remove(component);
 }
 
 void AIZone::open(){

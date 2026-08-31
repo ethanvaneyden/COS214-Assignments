@@ -37,6 +37,12 @@ public:
  */
   void remove(EventComponent *component) override;
 
+  /**
+   * @brief Checks if composite has any children
+   * 
+   * @return true 
+   * @return false 
+   */
   bool hasChildren() const override;
 
   virtual ~EventComposite() = default;

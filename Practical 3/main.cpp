@@ -7,7 +7,7 @@
 
 void printHelp() {
     std::cout << "\n================ EVENTFLOW COMMAND MENU ================\n"
-              << "  map                       : Print the EXPO map\n"
+              << "  map                       : Print the EVENTFLOW map\n"
               << "  status                    : Print operational status report\n"
               << "  capacity <name>           : Show capacity info for a component\n"
               << "  enter <name> <count>      : Admit visitors into a component\n"
@@ -36,7 +36,7 @@ int main() {
 
     std::string line;
     while (true) {
-        std::cout << "expo> ";
+        std::cout << "EventFlow> ";
         if (!std::getline(std::cin, line)) break;
         if (line.empty()) continue;
 

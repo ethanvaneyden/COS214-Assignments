@@ -37,7 +37,7 @@ public:
  */
   void remove(EventComponent *component) override;
 
-  virtual ~EventComposite();
+  virtual ~EventComposite() = default;
 
 protected:
   EventComposite(std::string name, EventComponent *parent = nullptr);

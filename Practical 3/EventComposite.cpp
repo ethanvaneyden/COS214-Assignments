@@ -26,13 +26,3 @@ void EventComposite::remove(EventComponent *component)
 EventComposite::EventComposite(std::string name, EventComponent *parent)
     : EventComponent(name, parent),
       broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster())) {}
-
-EventComposite::~EventComposite()
-{
-  for (EventComponent *child : children)
-  {
-    delete child;
-  }
-
-  children.clear();
-}

@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include "ExpoRegistry.h"
+#include "MapBuilder.h"
 #include "TechSignal.h"
 
 void printHelp() {
@@ -20,6 +21,9 @@ void printHelp() {
 
 int main() {
     ExpoRegistry registry;
+
+    MapBuilder mapBuilder;
+    mapBuilder.build(registry);
 
     registry.createComponent(ExpoRegistry::ComponentType::EXHIBITION_HALL);
     registry.createComponent(ExpoRegistry::ComponentType::MAIN_STAGE, "Main Exhibition Hall");

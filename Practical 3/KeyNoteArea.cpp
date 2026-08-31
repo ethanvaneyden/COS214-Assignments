@@ -2,6 +2,7 @@
 #include "BackgroundTimer.h"
 #include "EventComponent.h"
 #include "TechSignal.h"
+#include <iostream>
 
 using namespace std::chrono;
 
@@ -59,6 +60,46 @@ void KeyNoteArea::update(const TechSignal &signal) {
   default:
     break;
   }
+}
+
+void KeyNoteArea::open() {
+  std::lock_guard<std::mutex> lock(stateMutex);
+  isOpen = true;
+  status = "Key Note Area is now open.";
+  lock.~lock_guard();
+  if (presenterTimer->isPaused()) {
+    resumePresenterTimer();
+  } else if (!presenterTimer->isRunning()) {
+    startPresenterTimer();
+  }
+}
+
+void KeyNoteArea::close() {
+  std::lock_guard<std::mutex> lock(stateMutex);
+  isOpen = false;
+  status = "Key Note Area is now closed.";
+  lock.~lock_guard();
+  stopPresenterTimer();
+}
+
+void KeyNoteArea::reportStatus() const {
+  std::cout << getStatus();
+}
+
+int KeyNoteArea::getCapacity() const {
+  return 0;
+}
+
+int KeyNoteArea::enterVisitor(int visitors) {
+  return visitors > 0 ? 0 : 0;
+}
+
+int KeyNoteArea::leaveVisitor(int visitors) {
+  return visitors > 0 ? 0 : 0;
+}
+
+int KeyNoteArea::getCurrentVisitors() const {
+  return 0;
 }
 
 void KeyNoteArea::startPresenterTimer() {

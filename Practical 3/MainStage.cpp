@@ -4,6 +4,7 @@
 #include "TechSignal.h"
 #include "Technician.h"
 #include <algorithm>
+#include <iostream>
 
 MainStage::MainStage(EventComponent *parent)
     : EventComposite("Main Stage", parent), staffIndex(0),
@@ -21,6 +22,86 @@ MainStage::~MainStage() { delete staffTimer; }
 
 void MainStage::update(const TechSignal &signal) {
   broadcaster->transmit(signal);
+}
+
+void MainStage::open() {
+  for (EventComponent *child : children) {
+    if (child) {
+      child->open();
+    }
+  }
+  startStaffTimer();
+}
+
+void MainStage::close() {
+  for (EventComponent *child : children) {
+    if (child) {
+      child->close();
+    }
+  }
+  stopStaffTimer();
+}
+
+void MainStage::reportStatus() const {
+  std::cout << getStatus();
+}
+
+int MainStage::getCapacity() const {
+  int total = 0;
+  for (EventComponent *child : children) {
+    if (child) {
+      total += child->getCapacity();
+    }
+  }
+  return total;
+}
+
+int MainStage::enterVisitor(int visitors) {
+  if (visitors <= 0) {
+    return 0;
+  }
+
+  int remaining = visitors;
+  for (EventComponent *child : children) {
+    if (!child) {
+      continue;
+    }
+    int accepted = child->enterVisitor(remaining);
+    remaining -= accepted;
+    if (remaining <= 0) {
+      break;
+    }
+  }
+  return visitors - remaining;
+}
+
+int MainStage::leaveVisitor(int visitors) {
+  if (visitors <= 0) {
+    return 0;
+  }
+
+  int remaining = visitors;
+  for (EventComponent *child : children) {
+    if (!child) {
+      continue;
+    }
+    int removed = child->leaveVisitor(remaining);
+    remaining -= removed;
+    if (remaining <= 0) {
+      break;
+    }
+  }
+  return visitors - remaining;
+}
+
+int MainStage::getCurrentVisitors() const {
+  int total = 0;
+  for (EventComponent *child : children) {
+    if (child) {
+      total += child->getCurrentVisitors();
+    }
+  }
+  return total;
 }
 
 void MainStage::startStaffTimer() {

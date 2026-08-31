@@ -21,7 +21,7 @@ void EventComposite::remove(EventComponent *component) {
 
 EventComposite::EventComposite(std::string name, EventComponent *parent)
     : EventComponent(name, parent),
-      broadcaster(std::make_unique<SignalBroadcaster>()) {}
+      broadcaster(new SignalBroadcaster()) {}
 
 EventComposite::~EventComposite() {
   for (EventComponent *child : children) {

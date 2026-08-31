@@ -5,7 +5,40 @@ ByteSizedBites::ByteSizedBites(std::string name)
 {}
 
 void ByteSizedBites::update(const TechSignal& signal){
+    switch (signal.getType()){
+        case TechSignal::Type::OPEN:
+            open();
+            break;
 
+        case TechSignal::Type::CLOSE:
+            close();
+            break;
+
+        case TechSignal::Type::RESUME:
+            open();
+            break;
+
+        case TechSignal::Type::FULL_CAPACITY:
+            visitorsOnChairs = TotalChairs;
+            break;
+
+        case TechSignal::Type::POWER_FAILURE:
+            close();
+            break;
+
+        case TechSignal::Type::EMERGENCY_PAUSE:
+            close();
+            break;
+
+        case TechSignal::Type::NETWORK_FAILURE:
+            ordersInProgress = 0;
+            break;
+
+        case TechSignal::Type::SCHEDULE_CHANGE:
+        case TechSignal::Type::UNKNOWN:
+        default:
+            break;
+    }
 }
 
 void ByteSizedBites::open(){

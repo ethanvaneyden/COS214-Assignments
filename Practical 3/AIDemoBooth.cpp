@@ -1,7 +1,7 @@
 #include "AIDemoBooth.h"
 
 AIDemoBooth::AIDemoBooth(int capacity, std::string name)
-    : EventComponent(name), isOpen(false), active(false), capacity(capacity), currentVisitors(0), requiresNetwork(true), demoRunning(false)   
+    : EventLeaf(name), isOpen(false), active(false), capacity(capacity), currentVisitors(0), requiresNetwork(true), demoRunning(false)   
 {}
 
 void AIDemoBooth::update(const TechSignal& signal) {
@@ -67,8 +67,24 @@ void AIDemoBooth::close(){
     std::cout << getName() << " is now closed.\n";
 }
 
-void AIDemoBooth::reportStatus() const{
-    std::cout << getName() << " | " << (isOpen ? "OPEN" : "CLOSED") << " | Visitors: " << currentVisitors << "/" << capacity << " | Demo: " << (demoRunning ? "RUNNING" : "STOPPED") << std::endl;
+std::string AIDemoBooth::getStatus() const{
+    std::string output = "";
+    std::string temp = getName();
+    output += temp + " | ";
+
+    temp = isOpen ? "OPEN" : "CLOSED";
+    output += temp + " | Visitors: ";
+
+    temp = std::to_string(currentVisitors);
+    output += temp + "/";
+
+    temp = std::to_string(capacity);
+    output += temp + " | Demo: ";
+
+    temp = demoRunning ? "RUNNING" : "STOPPED";
+    output += temp + "\n";
+
+    return output;
 }
 
 int AIDemoBooth::getCapacity() const{

@@ -17,8 +17,9 @@ $(TARGET): $(OBJS)
 
 clean:
 	rm -f $(TARGET) $(OBJS)
-	rm -r docs/
 
+cleandoc:
+	rm -r /docs
 valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./expo
 

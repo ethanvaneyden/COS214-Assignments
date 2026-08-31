@@ -44,6 +44,22 @@ std::string AIZone::getStatus() const{
     return output;
 }
 
+void AIZone::reportStatus() const{
+    std::cout << getStatus();
+}
+
+int AIZone::getCurrentVisitors() const{
+    int totalVisitors = 0;
+
+    for(EventComponent* child : children){
+        if(child != nullptr){
+            totalVisitors += child->getCurrentVisitors();
+        }
+    }
+
+    return totalVisitors;
+}
+
 int AIZone::getCapacity() const{
     int totalCapacity = 0;
 

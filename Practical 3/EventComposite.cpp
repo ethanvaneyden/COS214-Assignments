@@ -37,3 +37,4 @@ EventComposite::EventComposite(std::string name, EventComponent *parent)
 }
 
 bool EventComposite::hasChildren() const { return !children.empty(); }
+

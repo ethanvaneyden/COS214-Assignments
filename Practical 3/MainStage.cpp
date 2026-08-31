@@ -7,7 +7,7 @@
 #include <iostream>
 
 MainStage::MainStage(EventComponent *parent)
-    : EventComposite("Main Stage", parent), staffIndex(0),
+    : EventComposite("Main_Stage", parent), staffIndex(0),
       staffInterval(std::chrono::minutes(5)),
       staffTimer(new BackgroundTimer()) {
   staff = {Technician("Stephen Groos", "082 555 1234"),

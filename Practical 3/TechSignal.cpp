@@ -33,11 +33,11 @@ TechSignal::Type TechSignal::parseType(const std::string &typeStr) const {
       {"open", TechSignal::Type::OPEN},
       {"close", TechSignal::Type::CLOSE},
       {"resume", TechSignal::Type::RESUME},
-      {"full capacity", TechSignal::Type::FULL_CAPACITY},
-      {"change schedule", TechSignal::Type::SCHEDULE_CHANGE},
-      {"power failure", TechSignal::Type::POWER_FAILURE},
-      {"emergency pause", TechSignal::Type::EMERGENCY_PAUSE},
-      {"network failure", TechSignal::Type::NETWORK_FAILURE}};
+      {"full_capacity", TechSignal::Type::FULL_CAPACITY},
+      {"change_schedule", TechSignal::Type::SCHEDULE_CHANGE},
+      {"power_failure", TechSignal::Type::POWER_FAILURE},
+      {"emergency_pause", TechSignal::Type::EMERGENCY_PAUSE},
+      {"network_failure", TechSignal::Type::NETWORK_FAILURE}};
 
   auto it = types.find(typeStr);
   if (it != types.end()) {

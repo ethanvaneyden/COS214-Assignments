@@ -3,6 +3,7 @@
 
 #include "SignalSubscriber.h"
 #include "EventComponent.h"
+#include "EventLeaf.h"
 #include "TechSignal.h"
 
 #include <iostream>
@@ -10,7 +11,7 @@
 /**
  * @brief Leaf representing a robotics demonstration booth.
 */
-class RoboticsBooth : public EventComponent {
+class RoboticsBooth : public EventLeaf {
     private:
         bool isOpen;
         bool active;
@@ -49,7 +50,7 @@ class RoboticsBooth : public EventComponent {
         /**
          * @brief Reports the booth status.
         */
-        void reportStatus() const override;
+        std::string getStatus() const override;
 
         /**
          * @brief Returns the booth capacity.

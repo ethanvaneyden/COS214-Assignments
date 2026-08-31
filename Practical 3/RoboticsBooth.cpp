@@ -1,7 +1,7 @@
 #include "RoboticsBooth.h"
 
 RoboticsBooth::RoboticsBooth(int capacity, std::string name)
-    : EventComponent(name), isOpen(false), active(false), safeMode(true), capacity(capacity), currentVisitors(0), robotsActive(false), requiresPower(true)   
+    : EventLeaf(name), isOpen(false), active(false), safeMode(true), capacity(capacity), currentVisitors(0), robotsActive(false), requiresPower(true)   
 {}
 
 void RoboticsBooth::update(const TechSignal& signal) {
@@ -65,10 +65,28 @@ void RoboticsBooth::close(){
     std::cout << getName() << " is now closed.\n";
 }
 
-void RoboticsBooth::reportStatus() const{
-    std::cout << getName() << " | " << (isOpen ? "OPEN" : "CLOSED") << " | Visitors: " << currentVisitors 
-            << "/" << capacity << " | Robots showcase: " << (robotsActive ? "ACTIVE" : "STOPPED") << " | Safe mode: " 
-            << (safeMode ? "ON" : "OFF") << std::endl;
+std::string RoboticsBooth::getStatus() const{
+    std::string output = "";
+    std::string temp = getName();
+    
+    output += temp + " | ";
+    
+    temp = isOpen ? "OPEN" : "CLOSED";
+    output += temp + " | Visitors: ";
+    
+    temp = std::to_string(currentVisitors);
+    output += temp + "/";
+    
+    temp = std::to_string(capacity);
+    output += temp + " | Robots showcase: ";
+    
+    temp = robotsActive ? "ACTIVE" : "STOPPED";
+    output += temp + " | Safe mode: ";
+
+    temp = safeMode ? "ON" : "OFF";
+    output += temp + "\n";
+
+    return output;
 }
 
 int RoboticsBooth::getCapacity() const{

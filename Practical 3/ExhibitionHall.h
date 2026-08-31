@@ -49,8 +49,29 @@ class ExhibitionHall : public EventComposite, public SignalBroadcaster {
     */
     int getCapacity() const override;
 
+    /**
+     * @brief Adds visitors to the exhibition hall.
+     *
+     * @param visitors The number of visitors to add.
+     * @return true if the visitors were added successfully,
+     *          false if the capacity would be exceeded.
+    */
     int enterVisitor(int visitors) override;
+
+    /**
+     * @brief Removes visitors from the exhibition hall.
+     *
+     * @param visitors The number of visitors to remove.
+     * @return true if the visitors were removed successfully,
+     *          false if there are not enough visitors in the hall.
+    */
     int leaveVisitor(int visitors) override;
+
+    /**
+     * @brief Gets the current number of visitors.
+     *
+     * @return The current number of visitors.
+    */
     int getCurrentVisitors() const override;
     std::string getStatus() const override;
 
@@ -68,3 +89,4 @@ class ExhibitionHall : public EventComposite, public SignalBroadcaster {
 };
 
 #endif
+

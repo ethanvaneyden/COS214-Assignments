@@ -89,6 +89,14 @@ std::string RoboticsBooth::getStatus() const{
     return output;
 }
 
+void RoboticsBooth::reportStatus() const{
+    std::cout << getStatus();
+}
+
+int RoboticsBooth::getCurrentVisitors() const{
+    return currentVisitors;
+}
+
 int RoboticsBooth::getCapacity() const{
     return this->capacity;
 }

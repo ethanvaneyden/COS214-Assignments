@@ -87,6 +87,14 @@ std::string AIDemoBooth::getStatus() const{
     return output;
 }
 
+void AIDemoBooth::reportStatus() const{
+    std::cout << getStatus();
+}
+
+int AIDemoBooth::getCurrentVisitors() const{
+    return currentVisitors;
+}
+
 int AIDemoBooth::getCapacity() const{
     return this->capacity;
 }

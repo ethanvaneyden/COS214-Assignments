@@ -58,6 +58,7 @@ EventComponent *ExpoRegistry::createComponent(
         parent->add(rawPtr);
     }
 
+    // Always use rawPtr->getName() as the map key
     std::string name = rawPtr->getName();
 
     lookupTable[name] = rawPtr;

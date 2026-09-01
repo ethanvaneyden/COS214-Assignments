@@ -10,7 +10,7 @@
 class AIZone : public EventComposite, public SignalBroadcaster {
 private:
     bool isOpen;
-
+    
 public:
     explicit AIZone(EventComponent* parent);
     ~AIZone() override = default;

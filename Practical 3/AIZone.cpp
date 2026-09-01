@@ -83,48 +83,42 @@ void AIZone::update(const TechSignal& signal){
     }
 }
 
-int AIZone::enterVisitor(int visitors){
-    if(visitors <= 0 || !isOpen)
+int AIZone::enterVisitor(int visitors) {
+    if (visitors <= 0 || !isOpen) {
         return 0;
+    }
 
     int remaining = visitors;
-    int accepted = 0;
+    int totalAdmitted = 0;
 
-    for(auto child : children){
-        if(child == nullptr || remaining <= 0)
-            continue;
+    for (auto* child : children) {
+        if (remaining <= 0) break;
+        if (!child) continue;
 
         int admitted = child->enterVisitor(remaining);
-        accepted += admitted;
+        totalAdmitted += admitted;
         remaining -= admitted;
     }
 
-    if(remaining > 0){
-        std::cout << remaining << " visitor(s) could not enter " << getName() << " because the zone has insufficient capacity.\n";
-    }
-
-    return accepted;
+    return totalAdmitted;
 }
 
-int AIZone::leaveVisitor(int visitors){
-    if(visitors <= 0)
+int AIZone::leaveVisitor(int visitors) {
+    if (visitors <= 0) {
         return 0;
+    }
 
     int remaining = visitors;
-    int removed = 0;
+    int totalRemoved = 0;
 
-    for(auto child : children){
-        if(child == nullptr || remaining <= 0)
-            continue;
+    for (auto* child : children) {
+        if (remaining <= 0) break;
+        if (!child) continue;
 
-        int departed = child->leaveVisitor(remaining);
-        removed += departed;
-        remaining -= departed;
+        int removed = child->leaveVisitor(remaining);
+        totalRemoved += removed;
+        remaining -= removed;
     }
 
-    if(remaining > 0){
-        std::cout << remaining << " visitor(s) could not be removed from " << getName() << " because there were not enough visitors.\n";
-    }
-
-    return removed;
+    return totalRemoved;
 }

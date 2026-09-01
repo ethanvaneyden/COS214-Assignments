@@ -63,6 +63,8 @@ vcpkg_installed/
 
 # debug information files
 *.dwo
+*.gcda
+*.gcno
 
 # test output & cache
 Testing/
@@ -72,3 +74,5 @@ Testing/
 *.Identifier
 Practical 1/engine
 Practical 3/docs
+
+eventflow

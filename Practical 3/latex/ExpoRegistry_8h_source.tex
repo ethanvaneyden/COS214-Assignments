@@ -1,0 +1,64 @@
+\doxysection{Expo\+Registry.\+h}
+\hypertarget{ExpoRegistry_8h_source}{}\label{ExpoRegistry_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EXPOREGISTRY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EXPOREGISTRY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}EventComponent.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}TechSignal.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }ExpoRegistry\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ ExpoRegistry()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ \ \ \ \ \string~ExpoRegistry()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ Prevent\ copying\ to\ maintain\ valid\ unique\ component\ references}}
+\DoxyCodeLine{00024\ \ \ \ \ ExpoRegistry(\textcolor{keyword}{const}\ ExpoRegistry\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00025\ \ \ \ \ ExpoRegistry\&\ operator=(\textcolor{keyword}{const}\ ExpoRegistry\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ Supported\ component\ type\ identifiers\ for\ factory\ creation}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{enum\ class}\ ComponentType\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ EXHIBITION\_HALL,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ MAIN\_STAGE,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ KEYNOTE\_AREA,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ DEMO\_AREA,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ BYTE\_SIZED\_BITES,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ ROBOTICS\_BOOTH,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ AI\_ZONE,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ AI\_DEMO\_BOOTH}
+\DoxyCodeLine{00037\ \ \ \ \ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classEventComponent}{EventComponent}}*\ \mbox{\hyperlink{classExpoRegistry_a12dc7c5eb6c66f8d113428900a15f23d}{createComponent}}(ComponentType\ type,\ \mbox{\hyperlink{classEventComponent}{EventComponent}}\ *parent);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classExpoRegistry_af93bc3375185fd9b16202d49835d1586}{removeComponent}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classEventComponent}{EventComponent}}*\ \mbox{\hyperlink{classExpoRegistry_a914d7a5dac730ba9cef26589b02693a4}{findComponent}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classExpoRegistry_a9e801ba2566740a87d13018d33bc2930}{moveComponent}}(\textcolor{keyword}{const}\ std::string\&\ childName,\ \textcolor{keyword}{const}\ std::string\&\ newParentName);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classExpoRegistry_a600ef8166cd2206249c130b010c114cb}{transmitSignal}}(\textcolor{keyword}{const}\ std::string\&\ targetName,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTechSignal}{TechSignal}}\&\ signal);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExpoRegistry_a92e67634112fe440de3378c15a784bf2}{printCapacity}}(\textcolor{keyword}{const}\ std::string\&\ componentName)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classExpoRegistry_ab3a35c36cb761fddb3cfc4aa941d024f}{enterVisitors}}(\textcolor{keyword}{const}\ std::string\&\ componentName,\ \textcolor{keywordtype}{int}\ count);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classExpoRegistry_a2e1367d13025162bb532736eed3b366d}{leaveVisitors}}(\textcolor{keyword}{const}\ std::string\&\ componentName,\ \textcolor{keywordtype}{int}\ count);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExpoRegistry_ad77992acd67e273957d2042b70eed28e}{printMap}}(\textcolor{keyword}{const}\ std::string\&\ rootName\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classExpoRegistry_ac99583c2674f577483d1745c33977aa0}{printStatusReport}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00112\ \ \ \ \ std::unordered\_map<std::string,\ std::unique\_ptr<EventComponent>>\ registryMap;\ }
+\DoxyCodeLine{00113\ \ \ \ \ std::unordered\_map<std::string,\ EventComponent*>\ lookupTable;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ printTreeRecursive(\textcolor{keyword}{const}\ \mbox{\hyperlink{classEventComponent}{EventComponent}}*\ component,\ \textcolor{keywordtype}{int}\ depth\ =\ 0,\ \textcolor{keywordtype}{bool}\ isLast\ =\ \textcolor{keyword}{true},\ std::string\ prefix\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00116\ \};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ EXPOREGISTRY\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

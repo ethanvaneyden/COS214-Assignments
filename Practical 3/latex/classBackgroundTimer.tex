@@ -1,0 +1,69 @@
+\doxysection{Background\+Timer Class Reference}
+\hypertarget{classBackgroundTimer}{}\label{classBackgroundTimer}\index{BackgroundTimer@{BackgroundTimer}}
+
+
+Manages a background thread timer using an internal State Machine.  
+
+
+
+
+{\ttfamily \#include $<$Background\+Timer.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBackgroundTimer_af604f95d8d8c2bc10b663755b62f42d7}{Background\+Timer}} ()
+\item 
+\Hypertarget{classBackgroundTimer_a8437c0ed2f9b2cce7975182dd0071c2d}\label{classBackgroundTimer_a8437c0ed2f9b2cce7975182dd0071c2d} 
+void {\bfseries start} (std\+::chrono\+::milliseconds interval, std\+::function$<$ void()$>$ task)
+\item 
+\Hypertarget{classBackgroundTimer_a5affe1812dc7f89c68ab04fdb2ec0a17}\label{classBackgroundTimer_a5affe1812dc7f89c68ab04fdb2ec0a17} 
+void {\bfseries pause} ()
+\item 
+\Hypertarget{classBackgroundTimer_afb2348463802fa6e59f99c81752ed76d}\label{classBackgroundTimer_afb2348463802fa6e59f99c81752ed76d} 
+void {\bfseries resume} ()
+\item 
+\Hypertarget{classBackgroundTimer_a498ad8251bfc67b24809e23641a613de}\label{classBackgroundTimer_a498ad8251bfc67b24809e23641a613de} 
+void {\bfseries stop} ()
+\item 
+\Hypertarget{classBackgroundTimer_ac5817a6b1f8035c05ef70255f5d67d11}\label{classBackgroundTimer_ac5817a6b1f8035c05ef70255f5d67d11} 
+bool {\bfseries is\+Running} () const
+\item 
+\Hypertarget{classBackgroundTimer_a38b24f9da78cd83dd4ae1bde7b359251}\label{classBackgroundTimer_a38b24f9da78cd83dd4ae1bde7b359251} 
+bool {\bfseries is\+Paused} () const
+\item 
+\Hypertarget{classBackgroundTimer_a0a07b44c234dd194094bba999fd7f0c6}\label{classBackgroundTimer_a0a07b44c234dd194094bba999fd7f0c6} 
+void {\bfseries transition\+To} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classTimerState}{Timer\+State}} $>$ new\+State)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classBackgroundTimer_aeead8bb82061156e8710f8e6b3352d30}\label{classBackgroundTimer_aeead8bb82061156e8710f8e6b3352d30} 
+class {\bfseries Stopped\+State}
+\item 
+\Hypertarget{classBackgroundTimer_a53d39bf74309c8c448c458a6a4079724}\label{classBackgroundTimer_a53d39bf74309c8c448c458a6a4079724} 
+class {\bfseries Running\+State}
+\item 
+\Hypertarget{classBackgroundTimer_ab5fb293c5b3f03a7793f2cf63187a6db}\label{classBackgroundTimer_ab5fb293c5b3f03a7793f2cf63187a6db} 
+class {\bfseries Paused\+State}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages a background thread timer using an internal State Machine. 
+
+\label{doc-constructors}
+\Hypertarget{classBackgroundTimer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classBackgroundTimer_af604f95d8d8c2bc10b663755b62f42d7}\index{BackgroundTimer@{BackgroundTimer}!BackgroundTimer@{BackgroundTimer}}
+\index{BackgroundTimer@{BackgroundTimer}!BackgroundTimer@{BackgroundTimer}}
+\doxysubsubsection{\texorpdfstring{BackgroundTimer()}{BackgroundTimer()}}
+{\footnotesize\ttfamily \label{classBackgroundTimer_af604f95d8d8c2bc10b663755b62f42d7} 
+Background\+Timer\+::\+Background\+Timer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Abstract class implementation 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{BackgroundTimer_8h}{Background\+Timer.\+h}}\item 
+Background\+Timer.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,38 @@
+\doxysection{Event\+Composite.\+h}
+\hypertarget{EventComposite_8h_source}{}\label{EventComposite_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EVENTCOMPOSITE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EVENTCOMPOSITE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}EventComponent.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}SignalBroadcaster.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}TechSignal.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }EventComposite\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00021\ \ \ std::vector<EventComponent\ *>\ children;}
+\DoxyCodeLine{00022\ \ \ std::unique\_ptr<SignalBroadcaster>\ broadcaster;}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEventComposite_a298604e6340b5489828f8feeb426bab9}{add}}(\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *component)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEventComposite_a7e9975928ad9819e12282a2865567b9e}{remove}}(\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *component)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classEventComposite_a503b64cc067e75b2f84a1cf744bafd23}{hasChildren}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ std::vector<EventComponent*>\ getChildren()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ children;\}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{virtual}\ \string~EventComposite()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ std::string\ \mbox{\hyperlink{classEventComposite_a25ae28bc85a7dead9d8de3ca9167a44c}{getDisplayDetails}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00055\ \ \ EventComposite(std::string\ name,\ \mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *\mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

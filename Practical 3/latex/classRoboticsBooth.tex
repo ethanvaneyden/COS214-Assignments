@@ -1,0 +1,238 @@
+\doxysection{Robotics\+Booth Class Reference}
+\hypertarget{classRoboticsBooth}{}\label{classRoboticsBooth}\index{RoboticsBooth@{RoboticsBooth}}
+
+
+Inheritance diagram for Robotics\+Booth\+:
+% FIG 0
+
+
+Collaboration diagram for Robotics\+Booth\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classRoboticsBooth_aa110f673f0d60f8d8b56551041cf7653}\label{classRoboticsBooth_aa110f673f0d60f8d8b56551041cf7653} 
+{\bfseries Robotics\+Booth} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}=nullptr)
+\item 
+void \mbox{\hyperlink{classRoboticsBooth_af63e0555b53a11a1664669b9bae5955b}{update}} (const \mbox{\hyperlink{classTechSignal}{Tech\+Signal}} \&signal) override
+\begin{DoxyCompactList}\small\item\em Pure virtual method to handle an incoming technical signal from a broadcaster. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRoboticsBooth_a30174087e2f695eebd4b7160587459ee}{open}} () override
+\begin{DoxyCompactList}\small\item\em Opens the component and its children. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRoboticsBooth_a896666e568ff7c956d916c66d71d5d36}{close}} () override
+\begin{DoxyCompactList}\small\item\em Closes the component and its children. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classRoboticsBooth_a3751d1cc07297ce0f7045ca4cdad577b}{get\+Status}} () const override
+\begin{DoxyCompactList}\small\item\em Pure virtual method querying the status of the component or its subtree. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classRoboticsBooth_a218e4ef27f3bfb6cc3f2c02dd6e2a231}{get\+Capacity}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the total capacity of a component. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classRoboticsBooth_abc944f0bfb5f5921ea204ecfa8a63092}{get\+Current\+Visitors}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the number of visitors currently inside this component. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classRoboticsBooth_ad7f0f8993661a85f436a8cc334519780}{enter\+Visitor}} (int visitors) override
+\begin{DoxyCompactList}\small\item\em Attempts to admit visitors into this event component. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classRoboticsBooth_a42df978682c56f46bfcd99a0aadd2365}{leave\+Visitor}} (int visitors) override
+\begin{DoxyCompactList}\small\item\em Removes visitors from this event component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEventLeaf}{Event\+Leaf}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Event\+Leaf} () override=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for \doxylink{classEventLeaf}{Event\+Leaf}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classEventLeaf_adf68a906caad9e73de93d4878c18ca5a}{get\+Display\+Details}} () const override
+\begin{DoxyCompactList}\small\item\em Pure virtual hook for returning class-\/specific display metadata in tree views. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEventComponent}{Event\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{Event\+Component}} (std\+::string name, \mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}parent\+Component=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classEventComponent}{Event\+Component} object. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Event\+Component} () override=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for \doxylink{classEventComponent}{Event\+Component}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classEventComponent_a3ae83c4ea8b51ab54fa0feefba82bd25}{add}} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Adds a child component to this node (Composite pattern interface). \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classEventComponent_a249c9b806eb48f53922ff09fb25b153b}{remove}} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Removes a child component from this node (Composite pattern interface). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEventComponent_ab451a2e2b0cec95decc63d6c70a03e60}{set\+Parent}} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}parent\+Component)
+\begin{DoxyCompactList}\small\item\em Sets the parent component in the hierarchy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classEventComponent_a2b7d11aeff00e3c4b14d26650b5fa15e}{get\+Parent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the parent component in the hierarchy. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classEventComponent_a76aaa9b1d4c3f0085ad66dc83fa25691}{get\+Staff}} () const
+\begin{DoxyCompactList}\small\item\em Recursively queries the parent hierarchy to find the on-\/duty technician. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classEventComponent_aa30c59d9f001c288cdb55f5411deb5f6}{has\+Children}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the node has children. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classEventComponent_a514ee7d351f3aeee4b611665fa91cbaf}{get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Returns the name of a component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classSignalSubscriber}{Signal\+Subscriber}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Signal\+Subscriber} ()=default
+\begin{DoxyCompactList}\small\item\em Construct a new Signal Subscriber object. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Signal\+Subscriber} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for \doxylink{classSignalSubscriber}{Signal\+Subscriber}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classEventLeaf}{Event\+Leaf}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEventLeaf_a1edc828692af9e442b0a3c8493521e71}{Event\+Leaf}} (std\+::string name, \mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classEventLeaf}{Event\+Leaf}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classEventLeaf}{Event\+Leaf}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bfseries last\+Message}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classEventComponent}{Event\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bfseries name}
+\item 
+\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classRoboticsBooth_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRoboticsBooth_a896666e568ff7c956d916c66d71d5d36}\index{RoboticsBooth@{RoboticsBooth}!close@{close}}
+\index{close@{close}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_a896666e568ff7c956d916c66d71d5d36} 
+void Robotics\+Booth\+::close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Closes the component and its children. 
+
+
+
+Implements \mbox{\hyperlink{classEventComponent_a8e13a68d681c1b6affcf13435a09adab}{Event\+Component}}.
+
+\Hypertarget{classRoboticsBooth_ad7f0f8993661a85f436a8cc334519780}\index{RoboticsBooth@{RoboticsBooth}!enterVisitor@{enterVisitor}}
+\index{enterVisitor@{enterVisitor}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{enterVisitor()}{enterVisitor()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_ad7f0f8993661a85f436a8cc334519780} 
+int Robotics\+Booth\+::enter\+Visitor (\begin{DoxyParamCaption}\item[{int}]{visitors}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Attempts to admit visitors into this event component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visitors} & Number of visitors attempting to enter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of visitors actually admitted. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a5729b83e7b81f01c964cae2d6aa965ee}{Event\+Component}}.
+
+\Hypertarget{classRoboticsBooth_a218e4ef27f3bfb6cc3f2c02dd6e2a231}\index{RoboticsBooth@{RoboticsBooth}!getCapacity@{getCapacity}}
+\index{getCapacity@{getCapacity}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{getCapacity()}{getCapacity()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_a218e4ef27f3bfb6cc3f2c02dd6e2a231} 
+int Robotics\+Booth\+::get\+Capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the total capacity of a component. 
+
+\begin{DoxyReturn}{Returns}
+The total capacity. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a6128b4c0f20d353a29d45348f48a5f2e}{Event\+Component}}.
+
+\Hypertarget{classRoboticsBooth_abc944f0bfb5f5921ea204ecfa8a63092}\index{RoboticsBooth@{RoboticsBooth}!getCurrentVisitors@{getCurrentVisitors}}
+\index{getCurrentVisitors@{getCurrentVisitors}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{getCurrentVisitors()}{getCurrentVisitors()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_abc944f0bfb5f5921ea204ecfa8a63092} 
+int Robotics\+Booth\+::get\+Current\+Visitors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the number of visitors currently inside this component. 
+
+\begin{DoxyReturn}{Returns}
+The current visitor count. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a123d1862bdbbdd996031b2cbce85fa4e}{Event\+Component}}.
+
+\Hypertarget{classRoboticsBooth_a3751d1cc07297ce0f7045ca4cdad577b}\index{RoboticsBooth@{RoboticsBooth}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{getStatus()}{getStatus()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_a3751d1cc07297ce0f7045ca4cdad577b} 
+std\+::string Robotics\+Booth\+::get\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Pure virtual method querying the status of the component or its subtree. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string Operational status description. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a761fb00f133877f18dd3cc280879d833}{Event\+Component}}.
+
+\Hypertarget{classRoboticsBooth_a42df978682c56f46bfcd99a0aadd2365}\index{RoboticsBooth@{RoboticsBooth}!leaveVisitor@{leaveVisitor}}
+\index{leaveVisitor@{leaveVisitor}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{leaveVisitor()}{leaveVisitor()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_a42df978682c56f46bfcd99a0aadd2365} 
+int Robotics\+Booth\+::leave\+Visitor (\begin{DoxyParamCaption}\item[{int}]{visitors}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Removes visitors from this event component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visitors} & Number of visitors attempting to leave. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of visitors actually removed. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_acdbc68f0cc8f90520091f0be8cc9dd2a}{Event\+Component}}.
+
+\Hypertarget{classRoboticsBooth_a30174087e2f695eebd4b7160587459ee}\index{RoboticsBooth@{RoboticsBooth}!open@{open}}
+\index{open@{open}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_a30174087e2f695eebd4b7160587459ee} 
+void Robotics\+Booth\+::open (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Opens the component and its children. 
+
+
+
+Implements \mbox{\hyperlink{classEventComponent_ada5f41377769e0cbdaa7546477b3970c}{Event\+Component}}.
+
+\Hypertarget{classRoboticsBooth_af63e0555b53a11a1664669b9bae5955b}\index{RoboticsBooth@{RoboticsBooth}!update@{update}}
+\index{update@{update}!RoboticsBooth@{RoboticsBooth}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classRoboticsBooth_af63e0555b53a11a1664669b9bae5955b} 
+void Robotics\+Booth\+::update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTechSignal}{Tech\+Signal}} \&}]{signal}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Pure virtual method to handle an incoming technical signal from a broadcaster. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signal} & The incoming \doxylink{classTechSignal}{Tech\+Signal} instance. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classSignalSubscriber_a1d364b73f52512650e761d0646e2504e}{Signal\+Subscriber}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Robotics\+Booth.\+h\item 
+Robotics\+Booth.\+cpp\end{DoxyCompactItemize}

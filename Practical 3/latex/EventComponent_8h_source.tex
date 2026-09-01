@@ -1,0 +1,57 @@
+\doxysection{Event\+Component.\+h}
+\hypertarget{EventComponent_8h_source}{}\label{EventComponent_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EVENTCOMPONENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EVENTCOMPONENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}SignalSubscriber.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classSignalSubscriber_a5ae0f75f3f0e942fb6b3a1825abbb199}{SignalSubscriber}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}(std::string\ name,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *parentComponent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classEventComponent_a61fb6985a8ffee2413fa131338a1f997}{\string~EventComponent}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEventComponent_a3ae83c4ea8b51ab54fa0feefba82bd25}{add}}(\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *)\ \{\}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEventComponent_a249c9b806eb48f53922ff09fb25b153b}{remove}}(\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *)\ \{\}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEventComponent_ab451a2e2b0cec95decc63d6c70a03e60}{setParent}}(\mbox{\hyperlink{classEventComponent}{EventComponent}}\ *parentComponent);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{classEventComponent}{EventComponent}}\ *\mbox{\hyperlink{classEventComponent_a2b7d11aeff00e3c4b14d26650b5fa15e}{getParent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classEventComponent_a76aaa9b1d4c3f0085ad66dc83fa25691}{getStaff}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classEventComponent_a761fb00f133877f18dd3cc280879d833}{getStatus}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ \&\mbox{\hyperlink{classEventComponent_ab725ab0f6484db1978a8368ef9435df8}{operator>>}}(\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ \&child,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ \&newParent);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEventComponent_ada5f41377769e0cbdaa7546477b3970c}{open}}()\ =\ 0;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEventComponent_a8e13a68d681c1b6affcf13435a09adab}{close}}()\ =\ 0;}
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classEventComponent_aa30c59d9f001c288cdb55f5411deb5f6}{hasChildren}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classEventComponent_a6128b4c0f20d353a29d45348f48a5f2e}{getCapacity}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00115\ \ \ std::string\ \mbox{\hyperlink{classEventComponent_a514ee7d351f3aeee4b611665fa91cbaf}{getName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00123\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classEventComponent_a5729b83e7b81f01c964cae2d6aa965ee}{enterVisitor}}(\textcolor{keywordtype}{int}\ visitors)\ =\ 0;}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00131\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classEventComponent_acdbc68f0cc8f90520091f0be8cc9dd2a}{leaveVisitor}}(\textcolor{keywordtype}{int}\ visitors)\ =\ 0;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00138\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classEventComponent_a123d1862bdbbdd996031b2cbce85fa4e}{getCurrentVisitors}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classEventComponent_aaf82be1a7f23c8770e71de3b08a1d1f8}{getDisplayDetails}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00147\ \ \ std::string\ name;}
+\DoxyCodeLine{00148\ \ \ \mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *\mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}};\ }
+\DoxyCodeLine{00149\ \};}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ EVENTCOMPONENT\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

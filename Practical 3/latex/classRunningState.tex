@@ -1,0 +1,81 @@
+\doxysection{Running\+State Class Reference}
+\hypertarget{classRunningState}{}\label{classRunningState}\index{RunningState@{RunningState}}
+
+
+Represents the actively running state of the timer.  
+
+
+
+
+{\ttfamily \#include $<$Background\+Timer.\+h$>$}
+
+
+
+Inheritance diagram for Running\+State\+:
+% FIG 0
+
+
+Collaboration diagram for Running\+State\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classRunningState_a0cb31794626013a004d4224af43eb1e6}{pause}} (\mbox{\hyperlink{classBackgroundTimer}{Background\+Timer}} \&context) override
+\item 
+void \mbox{\hyperlink{classRunningState_a88ba8802f1387daeace1108a5d9248da}{stop}} (\mbox{\hyperlink{classBackgroundTimer}{Background\+Timer}} \&context) override
+\item 
+bool \mbox{\hyperlink{classRunningState_af947721b8261cc19572b32dad6c9e174}{is\+Running}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classTimerState}{Timer\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries start} (\mbox{\hyperlink{classBackgroundTimer}{Background\+Timer}} \&, std\+::chrono\+::milliseconds, std\+::function$<$ void()$>$)
+\item 
+virtual void {\bfseries resume} (\mbox{\hyperlink{classBackgroundTimer}{Background\+Timer}} \&)
+\item 
+virtual bool {\bfseries is\+Paused} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the actively running state of the timer. 
+
+\label{doc-func-members}
+\Hypertarget{classRunningState_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRunningState_af947721b8261cc19572b32dad6c9e174}\index{RunningState@{RunningState}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!RunningState@{RunningState}}
+\doxysubsubsection{\texorpdfstring{isRunning()}{isRunning()}}
+{\footnotesize\ttfamily \label{classRunningState_af947721b8261cc19572b32dad6c9e174} 
+bool Running\+State\+::is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classTimerState}{Timer\+State}}.
+
+\Hypertarget{classRunningState_a0cb31794626013a004d4224af43eb1e6}\index{RunningState@{RunningState}!pause@{pause}}
+\index{pause@{pause}!RunningState@{RunningState}}
+\doxysubsubsection{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily \label{classRunningState_a0cb31794626013a004d4224af43eb1e6} 
+void Running\+State\+::pause (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classBackgroundTimer}{Background\+Timer}} \&}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classTimerState}{Timer\+State}}.
+
+\Hypertarget{classRunningState_a88ba8802f1387daeace1108a5d9248da}\index{RunningState@{RunningState}!stop@{stop}}
+\index{stop@{stop}!RunningState@{RunningState}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \label{classRunningState_a88ba8802f1387daeace1108a5d9248da} 
+void Running\+State\+::stop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classBackgroundTimer}{Background\+Timer}} \&}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classTimerState}{Timer\+State}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{BackgroundTimer_8h}{Background\+Timer.\+h}}\item 
+Background\+Timer.\+cpp\end{DoxyCompactItemize}

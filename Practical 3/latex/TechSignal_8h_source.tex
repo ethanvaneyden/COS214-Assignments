@@ -1,0 +1,48 @@
+\doxysection{Tech\+Signal.\+h}
+\hypertarget{TechSignal_8h_source}{}\label{TechSignal_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TECHSIGNAL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TECHSIGNAL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTechSignal_ae48d23319d55ba98326417849ec09c6b}{TechSignal}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \textcolor{keyword}{enum\ class}\ Type\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ UNKNOWN,}
+\DoxyCodeLine{00010\ \ \ \ \ OPEN,}
+\DoxyCodeLine{00011\ \ \ \ \ CLOSE,}
+\DoxyCodeLine{00012\ \ \ \ \ RESUME,}
+\DoxyCodeLine{00013\ \ \ \ \ FULL\_CAPACITY,}
+\DoxyCodeLine{00014\ \ \ \ \ SCHEDULE\_CHANGE,}
+\DoxyCodeLine{00015\ \ \ \ \ POWER\_FAILURE,}
+\DoxyCodeLine{00016\ \ \ \ \ EMERGENCY\_PAUSE,}
+\DoxyCodeLine{00017\ \ \ \ \ NETWORK\_FAILURE}
+\DoxyCodeLine{00018\ \ \ \};}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{enum\ class}\ Priority\ \{\ UNKNOWN,\ LOW,\ MEDIUM,\ HIGH,\ CRITICAL\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ Type\ type;}
+\DoxyCodeLine{00023\ \ \ Priority\ priority;}
+\DoxyCodeLine{00024\ \ \ std::string\ message;}
+\DoxyCodeLine{00025\ \ \ Type\ parseType(\textcolor{keyword}{const}\ std::string\ \&typeStr)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00026\ \ \ Priority\ parsePriority(\textcolor{keyword}{const}\ std::string\ \&priorityStr)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ \ \ Priority\ inferPriority(Type\ type);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{classTechSignal_ae48d23319d55ba98326417849ec09c6b}{TechSignal}}(\textcolor{keyword}{const}\ std::string\ \&type,\ \textcolor{keyword}{const}\ std::string\ \&priority,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&message);}
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{classTechSignal_aef197b911aff379f37671631a39de703}{TechSignal}}(\textcolor{keyword}{const}\ std::string\ \&type,\ \textcolor{keyword}{const}\ std::string\ \&message\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{classTechSignal_a57ac0226746e5f03ed381455989c7665}{TechSignal}}(\textcolor{keyword}{const}\ Type\ type,\ \textcolor{keyword}{const}\ Priority\ priority,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&message);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{classTechSignal_a0fe3321016ec393dad56e13f0a6301df}{TechSignal}}(\textcolor{keyword}{const}\ Type\ type,\ \textcolor{keyword}{const}\ std::string\ \&message);}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{classTechSignal_aa256f368d42899d9a9aaf985edf93ce1}{\string~TechSignal}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00074\ \ \ Type\ \mbox{\hyperlink{classTechSignal_a7b083519eeb7a5eb7534fe72956568e9}{getType}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ \ \ Priority\ \mbox{\hyperlink{classTechSignal_a37ea469f18f4fc98688ab76cf87ae73e}{getPriority}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ \ \ std::string\ \mbox{\hyperlink{classTechSignal_aaab81a993ba6aee022eab9e3558c0adb}{getMessage}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

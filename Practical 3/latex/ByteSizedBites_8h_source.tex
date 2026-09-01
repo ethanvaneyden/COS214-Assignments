@@ -1,0 +1,77 @@
+\doxysection{Byte\+Sized\+Bites.\+h}
+\hypertarget{ByteSizedBites_8h_source}{}\label{ByteSizedBites_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BYTESIZEDBITES\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BYTESIZEDBITES\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}EventLeaf.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}TechSignal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }ByteSizedBites\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classEventLeaf_a1edc828692af9e442b0a3c8493521e71}{EventLeaf}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ isOpen;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ TotalChairs;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ visitorsOnChairs;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ foodStock;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ drinkStock;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ snackStock;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ energyBarStock;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ staffCount;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ ordersInProgress;}
+\DoxyCodeLine{00020\ \ \ \ \ std::string\ specialOfTheDay;}
+\DoxyCodeLine{00021\ \ \ \ \ std::string\ lastMessage;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ ByteSizedBites(\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{EventComponent}}\ *\mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00025\ \ \ \ \ \string~ByteSizedBites()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classByteSizedBites_ad5ab43cd7f6f3445ed6913bc6a200c87}{update}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTechSignal}{TechSignal}}\ \&signal)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classByteSizedBites_a4f513d93b3c1cb61b52db504fc7ce847}{open}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classByteSizedBites_af7ace4568b395cc8ae772ee4e6631e68}{close}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ std::string\ \mbox{\hyperlink{classByteSizedBites_aba434a1da87af19c9c12361f27b3469f}{getStatus}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classByteSizedBites_ae188b8ff30540770617db277f7615d69}{getCapacity}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classByteSizedBites_a01a93d45a56492f2902356087abc47e8}{getCurrentVisitors}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classByteSizedBites_aee5e4d53196d760d6d8453dba527ea35}{enterVisitor}}(\textcolor{keywordtype}{int}\ visitors)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classByteSizedBites_af9426a9a5f6af7cad61c033c9367020f}{leaveVisitor}}(\textcolor{keywordtype}{int}\ visitors)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ getIsOpen()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ setIsOpen(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ getTotalChairs()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ setTotalChairs(\textcolor{keywordtype}{int}\ chairs);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ getVisitorsOnChairs()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ setVisitorsOnChairs(\textcolor{keywordtype}{int}\ visitors);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ seatVisitor();}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ removeVisitor();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ getFoodStock()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ setFoodStock(\textcolor{keywordtype}{int}\ stock);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ getDrinkStock()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ setDrinkStock(\textcolor{keywordtype}{int}\ stock);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ getSnackStock()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ setSnackStock(\textcolor{keywordtype}{int}\ stock);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{int}\ getEnergyBarStock()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ setEnergyBarStock(\textcolor{keywordtype}{int}\ stock);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ useFood(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ useDrink(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ useSnack(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ useEnergyBar(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{int}\ getStaffCount()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ setStaffCount(\textcolor{keywordtype}{int}\ count);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{int}\ getOrdersInProgress()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ setOrdersInProgress(\textcolor{keywordtype}{int}\ orders);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ startOrder();}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ completeOrder();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ std::string\ getSpecialOfTheDay()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ setSpecialOfTheDay(\textcolor{keyword}{const}\ std::string\ \&special);}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BYTESIZEDBITES\_H}}
+
+\end{DoxyCode}

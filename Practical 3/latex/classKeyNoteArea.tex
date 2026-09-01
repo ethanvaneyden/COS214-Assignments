@@ -1,0 +1,304 @@
+\doxysection{Key\+Note\+Area Class Reference}
+\hypertarget{classKeyNoteArea}{}\label{classKeyNoteArea}\index{KeyNoteArea@{KeyNoteArea}}
+
+
+Leaf node component representing a Keynote presentation area on stage.  
+
+
+
+
+{\ttfamily \#include $<$Key\+Note\+Area.\+h$>$}
+
+
+
+Inheritance diagram for Key\+Note\+Area\+:
+% FIG 0
+
+
+Collaboration diagram for Key\+Note\+Area\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classKeyNoteArea_abcb7d6f5229a9b51ca7be0dcfe9f8ae1}{Key\+Note\+Area}} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classKeyNoteArea}{Key\+Note\+Area} leaf object. \end{DoxyCompactList}\item 
+\Hypertarget{classKeyNoteArea_aff8a448d1f27b3a6ffde9f827a8011ce}\label{classKeyNoteArea_aff8a448d1f27b3a6ffde9f827a8011ce} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Key\+Note\+Area} () override
+\begin{DoxyCompactList}\small\item\em Destructor that cleans up local timer dynamic allocations. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKeyNoteArea_ae3ea07afc36b5b27e481a7de7675fcc1}{update}} (const \mbox{\hyperlink{classTechSignal}{Tech\+Signal}} \&signal) override
+\begin{DoxyCompactList}\small\item\em Handles incoming technical signals to modify operational status and timers. \end{DoxyCompactList}\item 
+\Hypertarget{classKeyNoteArea_a8bdc591b25925b4d67606c59c2e4585c}\label{classKeyNoteArea_a8bdc591b25925b4d67606c59c2e4585c} 
+void {\bfseries start\+Presenter\+Timer} ()
+\begin{DoxyCompactList}\small\item\em Starts the background presenter rotation timer. \end{DoxyCompactList}\item 
+\Hypertarget{classKeyNoteArea_adb62cac2179ec56632aafeed92a191bd}\label{classKeyNoteArea_adb62cac2179ec56632aafeed92a191bd} 
+void {\bfseries stop\+Presenter\+Timer} ()
+\begin{DoxyCompactList}\small\item\em Stops the background presenter rotation timer. \end{DoxyCompactList}\item 
+\Hypertarget{classKeyNoteArea_a2b7f33b3296f950399290cd222f12e44}\label{classKeyNoteArea_a2b7f33b3296f950399290cd222f12e44} 
+void {\bfseries pause\+Presenter\+Timer} ()
+\begin{DoxyCompactList}\small\item\em Pauses the background presenter rotation timer. \end{DoxyCompactList}\item 
+\Hypertarget{classKeyNoteArea_a8ccd9e3d608a1eebf7f2e0eaff13dbd8}\label{classKeyNoteArea_a8ccd9e3d608a1eebf7f2e0eaff13dbd8} 
+void {\bfseries resume\+Presenter\+Timer} ()
+\begin{DoxyCompactList}\small\item\em Resumes the background presenter rotation timer. \end{DoxyCompactList}\item 
+\Hypertarget{classKeyNoteArea_a7396828cb9d372c22c3e3b54d4697601}\label{classKeyNoteArea_a7396828cb9d372c22c3e3b54d4697601} 
+void {\bfseries advance\+Presenter} ()
+\begin{DoxyCompactList}\small\item\em Advances to the next presenter in the rotation list. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classKeyNoteArea_a0dee51037a0373c92ad82e8685f3e21b}{get\+Presenter}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name of the active presenter if the area is open. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classKeyNoteArea_a31dae8611871031c683f32d8b127db03}{get\+Status}} () const override
+\begin{DoxyCompactList}\small\item\em Pure virtual method querying the status of the component or its subtree. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKeyNoteArea_ae4a256d993385fb501e475c10a8ab1bf}{open}} () override
+\begin{DoxyCompactList}\small\item\em Opens the component and its children. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKeyNoteArea_a9b65b2ad6dc94d74a4f2ce1c941189a3}{close}} () override
+\begin{DoxyCompactList}\small\item\em Closes the component and its children. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKeyNoteArea_a31b45c9f2f8aa7e3a9bc2d0e53a398fb}{get\+Capacity}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the total capacity of a component. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKeyNoteArea_a1ce73293190d74531496e05fbba28d38}{enter\+Visitor}} (int visitors) override
+\begin{DoxyCompactList}\small\item\em Attempts to admit visitors into this event component. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKeyNoteArea_afc7bc0a0661c67fea856d60577bc9a3e}{leave\+Visitor}} (int visitors) override
+\begin{DoxyCompactList}\small\item\em Removes visitors from this event component. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classKeyNoteArea_ad34f8ab9e5a640b3a6bb98e60a2262ce}{get\+Current\+Visitors}} () const override
+\begin{DoxyCompactList}\small\item\em Returns the number of visitors currently inside this component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEventLeaf}{Event\+Leaf}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Event\+Leaf} () override=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for \doxylink{classEventLeaf}{Event\+Leaf}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classEventLeaf_adf68a906caad9e73de93d4878c18ca5a}{get\+Display\+Details}} () const override
+\begin{DoxyCompactList}\small\item\em Pure virtual hook for returning class-\/specific display metadata in tree views. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEventComponent}{Event\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEventComponent_a5ed455cbb551ed5fd74e0fec71e91f8f}{Event\+Component}} (std\+::string name, \mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}parent\+Component=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classEventComponent}{Event\+Component} object. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Event\+Component} () override=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for \doxylink{classEventComponent}{Event\+Component}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classEventComponent_a3ae83c4ea8b51ab54fa0feefba82bd25}{add}} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Adds a child component to this node (Composite pattern interface). \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classEventComponent_a249c9b806eb48f53922ff09fb25b153b}{remove}} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Removes a child component from this node (Composite pattern interface). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEventComponent_ab451a2e2b0cec95decc63d6c70a03e60}{set\+Parent}} (\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}parent\+Component)
+\begin{DoxyCompactList}\small\item\em Sets the parent component in the hierarchy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classEventComponent_a2b7d11aeff00e3c4b14d26650b5fa15e}{get\+Parent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the parent component in the hierarchy. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classEventComponent_a76aaa9b1d4c3f0085ad66dc83fa25691}{get\+Staff}} () const
+\begin{DoxyCompactList}\small\item\em Recursively queries the parent hierarchy to find the on-\/duty technician. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classEventComponent_aa30c59d9f001c288cdb55f5411deb5f6}{has\+Children}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the node has children. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classEventComponent_a514ee7d351f3aeee4b611665fa91cbaf}{get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Returns the name of a component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classSignalSubscriber}{Signal\+Subscriber}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Signal\+Subscriber} ()=default
+\begin{DoxyCompactList}\small\item\em Construct a new Signal Subscriber object. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Signal\+Subscriber} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for \doxylink{classSignalSubscriber}{Signal\+Subscriber}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classEventLeaf}{Event\+Leaf}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEventLeaf_a1edc828692af9e442b0a3c8493521e71}{Event\+Leaf}} (std\+::string name, \mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classEventLeaf}{Event\+Leaf}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classEventLeaf}{Event\+Leaf}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bfseries last\+Message}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classEventComponent}{Event\+Component}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bfseries name}
+\item 
+\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classEventComponent_a856475a8f6ac408c097d4117d7a6ace8}{parent}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Leaf node component representing a Keynote presentation area on stage. 
+
+Manages local presenters via a background timer, handles domain status updates, and resolves emergency staff contact details dynamically using its parent hierarchy pointer. 
+
+\label{doc-constructors}
+\Hypertarget{classKeyNoteArea_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classKeyNoteArea_abcb7d6f5229a9b51ca7be0dcfe9f8ae1}\index{KeyNoteArea@{KeyNoteArea}!KeyNoteArea@{KeyNoteArea}}
+\index{KeyNoteArea@{KeyNoteArea}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{KeyNoteArea()}{KeyNoteArea()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_abcb7d6f5229a9b51ca7be0dcfe9f8ae1} 
+Key\+Note\+Area\+::\+Key\+Note\+Area (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEventComponent}{Event\+Component}} \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \doxylink{classKeyNoteArea}{Key\+Note\+Area} leaf object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Pointer to the parent component in the composite hierarchy (default\+: nullptr). \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classKeyNoteArea_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classKeyNoteArea_a9b65b2ad6dc94d74a4f2ce1c941189a3}\index{KeyNoteArea@{KeyNoteArea}!close@{close}}
+\index{close@{close}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_a9b65b2ad6dc94d74a4f2ce1c941189a3} 
+void Key\+Note\+Area\+::close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Closes the component and its children. 
+
+
+
+Implements \mbox{\hyperlink{classEventComponent_a8e13a68d681c1b6affcf13435a09adab}{Event\+Component}}.
+
+\Hypertarget{classKeyNoteArea_a1ce73293190d74531496e05fbba28d38}\index{KeyNoteArea@{KeyNoteArea}!enterVisitor@{enterVisitor}}
+\index{enterVisitor@{enterVisitor}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{enterVisitor()}{enterVisitor()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_a1ce73293190d74531496e05fbba28d38} 
+int Key\+Note\+Area\+::enter\+Visitor (\begin{DoxyParamCaption}\item[{int}]{visitors}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Attempts to admit visitors into this event component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visitors} & Number of visitors attempting to enter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of visitors actually admitted. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a5729b83e7b81f01c964cae2d6aa965ee}{Event\+Component}}.
+
+\Hypertarget{classKeyNoteArea_a31b45c9f2f8aa7e3a9bc2d0e53a398fb}\index{KeyNoteArea@{KeyNoteArea}!getCapacity@{getCapacity}}
+\index{getCapacity@{getCapacity}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{getCapacity()}{getCapacity()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_a31b45c9f2f8aa7e3a9bc2d0e53a398fb} 
+int Key\+Note\+Area\+::get\+Capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the total capacity of a component. 
+
+\begin{DoxyReturn}{Returns}
+The total capacity. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a6128b4c0f20d353a29d45348f48a5f2e}{Event\+Component}}.
+
+\Hypertarget{classKeyNoteArea_ad34f8ab9e5a640b3a6bb98e60a2262ce}\index{KeyNoteArea@{KeyNoteArea}!getCurrentVisitors@{getCurrentVisitors}}
+\index{getCurrentVisitors@{getCurrentVisitors}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{getCurrentVisitors()}{getCurrentVisitors()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_ad34f8ab9e5a640b3a6bb98e60a2262ce} 
+int Key\+Note\+Area\+::get\+Current\+Visitors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the number of visitors currently inside this component. 
+
+\begin{DoxyReturn}{Returns}
+The current visitor count. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a123d1862bdbbdd996031b2cbce85fa4e}{Event\+Component}}.
+
+\Hypertarget{classKeyNoteArea_a0dee51037a0373c92ad82e8685f3e21b}\index{KeyNoteArea@{KeyNoteArea}!getPresenter@{getPresenter}}
+\index{getPresenter@{getPresenter}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{getPresenter()}{getPresenter()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_a0dee51037a0373c92ad82e8685f3e21b} 
+std\+::string Key\+Note\+Area\+::get\+Presenter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the name of the active presenter if the area is open. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string Name of active presenter or closure notification. 
+\end{DoxyReturn}
+\Hypertarget{classKeyNoteArea_a31dae8611871031c683f32d8b127db03}\index{KeyNoteArea@{KeyNoteArea}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{getStatus()}{getStatus()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_a31dae8611871031c683f32d8b127db03} 
+std\+::string Key\+Note\+Area\+::get\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Pure virtual method querying the status of the component or its subtree. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string Operational status description. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_a761fb00f133877f18dd3cc280879d833}{Event\+Component}}.
+
+\Hypertarget{classKeyNoteArea_afc7bc0a0661c67fea856d60577bc9a3e}\index{KeyNoteArea@{KeyNoteArea}!leaveVisitor@{leaveVisitor}}
+\index{leaveVisitor@{leaveVisitor}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{leaveVisitor()}{leaveVisitor()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_afc7bc0a0661c67fea856d60577bc9a3e} 
+int Key\+Note\+Area\+::leave\+Visitor (\begin{DoxyParamCaption}\item[{int}]{visitors}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Removes visitors from this event component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visitors} & Number of visitors attempting to leave. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of visitors actually removed. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classEventComponent_acdbc68f0cc8f90520091f0be8cc9dd2a}{Event\+Component}}.
+
+\Hypertarget{classKeyNoteArea_ae4a256d993385fb501e475c10a8ab1bf}\index{KeyNoteArea@{KeyNoteArea}!open@{open}}
+\index{open@{open}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_ae4a256d993385fb501e475c10a8ab1bf} 
+void Key\+Note\+Area\+::open (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Opens the component and its children. 
+
+
+
+Implements \mbox{\hyperlink{classEventComponent_ada5f41377769e0cbdaa7546477b3970c}{Event\+Component}}.
+
+\Hypertarget{classKeyNoteArea_ae3ea07afc36b5b27e481a7de7675fcc1}\index{KeyNoteArea@{KeyNoteArea}!update@{update}}
+\index{update@{update}!KeyNoteArea@{KeyNoteArea}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{classKeyNoteArea_ae3ea07afc36b5b27e481a7de7675fcc1} 
+void Key\+Note\+Area\+::update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTechSignal}{Tech\+Signal}} \&}]{signal}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Handles incoming technical signals to modify operational status and timers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signal} & The \doxylink{classTechSignal}{Tech\+Signal} describing an event. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classSignalSubscriber_a1d364b73f52512650e761d0646e2504e}{Signal\+Subscriber}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Key\+Note\+Area.\+h\item 
+Key\+Note\+Area.\+cpp\end{DoxyCompactItemize}

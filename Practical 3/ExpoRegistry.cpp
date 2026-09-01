@@ -3,6 +3,10 @@
 #include "ExhibitionHall.h"
 #include "KeyNoteArea.h"
 #include "MainStage.h"
+#include "ByteSizedBites.h"
+#include "RoboticsBooth.h"
+#include "AIZone.h"
+#include "AIDemoBooth.h"
 #include <iostream>
 
 EventComponent *ExpoRegistry::createComponent(
@@ -26,6 +30,22 @@ EventComponent *ExpoRegistry::createComponent(
 
     case ComponentType::DEMO_AREA:
         newComponent.reset(new DemoArea(parent));
+        break;
+
+    case ComponentType::BYTE_SIZED_BITES:
+        newComponent.reset(new ByteSizedBites(parent));
+        break;
+
+    case ComponentType::ROBOTICS_BOOTH:
+        newComponent.reset(new RoboticsBooth(parent));
+        break;
+
+    case ComponentType::AI_ZONE:
+        newComponent.reset(new AIZone(parent));
+        break;
+
+    case ComponentType::AI_DEMO_BOOTH:
+        newComponent.reset(new AIDemoBooth(parent));
         break;
     }
 

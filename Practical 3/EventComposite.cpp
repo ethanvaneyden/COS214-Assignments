@@ -142,9 +142,7 @@ std::string EventComposite::getDisplayDetails() const
 }
 
 EventComposite::EventComposite(std::string name, EventComponent *parent)
-    : EventComponent(name, parent),
-      broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster()))
-{}
+    : EventComponent(name, parent), broadcaster(std::unique_ptr<SignalBroadcaster>(new SignalBroadcaster())) {}
 
 bool EventComposite::hasChildren() const{
 

@@ -42,10 +42,6 @@ void MainStage::close() {
   stopStaffTimer();
 }
 
-void MainStage::reportStatus() const {
-  std::cout << getStatus();
-}
-
 int MainStage::getCapacity() const {
   int total = 0;
   for (EventComponent *child : children) {

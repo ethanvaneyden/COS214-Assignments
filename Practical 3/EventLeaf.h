@@ -17,7 +17,7 @@ protected:
    * @param parent Parent component in the hierarchy.
    */
   EventLeaf(std::string name, EventComponent *parent = nullptr);
-
+  std::string lastMessage;
 public:
   /**
    * @brief Virtual destructor for EventLeaf.

@@ -72,11 +72,6 @@ public:
    */
   std::string getPresenter() const;
 
-  /**
-   * @brief Overrides Component method to print the operational status of the
-   * KeyNoteArea.
-   */
-  void reportStatus() const override;
 
   std::string getStatus() const override;
   

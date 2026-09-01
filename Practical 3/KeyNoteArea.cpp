@@ -188,10 +188,6 @@ void KeyNoteArea::close(){
     stopPresenterTimer();
 }
 
-void KeyNoteArea::reportStatus() const{
-    std::cout << getStatus();
-}
-
 int KeyNoteArea::getCapacity() const{
     return 0;
 }

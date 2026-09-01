@@ -31,11 +31,6 @@ void ExhibitionHall::close(){
 }
 
 
-void ExhibitionHall::reportStatus() const{
-    std::cout << getStatus();
-}
-
-
 int ExhibitionHall::getCapacity() const{
     int totalCapacity = 0;
 

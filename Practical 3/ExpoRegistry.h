@@ -29,7 +29,11 @@ public:
         EXHIBITION_HALL,
         MAIN_STAGE,
         KEYNOTE_AREA,
-        DEMO_AREA
+        DEMO_AREA,
+        BYTE_SIZED_BITES,
+        ROBOTICS_BOOTH,
+        AI_ZONE,
+        AI_DEMO_BOOTH
     };
 
     /**

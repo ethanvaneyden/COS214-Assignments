@@ -102,6 +102,37 @@ class ByteSizedBites : public EventLeaf{
         std::string getStatus() const override;
 
         /**
+         * @brief Reports the status.
+        */
+        void reportStatus() const override;
+
+        /**
+         * @brief Gets the current number of visitors.
+         *
+         * @return The current number of visitors.
+        */
+        int getCurrentVisitors() const override;
+
+        /**
+         * @brief Attempts to seat a visitor.
+         *
+         * A visitor can only be seated when the facility is open
+         * and there is an available chair.
+         *
+         * @param visitors Number of visitors attempting to enter. Must be positive.
+         * @return The number of visitors actually admitted.
+        */
+        int enterVisitor(int visitors) override;
+
+        /**
+         * @brief Removes a visitor from the seating area.
+         *
+         * @param visitors Number of visitors attempting to leave. Must be positive.
+         * @return The number of visitors actually removed.
+        */
+        int leaveVisitor(int visitors) override;
+
+        /**
          * @brief Returns the seating capacity of the facility.
          *
          * @return The total number of available chairs.

@@ -1,0 +1,10 @@
+<map id="AIDemoBooth" name="AIDemoBooth">
+<area shape="rect" id="Node000001" title=" " alt="" coords="17,229,129,255"/>
+<area shape="rect" id="Node000002" href="$classEventLeaf.html" title="The interface representing the leaves of the hierachy." alt="" coords="29,155,116,180"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,194,75,229,70,229,70,194"/>
+<area shape="rect" id="Node000003" href="$classEventComponent.html" title="Base Component interface in the Composite pattern, inheriting from SignalSubscriber." alt="" coords="5,80,140,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,120,75,154,70,154,70,120"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="155,85,167,93,158,100,141,102,140,97,156,95,161,93,153,90"/>
+<area shape="rect" id="Node000004" href="$classSignalSubscriber.html" title="Pure Abstract Observer interface in the Observer design pattern." alt="" coords="7,5,138,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="75,45,75,80,70,80,70,45"/>
+</map>

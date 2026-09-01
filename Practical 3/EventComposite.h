@@ -13,7 +13,11 @@
  * @brief This is the class that represents a composite in the hierachy. It has
  * a list of children and a broadcaster object.
  *
- *
+ * @note Design decision 2: each composite owns its own broadcaster and
+ * subscribes each child only once. This keeps propagation logic centralized,
+ * prevents duplicate event delivery, and ensures that a parent can broadcast a
+ * signal to the entire subtree without leaking implementation details to leaf
+ * nodes.
  */
 class EventComposite : public EventComponent {
 

@@ -1,0 +1,9 @@
+<map id="TimerState" name="TimerState">
+<area shape="rect" id="Node000001" title="Abstract base class for BackgroundTimer states." alt="" coords="140,5,235,31"/>
+<area shape="rect" id="Node000002" href="$classPausedState.html" title="Represents the paused state of the timer." alt="" coords="5,79,108,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,40,79,81,77,76,153,35"/>
+<area shape="rect" id="Node000003" href="$classRunningState.html" title="Represents the actively running state of the timer." alt="" coords="133,79,242,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="190,44,190,79,185,79,185,44"/>
+<area shape="rect" id="Node000004" href="$classStoppedState.html" title="Represents the stopped state of the timer." alt="" coords="266,79,375,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="222,35,300,76,298,81,219,39"/>
+</map>

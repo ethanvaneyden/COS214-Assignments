@@ -13,6 +13,11 @@
  * interface. Provides hierarchical parent-child linking to support upward
  * contextual queries (such as finding on-duty staff) and stream-based
  * relocation.
+ *
+ * @note Design decision 1: the parent pointer is treated as the single source
+ * of truth for tree structure. That makes ancestor lookup and staff delegation
+ * straightforward, while also allowing the move operator to reject any re-parent
+ * operation that would introduce a cycle.
  */
 class EventComponent : public SignalSubscriber {
 public:

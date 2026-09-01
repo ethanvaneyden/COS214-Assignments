@@ -14,6 +14,11 @@
  * 
  * Encapsulates component creation, map generation, tree printing, component lookup via std::unordered_map, 
  * relocation wrapper methods, visitor management, and signal transmission initiation.
+ *
+ * @note Design decision 3: the registry keeps a unique_ptr-owned tree and a
+ * parallel lookup table for name-based access. This preserves object lifetime and
+ * keeps component lookup fast, while preventing removal of a node that still has
+ * children so the hierarchy stays structurally valid.
  */
 class ExpoRegistry {
 public:

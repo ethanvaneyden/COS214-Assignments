@@ -1,0 +1,25 @@
+<map id="EventComponent" name="EventComponent">
+<area shape="rect" id="Node000001" title="Base Component interface in the Composite pattern, inheriting from SignalSubscriber." alt="" coords="184,177,319,203"/>
+<area shape="rect" id="Node000003" href="$classEventComposite.html" title="This is the class that represents a composite in the hierachy. It has a list of children and a broadc..." alt="" coords="367,80,496,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="287,168,406,103,408,108,289,173"/>
+<area shape="rect" id="Node000007" href="$classEventLeaf.html" title="The interface representing the leaves of the hierachy." alt="" coords="388,227,475,252"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="312,204,388,225,387,230,311,209"/>
+<area shape="rect" id="Node000002" href="$classSignalSubscriber.html" title="Pure Abstract Observer interface in the Observer design pattern." alt="" coords="5,177,136,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,187,183,187,183,193,150,193"/>
+<area shape="rect" id="Node000004" href="$classAIZone.html" title=" " alt="" coords="570,5,638,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="471,72,543,40,570,28,572,33,545,44,473,77"/>
+<area shape="rect" id="Node000005" href="$classExhibitionHall.html" title="Represents the main exhibition hall." alt="" coords="547,55,661,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="509,79,547,73,547,78,510,84"/>
+<area shape="rect" id="Node000006" href="$classMainStage.html" title="Composite node in the hierarchy that holds child components and manages active technician rotations." alt="" coords="559,104,649,129"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="510,101,559,108,558,113,509,106"/>
+<area shape="rect" id="Node000008" href="$classAIDemoBooth.html" title=" " alt="" coords="548,153,660,179"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="474,219,572,176,574,181,476,224"/>
+<area shape="rect" id="Node000009" href="$classByteSizedBites.html" title=" " alt="" coords="544,203,664,228"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="488,229,543,221,544,226,488,234"/>
+<area shape="rect" id="Node000010" href="$classDemoArea.html" title="Leaf node component representing the interactive demonstration area." alt="" coords="559,252,649,277"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="489,245,559,255,558,261,488,250"/>
+<area shape="rect" id="Node000011" href="$classKeyNoteArea.html" title="Leaf node component representing a Keynote presentation area on stage." alt="" coords="551,301,657,327"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="473,255,545,288,572,299,570,304,543,292,471,260"/>
+<area shape="rect" id="Node000012" href="$classRoboticsBooth.html" title=" " alt="" coords="546,351,662,376"/>
+<area shape="poly" id="edge11_Node000007_Node000012" title=" " alt="" coords="456,261,495,299,545,337,567,348,564,353,543,342,492,303,452,264"/>
+</map>

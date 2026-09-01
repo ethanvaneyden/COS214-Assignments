@@ -39,6 +39,8 @@
 *.out
 *.app
 wayfarer
+eventflow
+
 
 # Build directories
 build/
@@ -73,6 +75,3 @@ Testing/
 # zone identifiers
 *.Identifier
 Practical 1/engine
-Practical 3/docs
-
-eventflow

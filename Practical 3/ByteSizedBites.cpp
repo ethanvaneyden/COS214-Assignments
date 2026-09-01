@@ -57,6 +57,15 @@ std::string ByteSizedBites::getStatus() const{
     return "ByteSizedBites is closed.";
 }
 
+
+void ByteSizedBites::reportStatus() const{
+    std::cout << getStatus() << std::endl;
+}
+
+int ByteSizedBites::getCurrentVisitors() const{
+    return visitorsOnChairs;
+}
+
 int ByteSizedBites::getCapacity() const{
     return TotalChairs;
 }
@@ -100,12 +109,28 @@ bool ByteSizedBites::seatVisitor(){
     return true;
 }
 
+int ByteSizedBites::enterVisitor(int visitors){
+    for(int k = 0; k < visitors; k++){
+        if(!seatVisitor()) return k
+    }
+
+    return visitors;
+}
+
 bool ByteSizedBites::removeVisitor(){
     if (visitorsOnChairs <= 0)
         return false;
 
     --visitorsOnChairs;
     return true;
+}
+
+int ByteSizedBites::leaveVisitor(int visitors){
+    for(int k = 0; k < visitors; k++){
+        if(!removeVisitor()) return k
+    }
+
+    return visitors;
 }
 
 int ByteSizedBites::getFoodStock() const{

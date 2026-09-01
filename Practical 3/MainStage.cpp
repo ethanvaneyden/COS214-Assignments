@@ -4,6 +4,7 @@
 #include "TechSignal.h"
 #include "Technician.h"
 #include <algorithm>
+#include <sstream>
 #include <iostream>
 
 MainStage::MainStage(EventComponent *parent)
@@ -127,11 +128,12 @@ std::string MainStage::getStaff() const {
 }
 
 std::string MainStage::getStatus() const {
-  std::string status = "-----MAIN STAGE----\n";
-  for (EventComponent *child : children) {
-    if (child) {
-      status += child->getStatus();
+    std::stringstream ss;
+    ss << "Main Stage: \n";
+    for (const auto* child : children) {
+        if (child) {
+            ss << child->getStatus(); // Let leaves handle their own leading "- " prefix
+        }
     }
-  }
-  return status;
+    return ss.str();
 }

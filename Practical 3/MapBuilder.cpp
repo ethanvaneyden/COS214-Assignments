@@ -3,12 +3,12 @@
 #include "EventComponent.h"
 
 void MapBuilder::build(ExpoRegistry& registry) {
-    // 1. Create top-level Root Composite
+    // 1. Top-level Root Composite
     EventComponent* exhibitionHall = registry.createComponent(
         ExpoRegistry::ComponentType::EXHIBITION_HALL, nullptr
     );
 
-    // 2. Create Composites under Exhibition Hall
+    // 2. Sub-Composites under Exhibition Hall
     EventComponent* mainStage = registry.createComponent(
         ExpoRegistry::ComponentType::MAIN_STAGE, exhibitionHall
     );
@@ -17,32 +17,26 @@ void MapBuilder::build(ExpoRegistry& registry) {
         ExpoRegistry::ComponentType::AI_ZONE, exhibitionHall
     );
 
-    // 3. Create Leaf Nodes directly under Exhibition Hall
-    EventComponent* byteSizedBites = registry.createComponent(
+    // 3. Leaf Node directly under Exhibition Hall
+    registry.createComponent(
         ExpoRegistry::ComponentType::BYTE_SIZED_BITES, exhibitionHall
     );
 
-    // 4. Create Leaf Nodes under Main Stage
-    EventComponent* keynoteArea = registry.createComponent(
+    // 4. Leaf Nodes under Main Stage
+    registry.createComponent(
         ExpoRegistry::ComponentType::KEYNOTE_AREA, mainStage
     );
 
-    // 5. Create Leaf Nodes under AI Zone
-    EventComponent* aiDemoBooth = registry.createComponent(
+    registry.createComponent(
+        ExpoRegistry::ComponentType::DEMO_AREA, mainStage
+    );
+
+    // 5. Leaf Nodes under AI Zone
+    registry.createComponent(
         ExpoRegistry::ComponentType::AI_DEMO_BOOTH, aiZone
     );
 
-    EventComponent* roboticsBooth = registry.createComponent(
+    registry.createComponent(
         ExpoRegistry::ComponentType::ROBOTICS_BOOTH, aiZone
     );
-
-    // 6. Build Composite Tree hierarchy directly
-    exhibitionHall->add(mainStage);
-    exhibitionHall->add(aiZone);
-    exhibitionHall->add(byteSizedBites);
-
-    mainStage->add(keynoteArea);
-
-    aiZone->add(aiDemoBooth);
-    aiZone->add(roboticsBooth);
 }

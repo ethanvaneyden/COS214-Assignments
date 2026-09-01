@@ -3,6 +3,7 @@
 #include "EventComponent.h"
 #include "TechSignal.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std::chrono;
 
@@ -25,6 +26,13 @@ KeyNoteArea::KeyNoteArea(EventComponent *parent)
 
 KeyNoteArea::~KeyNoteArea(){
     delete presenterTimer;
+}
+
+std::string KeyNoteArea::getStatus() const {
+    std::stringstream ss;
+    ss << "- KeyNote Area: " << (isOpen ? "OPEN" : "CLOSED")
+       << " | Presenter: " << getPresenter() << "\n";
+    return ss.str();
 }
 
 void KeyNoteArea::update(const TechSignal &signal){
@@ -257,11 +265,4 @@ std::string KeyNoteArea::getPresenter() const{
     }
 
     return "Area is closed. No presenter available.";
-}
-
-std::string KeyNoteArea::getStatus() const{
-
-    std::lock_guard<std::mutex> lock(stateMutex);
-
-    return "- Key Note Area: " + status + "\n";
 }

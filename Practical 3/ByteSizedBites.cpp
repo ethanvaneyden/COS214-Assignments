@@ -111,7 +111,7 @@ bool ByteSizedBites::seatVisitor(){
 
 int ByteSizedBites::enterVisitor(int visitors){
     for(int k = 0; k < visitors; k++){
-        if(!seatVisitor()) return k
+        if(!seatVisitor()) return k;
     }
 
     return visitors;
@@ -127,7 +127,7 @@ bool ByteSizedBites::removeVisitor(){
 
 int ByteSizedBites::leaveVisitor(int visitors){
     for(int k = 0; k < visitors; k++){
-        if(!removeVisitor()) return k
+        if(!removeVisitor()) return k;
     }
 
     return visitors;

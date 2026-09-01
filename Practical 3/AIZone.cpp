@@ -61,13 +61,13 @@ void AIZone::update(const TechSignal& signal){
         case TechSignal::Type::OPEN:
             isOpen = true;
             std::cout << "AI Zone is now OPEN.\n";
-            transmit(signal);
+            broadcaster->transmit(signal);
             break;
 
         case TechSignal::Type::CLOSE:
             isOpen = false;
             std::cout << "AI Zone is now CLOSED.\n";
-            transmit(signal);
+            broadcaster->transmit(signal);
             break;
 
         case TechSignal::Type::FULL_CAPACITY:
@@ -75,7 +75,7 @@ void AIZone::update(const TechSignal& signal){
         case TechSignal::Type::POWER_FAILURE:
         case TechSignal::Type::EMERGENCY_PAUSE:
         case TechSignal::Type::RESUME:
-            transmit(signal);
+            broadcaster->transmit(signal);
             break;
 
         default:

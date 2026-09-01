@@ -136,7 +136,7 @@ void ExhibitionHall::update(const TechSignal& signal){
             std::cout << getName()
                       << " received OPEN signal.\n";
 
-            transmit(signal);
+            broadcaster->transmit(signal);
             break;
 
         case TechSignal::Type::CLOSE:
@@ -145,7 +145,7 @@ void ExhibitionHall::update(const TechSignal& signal){
             std::cout << getName()
                       << " received CLOSE signal.\n";
 
-            transmit(signal);
+            broadcaster->transmit(signal);
             break;
 
         case TechSignal::Type::FULL_CAPACITY:
@@ -154,7 +154,7 @@ void ExhibitionHall::update(const TechSignal& signal){
         case TechSignal::Type::EMERGENCY_PAUSE:
         case TechSignal::Type::RESUME:
         case TechSignal::Type::NETWORK_FAILURE:
-            transmit(signal);
+            broadcaster->transmit(signal);
             break;
 
         case TechSignal::Type::UNKNOWN:

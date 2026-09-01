@@ -17,7 +17,7 @@
  * It is also the Observer (SignalSubscriber) and the Subject
  * (SignalBroadcaster) for its children Onws its children but not its observers
 */
-class ExhibitionHall : public EventComposite, public SignalBroadcaster {
+class ExhibitionHall : public EventComposite {
   private:
         bool isOpen;
 

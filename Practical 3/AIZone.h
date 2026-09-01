@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 
-class AIZone : public EventComposite, public SignalBroadcaster {
+class AIZone : public EventComposite {
 private:
     bool isOpen;
     

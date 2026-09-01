@@ -12,6 +12,7 @@
 #include "ByteSizedBites.h"
 #include "DemoArea.h"
 #include "EventComponent.h"
+#include "ExhibitionHall.h"
 #include "ExpoRegistry.h"
 #include "KeyNoteArea.h"
 #include "MainStage.h"
@@ -87,6 +88,7 @@ namespace {
         assert(second.notifications == 1);
         assert(first.lastType == TechSignal::Type::SCHEDULE_CHANGE);
 
+        broadcaster.unsubscribe(nullptr);
         broadcaster.unsubscribe(&first);
         broadcaster.unsubscribe(&first);
         assert(broadcaster.getSubscriberCount() == 1);
@@ -332,8 +334,125 @@ namespace {
         hall->close();
     }
 
+    void testExpandedStaticCoverage() {
+        heading("8. Expanded composite and signal coverage");
+
+        AIZone zone(nullptr);
+        DemoArea demoArea(&zone);
+        KeyNoteArea keynoteArea(&zone);
+
+        zone.add(nullptr);
+        zone.add(&zone);
+        zone.add(&demoArea);
+        zone.add(&demoArea);
+        zone.add(&keynoteArea);
+        zone.remove(nullptr);
+        assert(zone.hasChildren());
+        assert(zone.getChildren().size() == 2);
+        assert(zone.getDisplayDetails().find("AI_Zone") != std::string::npos);
+        assert(zone.getParent() == nullptr);
+        assert(demoArea.getParent() == &zone);
+        assert(keynoteArea.getParent() == &zone);
+
+        zone.remove(&demoArea);
+        assert(demoArea.getParent() == nullptr);
+        zone.add(&demoArea);
+        assert((demoArea >> zone).getName() == zone.getName());
+
+        KeyNoteArea noParentKeynote;
+        assert(noParentKeynote.getStaff() == "No technician assigned in this zone.");
+
+        MainStage cycleRoot(nullptr);
+        KeyNoteArea cycleChild(&cycleRoot);
+        DemoArea cycleGrand(&cycleChild);
+        assert((cycleChild >> cycleGrand).getName() == cycleGrand.getName());
+
+        DemoArea hallDemo(nullptr);
+        KeyNoteArea hallKeynote(nullptr);
+        ExhibitionHall hall;
+        hall.add(&hallDemo);
+        hall.add(&hallKeynote);
+        hall.open();
+        assert(hall.getCapacity() > 0);
+        assert(hall.enterVisitor(3) >= 0);
+        assert(hall.leaveVisitor(1) >= 0);
+        assert(hall.getCurrentVisitors() >= 0);
+        hall.update(TechSignal("power_failure", "Power failure"));
+        hall.update(TechSignal("close", "Close signal"));
+        hall.update(TechSignal("schedule_change", "Schedule change"));
+        hall.update(TechSignal("network_failure", "Network issue"));
+        hall.update(TechSignal("full_capacity", "Full"));
+        hall.update(TechSignal("emergency_pause", "Safety pause"));
+        hall.update(TechSignal("resume", "System restored"));
+        hall.update(TechSignal("unknown", "Ignored signal"));
+        assert(hall.getStatus().find("Status:") != std::string::npos);
+        hall.close();
+
+        DemoArea stageDemo(nullptr);
+        KeyNoteArea stageKeynote(nullptr);
+        MainStage stage(nullptr);
+        stage.add(&stageKeynote);
+        stage.add(&stageDemo);
+        stage.open();
+        stage.startStaffTimer();
+        stage.advanceStaff();
+        stage.stopStaffTimer();
+        assert(stage.getCapacity() >= 0);
+        assert(stage.enterVisitor(0) == 0);
+        assert(stage.leaveVisitor(0) == 0);
+        assert(!stage.getStatus().empty());
+        assert(!stage.getStaff().empty());
+        stage.close();
+        stage.update(TechSignal("open", "Stage update"));
+
+        keynoteArea.update(TechSignal("power_failure", "Power failure"));
+        keynoteArea.update(TechSignal("emergency_pause", "Emergency pause"));
+        keynoteArea.update(TechSignal("resume", "Resume"));
+        keynoteArea.update(TechSignal("open", "Open again"));
+        keynoteArea.startPresenterTimer();
+        keynoteArea.pausePresenterTimer();
+        keynoteArea.resumePresenterTimer();
+        keynoteArea.advancePresenter();
+        assert(keynoteArea.getCapacity() == 0);
+        assert(keynoteArea.enterVisitor(2) == 0);
+        assert(keynoteArea.leaveVisitor(1) == 0);
+        assert(keynoteArea.getCurrentVisitors() == 0);
+        assert(!keynoteArea.getPresenter().empty());
+        assert(keynoteArea.getStatus().find("KeyNote Area") != std::string::npos);
+        keynoteArea.close();
+        keynoteArea.stopPresenterTimer();
+
+        demoArea.setHandsOnAllowed(true);
+        assert(demoArea.isHandsOnAllowed());
+        demoArea.setHandsOnAllowed(false);
+        assert(!demoArea.isHandsOnAllowed());
+        demoArea.open();
+        assert(demoArea.getCapacity() == 100);
+        assert(demoArea.enterVisitor(12) == 12);
+        assert(demoArea.leaveVisitor(3) == 3);
+        assert(demoArea.getCurrentVisitors() == 9);
+        demoArea.update(TechSignal("power_failure", "Power failure"));
+        demoArea.update(TechSignal("emergency_pause", "Emergency pause"));
+        demoArea.update(TechSignal("schedule_change", "Schedule changed"));
+        demoArea.update(TechSignal("full_capacity", "Capacity reached"));
+        demoArea.update(TechSignal("resume", "Demo resumed"));
+        demoArea.startDemoTimer();
+        demoArea.pauseDemoTimer();
+        demoArea.resumeDemoTimer();
+        demoArea.advanceDemo();
+        assert(!demoArea.getCurrentDemo().empty());
+        assert(!demoArea.getDemoDetails().empty());
+        assert(!demoArea.getStatus().empty());
+        demoArea.close();
+        demoArea.stopDemoTimer();
+
+        EventComponent* fallback = new KeyNoteArea();
+        assert(fallback->getStaff() == "No technician assigned in this zone.");
+        delete fallback;
+    }
+
     void testTechnician() {
-        heading("8. Technician value object");
+        heading("9. Technician value object");
 
         Technician technician("Ace Lovelove", "012 345 6789");
         assert(static_cast<std::string>(technician) == "Ace Lovelove (012 345 6789)");
@@ -350,6 +469,7 @@ int main() {
     testAIZone();
     testRegistryFactoryAndRemoval();
     testEventScenario();
+    testExpandedStaticCoverage();
     testTechnician();
     
     // Uncomment runGame() to launch CLI mode

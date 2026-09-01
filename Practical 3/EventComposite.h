@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <memory>
 #include <vector>
+#include <string>
 
 /**
  * @brief This is the class that represents a composite in the hierachy. It has

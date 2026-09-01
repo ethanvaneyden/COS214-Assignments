@@ -57,43 +57,11 @@ std::string EventComponent::getStaff() const{
  */
 EventComponent &operator>>(EventComponent &child, EventComponent &newParent){
 
-    /*
-     * FIX 1:
-     * Do not allow a component to become its own parent.
-     *
-     * Without this check:
-     *
-     *     component >> component;
-     *
-     * could try to add the component to itself.
-     */
+
     if(&child == &newParent){
         return newParent;
     }
 
-
-    /*
-     * FIX 2:
-     * Do not allow a component to be moved underneath one of
-     * its own children.
-     *
-     * For example, if the hierarchy is:
-     *
-     * Main Hall
-     *     |
-     *     Main Stage
-     *         |
-     *         Keynote Area
-     *
-     * we should not allow:
-     *
-     *     Main Stage >> Keynote Area
-     *
-     * because this would create a circular hierarchy.
-     *
-     * We walk up from newParent and check whether we eventually
-     * reach child.
-     */
     EventComponent *current = &newParent;
 
     while(current != nullptr){
@@ -105,27 +73,10 @@ EventComponent &operator>>(EventComponent &child, EventComponent &newParent){
         current = current->getParent();
     }
 
-
-    /*
-     * FIX 3:
-     * Remove the child from its old parent before adding it
-     * to the new parent.
-     *
-     * This keeps the hierarchy consistent and prevents the
-     * child from appearing under two different parents.
-     */
     if(child.parent){
         child.parent->remove(&child);
     }
 
-
-    /*
-     * Add the child to the new parent.
-     *
-     * EventComposite::add() is responsible for setting the
-     * child's parent pointer and subscribing it to the
-     * parent's broadcaster.
-     */
     newParent.add(&child);
 
     return newParent;

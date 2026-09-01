@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra -Werror -g
 
-TARGET = EventFlow
+TARGET = eventflow
 
 SRCS = $(wildcard *.cpp)
 
